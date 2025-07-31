@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:everdantia-9f27f2.webflow.io)",
+      "Bash(npm run dev:*)",
+      "Bash(git restore:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm run build:*)"
+    ],
+    "deny": []
+  }
+}

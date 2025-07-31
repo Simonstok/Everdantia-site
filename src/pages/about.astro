@@ -1,0 +1,342 @@
+---
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		
+		<!-- SEO Meta Tags -->
+		<title>About Everdantia - The Story Behind Our Digital Forest Conservation</title>
+		<meta name="description" content="Learn about Everdantia's mission to bridge digital art and environmental conservation. Discover how our NFTs support real-world reforestation and protect Earth's wild sanctuaries." />
+		<meta name="keywords" content="about Everdantia, NFT conservation story, environmental mission, digital forest, reforestation support, eco-friendly blockchain" />
+		<meta name="author" content="Everdantia" />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href="https://everdantia.art/about" />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="https://everdantia.art/about" />
+		<meta property="og:title" content="About Everdantia - The Story Behind Our Digital Forest Conservation" />
+		<meta property="og:description" content="Learn about Everdantia's mission to bridge digital art and environmental conservation. Discover how our NFTs support real-world reforestation." />
+		<meta property="og:image" content="https://everdantia.art/Images/Environment/1. Everdantia Glade (De centrale open plek)/AlbedoBase_XL_Everdantia_Glade_a_tranquil_magical_forest_glade_0.jpg" />
+		<meta property="og:site_name" content="Everdantia" />
+		
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://everdantia.art/about" />
+		<meta property="twitter:title" content="About Everdantia - The Story Behind Our Digital Forest Conservation" />
+		<meta property="twitter:description" content="Learn about Everdantia's mission to bridge digital art and environmental conservation. Discover how our NFTs support real-world reforestation." />
+		<meta property="twitter:image" content="https://everdantia.art/Images/Environment/1. Everdantia Glade (De centrale open plek)/AlbedoBase_XL_Everdantia_Glade_a_tranquil_magical_forest_glade_0.jpg" />
+		
+		<!-- Performance -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="dns-prefetch" href="//fonts.googleapis.com">
+		
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: 'Inter', sans-serif;
+				background: #f8f6f2;
+				color: #4d6b3c;
+				scroll-behavior: smooth;
+			}
+
+			button:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+			}
+
+			/* Mobile navigation */
+			.mobile-menu-toggle {
+				display: none;
+				flex-direction: column;
+				cursor: pointer;
+				padding: 0.5rem;
+				background: rgba(255, 255, 255, 0.1);
+				border-radius: 0.5rem;
+				transition: all 0.3s ease;
+			}
+
+			.mobile-menu-toggle:hover {
+				background: rgba(255, 255, 255, 0.2);
+			}
+
+			.hamburger-line {
+				width: 25px;
+				height: 3px;
+				background: white;
+				margin: 3px 0;
+				transition: all 0.3s ease;
+				border-radius: 2px;
+			}
+
+			.mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+				transform: rotate(-45deg) translate(-5px, 6px);
+			}
+
+			.mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+				opacity: 0;
+			}
+
+			.mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+				transform: rotate(45deg) translate(-5px, -6px);
+			}
+
+			.mobile-menu {
+				position: fixed;
+				top: 0;
+				right: -100%;
+				width: 100%;
+				height: 100vh;
+				background: linear-gradient(135deg, #0c1c10 0%, #2d4a35 100%);
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+				z-index: 999;
+			}
+
+			.mobile-menu.active {
+				right: 0;
+			}
+
+			.mobile-menu a {
+				color: white;
+				text-decoration: none;
+				font-size: 2rem;
+				font-weight: 500;
+				margin: 1.5rem 0;
+				padding: 1rem 2rem;
+				border-radius: 1rem;
+				transition: all 0.3s ease;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				opacity: 0;
+				transform: translateX(50px);
+			}
+
+			.mobile-menu.active a {
+				opacity: 1;
+				transform: translateX(0);
+			}
+
+			.mobile-menu.active a:nth-child(1) { transition-delay: 0.1s; }
+			.mobile-menu.active a:nth-child(2) { transition-delay: 0.2s; }
+			.mobile-menu.active a:nth-child(3) { transition-delay: 0.3s; }
+			.mobile-menu.active a:nth-child(4) { transition-delay: 0.4s; }
+			.mobile-menu.active a:nth-child(5) { transition-delay: 0.5s; }
+
+			.mobile-menu a:hover {
+				background: rgba(255, 255, 255, 0.1);
+				transform: scale(1.05);
+			}
+
+			@media (max-width: 768px) {
+				.nav-links {
+					display: none;
+				}
+
+				.mobile-menu-toggle {
+					display: flex;
+				}
+
+				.content-grid {
+					grid-template-columns: 1fr !important;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<nav style="position: fixed; top: 0; left: 0; right: 0; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 100; background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 100%);">
+			<a href="/" style="display: flex; align-items: center; gap: 1rem; text-decoration: none;">
+				<div style="width: 3rem; height: 3rem; background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+					<span style="font-size:1.8rem; color:#6b4f2a;">🌿</span>
+				</div>
+				<span style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Everdantia</span>
+			</a>
+			<div class="nav-links" style="display: flex; gap: 2rem; align-items: center;">
+				<a href="/#story" style="color: white; text-decoration: none; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Story</a>
+				<a href="/about" style="color: white; text-decoration: none; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.3); border-bottom: 2px solid white;">About</a>
+				<a href="/#trees" style="color: white; text-decoration: none; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Trees</a>
+				<a href="/#mint" style="color: white; text-decoration: none; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Mint</a>
+				<a href="/#community" style="color: white; text-decoration: none; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Community</a>
+			</div>
+			
+			<div class="mobile-menu-toggle" id="mobileMenuToggle">
+				<div class="hamburger-line"></div>
+				<div class="hamburger-line"></div>
+				<div class="hamburger-line"></div>
+			</div>
+		</nav>
+
+		<div class="mobile-menu" id="mobileMenu">
+			<a href="/#story">Story</a>
+			<a href="/about">About</a>
+			<a href="/#trees">Trees</a>
+			<a href="/#mint">Mint</a>
+			<a href="/#community">Community</a>
+		</div>
+
+		<section style="position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; color: white;">
+			<img src="/Images/Environment/1. Everdantia Glade (De centrale open plek)/AlbedoBase_XL_Everdantia_Glade_a_tranquil_magical_forest_glade_0.jpg" 
+				 alt="Everdantia Glade" 
+				 style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;" />
+			<div style="position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2), rgba(0,0,0,0.4)); z-index: -1;"></div>
+			
+			<h1 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 5rem); font-weight: 700; margin-bottom: 1.5rem; text-shadow: 0 2px 24px rgba(0,0,0,0.3); max-width: 1000px; line-height: 1.1;">
+				The Story of Everdantia
+			</h1>
+			<p style="font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 400; color: rgba(255,255,255,0.9); margin-bottom: 3rem; max-width: 800px; line-height: 1.6;">
+				In a world where forests fall silent and biodiversity fades into memory, a digital forest awakens.
+			</p>
+		</section>
+
+		<section style="padding: 8rem 2rem;">
+			<div style="max-width: 1200px; margin: 0 auto;">
+				<div class="content-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 6rem;">
+					<div>
+						<h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; color: #6b4f2a; margin-bottom: 2rem;">
+							More Than Digital Art
+						</h2>
+						<p style="font-size: 1.2rem; line-height: 1.8; color: #4d6b3c; margin-bottom: 2rem;">
+							Our NFTs are more than digital collectibles — they're seeds of change. Each token supports real-world conservation efforts, from reforestation projects to preserving ancient woodlands and protecting Earth's wild sanctuaries.
+						</p>
+						<p style="font-size: 1.1rem; line-height: 1.7; color: #4d6b3c;">
+							Technology can serve nature. Digital art becomes a bridge between people and planet, where each NFT represents not just a tree, but a story, an ecosystem fragment waiting to flourish.
+						</p>
+					</div>
+					<img src="/Images/Environment/3. Everdantia's Edge (overgang tussen bos en bergen)/AlbedoBase_XL_a_lush_enchanted_forest_fading_into_misty_mounta_0.jpg" 
+						 alt="Forest conservation" 
+						 style="width: 100%; height: 400px; object-fit: cover; border-radius: 1rem; box-shadow: 0 4px 24px rgba(0,0,0,0.12);" />
+				</div>
+
+				<div class="content-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 6rem;">
+					<img src="/Images/Environment/4. Hidden Bridge (verbindingsplek tussen rijken)/AlbedoBase_XL_a_curved_wooden_bridge_crossing_a_glowing_stream_0.jpg" 
+						 alt="Bridge to nature" 
+						 style="width: 100%; height: 400px; object-fit: cover; border-radius: 1rem; box-shadow: 0 4px 24px rgba(0,0,0,0.12);" />
+					<div>
+						<h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; color: #6b4f2a; margin-bottom: 2rem;">
+							The Everdantia Manifest
+						</h2>
+						<p style="font-size: 1.2rem; line-height: 1.8; color: #4d6b3c; margin-bottom: 2rem;">
+							We believe in more than awareness — we strive for measurable action. Every purchase creates a transparent connection between the digital and physical worlds.
+						</p>
+						<p style="font-size: 1.1rem; line-height: 1.7; color: #4d6b3c; margin-bottom: 2rem;">
+							Where forests breathe, light remembers. Our mission is to preserve not just trees, but the intricate web of life they support.
+						</p>
+						<blockquote style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: #6b4f2a; border-left: 4px solid #8bab5d; padding-left: 2rem; margin: 2rem 0;">
+							"Everdantia — Where digital nature protects the real one"
+						</blockquote>
+					</div>
+				</div>
+
+				<div style="text-align: center; background: rgba(255, 255, 255, 0.8); padding: 6rem 4rem; border-radius: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+					<h2 style="font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: #6b4f2a; margin-bottom: 2rem;">
+						🌍 Mint a tree. 🌱 Grow a forest. 🔮 Shape a better tomorrow.
+					</h2>
+					<p style="font-size: 1.2rem; line-height: 1.8; color: #4d6b3c; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+						Join us in creating a digital realm where every interaction nurtures the natural world. 
+						Together, we'll grow something beautiful — both in pixels and in reality.
+					</p>
+					<a href="/" style="display: inline-block; background: #8bab5d; color: white; font-size: 1rem; font-weight: 500; padding: 1.2rem 3rem; border-radius: 999px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.3s ease;">
+						Explore Everdantia
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<footer style="background: linear-gradient(180deg, #f8f6f2 0%, #e8e4db 100%); padding: 6rem 2rem 2rem;">
+			<div style="max-width: 1200px; margin: 0 auto;">
+				<div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem;">
+					<div>
+						<h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: #6b4f2a; margin-bottom: 1.5rem;">
+							The World of Everdantia
+						</h3>
+						<p style="line-height: 1.6; font-size: 1.1rem; color: #4d6b3c; margin-bottom: 2rem;">
+							Journey through our enchanted forest, where every tree tells a story and every path leads to wonder. 
+							Join us in creating a digital realm where nature and imagination intertwine.
+						</p>
+						<p style="color: #6b4f2a; font-weight: 500;">
+							Contact: everdantia@gmail.com
+						</p>
+					</div>
+					<div>
+						<h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: #6b4f2a; margin-bottom: 1.5rem;">
+							Navigation
+						</h3>
+						<div style="display: flex; flex-direction: column; gap: 1rem;">
+							<a href="/" style="color: #4d6b3c; text-decoration: none; transition: color 0.3s ease;">Home</a>
+							<a href="/about" style="color: #4d6b3c; text-decoration: none; transition: color 0.3s ease;">About</a>
+							<a href="/#trees" style="color: #4d6b3c; text-decoration: none; transition: color 0.3s ease;">Trees</a>
+							<a href="/#mint" style="color: #4d6b3c; text-decoration: none; transition: color 0.3s ease;">Mint</a>
+						</div>
+					</div>
+					<div>
+						<h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: #6b4f2a; margin-bottom: 1.5rem;">
+							Join the Journey
+						</h3>
+						<div style="display: flex; flex-direction: column; gap: 1rem;">
+							<a href="https://discord.gg/UWV7WmVH" target="_blank" rel="noopener noreferrer" style="color: #4d6b3c; text-decoration: none; transition: color 0.3s ease;">Discord Community</a>
+							<a href="https://twitter.com/Everdantia" target="_blank" rel="noopener noreferrer" style="color: #4d6b3c; text-decoration: none; transition: color 0.3s ease;">Twitter Updates</a>
+							<a href="https://instagram.com/EverdantiaNFT" target="_blank" rel="noopener noreferrer" style="color: #4d6b3c; text-decoration: none; transition: color 0.3s ease;">Instagram Gallery</a>
+						</div>
+					</div>
+				</div>
+				<div style="border-top: 1px solid rgba(107, 79, 42, 0.1); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center;">
+					<div style="display: flex; align-items: center; gap: 0.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: #6b4f2a;">
+						<span style="font-size:1.5rem;">🌿</span>
+						<span>Everdantia</span>
+					</div>
+					<p style="color: #6b4f2a; font-size: 0.9rem;">
+						© 2025 Everdantia. All rights reserved.
+					</p>
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			// Mobile navigation functionality
+			const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+			const mobileMenu = document.getElementById('mobileMenu');
+			
+			function toggleMobileNav() {
+				mobileMenuToggle.classList.toggle('active');
+				mobileMenu.classList.toggle('active');
+				
+				// Prevent body scroll when menu is open
+				if (mobileMenu.classList.contains('active')) {
+					document.body.style.overflow = 'hidden';
+				} else {
+					document.body.style.overflow = '';
+				}
+			}
+			
+			mobileMenuToggle.addEventListener('click', toggleMobileNav);
+			
+			// Close mobile menu when clicking a link
+			mobileMenu.querySelectorAll('a').forEach(link => {
+				link.addEventListener('click', () => {
+					toggleMobileNav();
+				});
+			});
+			
+			// Close mobile menu on escape key
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+					toggleMobileNav();
+				}
+			});
+		</script>
+	</body>
+</html>
