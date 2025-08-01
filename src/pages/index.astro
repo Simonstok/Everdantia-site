@@ -656,48 +656,32 @@
 			const whitelistForm = document.getElementById('whitelistForm');
 			const formMessage = document.getElementById('formMessage');
 			
-			whitelistForm.addEventListener('submit', function(e) {
+			whitelistForm.addEventListener('submit', async function(e) {
 				e.preventDefault();
-				
+
 				const email = document.getElementById('email').value;
-				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-				
-				// Clear previous message
 				formMessage.textContent = '';
-				formMessage.style.color = 'rgba(255,255,255,0.9)';
-				
-				// Validate email
-				if (!emailRegex.test(email)) {
-					formMessage.textContent = 'Please enter a valid email address';
-					formMessage.style.color = '#ff6b6b';
-					return;
-				}
-				
-				// Show loading state
-				const submitBtn = whitelistForm.querySelector('button[type="submit"]');
-				const originalText = submitBtn.textContent;
-				submitBtn.textContent = 'Joining...';
-				submitBtn.disabled = true;
-				
-				// Simulate form submission (replace with actual endpoint)
-				setTimeout(() => {
-					// Success message
+
+				const response = await fetch('/api/subscribe', {
+					method: 'POST',
+					headers: {
+					'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ email })
+				});
+
+				const result = await response.json();
+
+				if (result.success) {
 					formMessage.textContent = '🌿 Successfully joined the whitelist!';
 					formMessage.style.color = '#8bab5d';
-					
-					// Reset form
 					document.getElementById('email').value = '';
-					submitBtn.textContent = originalText;
-					submitBtn.disabled = false;
-					
-					// Store email locally (for demo purposes)
-					const existingEmails = JSON.parse(localStorage.getItem('whitelistEmails') || '[]');
-					if (!existingEmails.includes(email)) {
-						existingEmails.push(email);
-						localStorage.setItem('whitelistEmails', JSON.stringify(existingEmails));
-					}
-				}, 1500);
-			});
+				} else {
+					formMessage.textContent = result.error || 'Something went wrong';
+					formMessage.style.color = '#ff6b6b';
+				}
+				});
+
 			
 			// Add focus/blur effects to email input
 			const emailInput = document.getElementById('email');
