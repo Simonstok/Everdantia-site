@@ -6,6 +6,6 @@ import sitemap from "@astrojs/sitemap";
 import netlify from '@astrojs/netlify';
 
 export default defineConfig({
-  output: 'static',
+  output: 'server',
   adapter: netlify(),
 });
