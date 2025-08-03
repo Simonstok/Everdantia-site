@@ -493,7 +493,7 @@
 						<div style="color: rgba(255,255,255,0.7); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">Mint Price</div>
 					</div>
 					<div style="text-align: center;">
-						<div style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">Aug 1</div>
+						<div style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">TBD</div>
 						<div style="color: rgba(255,255,255,0.7); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">Mint Date</div>
 					</div>
 				</div>
@@ -510,13 +510,13 @@
 							type="submit" 
 							style="background: #8bab5d; color: white; font-size: 1rem; font-weight: 500; padding: 1rem 2rem; border-radius: 999px; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.3s ease; white-space: nowrap;"
 						>
-							Join Whitelist
+							Join Newsletter
 						</button>
 					</div>
 					<div id="formMessage" style="min-height: 1.5rem; color: rgba(255,255,255,0.9); font-size: 0.9rem; text-align: center;"></div>
 				</form>
 				<p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 1rem;">
-					Whitelist guarantees you a spot in our Genesis Mint
+					Get the lastest updates and be the first to know when the mint goes live.
 				</p>
 			</div>
 		</section>
@@ -673,7 +673,7 @@
 				const result = await response.json();
 
 				if (result.success) {
-					formMessage.textContent = '🌿 Successfully joined the whitelist!';
+					formMessage.textContent = '🌿 Successfully joined the newsletter list!';
 					formMessage.style.color = '#8bab5d';
 					document.getElementById('email').value = '';
 				} else {
