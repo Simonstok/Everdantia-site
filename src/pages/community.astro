@@ -1,0 +1,327 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		
+		<title>Community - Everdantia</title>
+		<meta name="description" content="Join the Everdantia community - Where forest enthusiasts, digital artists, and environmentalists come together." />
+		
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+		
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: 'Inter', sans-serif;
+				background: #0c1c10;
+				color: #4d6b3c;
+				line-height: 1.6;
+				min-height: 100vh;
+				position: relative;
+			}
+
+			body::before {
+				content: '';
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: url('/images/environment/everdantia-glade/glade2.jpg');
+				background-size: cover;
+				background-position: center;
+				background-attachment: fixed;
+				opacity: 0.4;
+				z-index: -2;
+			}
+
+			body::after {
+				content: '';
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(135deg, rgba(12,28,16,0.8) 0%, rgba(45,74,53,0.9) 50%, rgba(12,28,16,0.8) 100%);
+				z-index: -1;
+			}
+
+			.hero-section {
+				position: relative;
+				background: transparent;
+				color: white;
+				padding: 8rem 2rem 6rem;
+				text-align: center;
+				overflow: hidden;
+			}
+
+			.hero-content {
+				position: relative;
+				z-index: 1;
+				max-width: 800px;
+				margin: 0 auto;
+			}
+
+			.hero-section h1 {
+				font-family: 'Cormorant Garamond', serif;
+				font-size: clamp(2.5rem, 6vw, 4rem);
+				font-weight: 700;
+				margin-bottom: 1rem;
+				text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+			}
+
+			.hero-section p {
+				font-size: 1.2rem;
+				color: rgba(255,255,255,0.9);
+				margin-bottom: 2rem;
+			}
+
+			.nav-back {
+				position: absolute;
+				top: 2rem;
+				left: 2rem;
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				color: white;
+				text-decoration: none;
+				font-weight: 500;
+				transition: all 0.3s ease;
+				z-index: 2;
+				background: rgba(255,255,255,0.1);
+				padding: 0.75rem 1.5rem;
+				border-radius: 2rem;
+				backdrop-filter: blur(10px);
+			}
+
+			.nav-back:hover {
+				background: rgba(255,255,255,0.2);
+				transform: translateX(-5px);
+			}
+
+			.container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 4rem 2rem;
+			}
+
+			.community-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 2rem;
+				margin-top: 3rem;
+			}
+
+			.community-card {
+				background: rgba(255,255,255,0.95);
+				border-radius: 2rem;
+				padding: 2.5rem;
+				text-align: center;
+				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+				position: relative;
+				overflow: hidden;
+				backdrop-filter: blur(20px);
+				border: 1px solid rgba(255,255,255,0.2);
+			}
+
+			.community-card:hover {
+				transform: translateY(-8px);
+				box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+			}
+
+			.community-icon {
+				font-size: 3rem;
+				margin-bottom: 1.5rem;
+			}
+
+			.community-card h3 {
+				font-family: 'Cormorant Garamond', serif;
+				font-size: 1.8rem;
+				color: #6b4f2a;
+				margin-bottom: 1rem;
+			}
+
+			.community-card p {
+				color: #4d6b3c;
+				margin-bottom: 1.5rem;
+			}
+
+			.community-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				color: #8bab5d;
+				text-decoration: none;
+				font-weight: 600;
+				font-size: 1rem;
+				transition: all 0.3s ease;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				padding: 0.75rem 1.5rem;
+				border: 2px solid rgba(139,171,93,0.2);
+				border-radius: 999px;
+			}
+
+			.community-link:hover {
+				background: rgba(139,171,93,0.1);
+				transform: translateY(-2px);
+			}
+
+			.community-stats {
+				display: flex;
+				justify-content: center;
+				gap: 3rem;
+				margin: 4rem 0;
+				flex-wrap: wrap;
+			}
+
+			.stat-item {
+				text-align: center;
+				color: white;
+			}
+
+			.stat-number {
+				font-family: 'Cormorant Garamond', serif;
+				font-size: 3rem;
+				font-weight: 700;
+				margin-bottom: 0.5rem;
+				background: linear-gradient(135deg, #8bab5d, #6b4f2a);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+
+			.stat-label {
+				font-size: 1.1rem;
+				color: rgba(255,255,255,0.9);
+			}
+
+			@media (max-width: 768px) {
+				.hero-section {
+					padding: 6rem 1rem 4rem;
+				}
+
+				.container {
+					padding: 2rem 1rem;
+				}
+
+				.community-stats {
+					gap: 2rem;
+				}
+
+				.stat-number {
+					font-size: 2.5rem;
+				}
+
+				.nav-back {
+					top: 1rem;
+					left: 1rem;
+					padding: 0.5rem 1rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<section class="hero-section">
+			<a href="/" class="nav-back">
+				← Back to Home
+			</a>
+			
+			<div class="hero-content">
+				<h1>Join Our Community</h1>
+				<p>Connect with fellow forest guardians, share your journey, and help shape the future of Everdantia</p>
+			</div>
+		</section>
+
+		<div class="container">
+			<div class="community-stats">
+				<div class="stat-item">
+					<div class="stat-number">5,000+</div>
+					<div class="stat-label">Community Members</div>
+				</div>
+				<div class="stat-item">
+					<div class="stat-number">100+</div>
+					<div class="stat-label">Trees Protected</div>
+				</div>
+				<div class="stat-item">
+					<div class="stat-number">3</div>
+					<div class="stat-label">Active Initiatives</div>
+				</div>
+			</div>
+
+			<div class="community-grid">
+				<div class="community-card">
+					<div class="community-icon">👾</div>
+					<h3>Discord Community</h3>
+					<p>Join our vibrant Discord server where forest guardians gather to discuss conservation, share stories, and participate in exclusive events.</p>
+					<a href="https://discord.gg/enqAsyDU" target="_blank" rel="noopener noreferrer" class="community-link">
+						Join Discord
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M5 12h14M12 5l7 7-7 7"/>
+						</svg>
+					</a>
+				</div>
+
+				<div class="community-card">
+					<div class="community-icon">🐦</div>
+					<h3>Twitter Updates</h3>
+					<p>Follow us on Twitter for the latest news, tree drops, and conservation milestones. Join the conversation and spread the word.</p>
+					<a href="https://twitter.com/Everdantia" target="_blank" rel="noopener noreferrer" class="community-link">
+						Follow Us
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M5 12h14M12 5l7 7-7 7"/>
+						</svg>
+					</a>
+				</div>
+
+				<div class="community-card">
+					<div class="community-icon">📸</div>
+					<h3>Instagram Gallery</h3>
+					<p>Experience the visual journey of Everdantia through our Instagram feed. Discover the beauty of our digital and real forests.</p>
+					<a href="https://instagram.com/EverdantiaNFT" target="_blank" rel="noopener noreferrer" class="community-link">
+						Follow Us
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M5 12h14M12 5l7 7-7 7"/>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// Scroll-based animations for stats
+			const observerOptions = {
+				threshold: 0.1,
+				rootMargin: '0px 0px -50px 0px'
+			};
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.style.opacity = '1';
+						entry.target.style.transform = 'translateY(0)';
+					}
+				});
+			}, observerOptions);
+
+			// Apply fade-in effect to community cards and stats
+			document.querySelectorAll('.community-card, .stat-item').forEach(el => {
+				el.style.opacity = '0';
+				el.style.transform = 'translateY(30px)';
+				el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+				observer.observe(el);
+			});
+		</script>
+	</body>
+</html>
