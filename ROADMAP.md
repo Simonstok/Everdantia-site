@@ -238,4 +238,4 @@ Your website is **professionally complete** with:
 
 *Last updated: January 29, 2025*
 *Website URL: https://everdantia.art*
-*Social: @Everdantia (Twitter), @EverdantiaNFT (Instagram), Discord: https://discord.gg/UWV7WmVH*
+*Social: @Everdantia (Twitter), @EverdantiaNFT (Instagram), Discord: https://discord.gg/enqAsyDU*
