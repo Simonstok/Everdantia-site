@@ -8,12 +8,57 @@ import Layout from '../../layouts/Layout.astro';
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
-		
+
+		<!-- SEO Meta Tags -->
 		<title>Welcome to Everdantia - Everdantia Blog</title>
 		<meta name="description" content="Discover the magical world where digital nature meets real conservation efforts. Step into a realm where every pixel tells a story of growth, wonder, and environmental hope." />
-		
+		<meta name="keywords" content="Everdantia, NFT, digital nature, conservation, blog, welcome" />
+		<meta name="author" content="Everdantia" />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href="https://everdantia.art/blog/welcome-to-everdantia" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="https://everdantia.art/blog/welcome-to-everdantia" />
+		<meta property="og:title" content="Welcome to Everdantia - Everdantia Blog" />
+		<meta property="og:description" content="Discover the magical world where digital nature meets real conservation efforts. Step into a realm where every pixel tells a story of growth, wonder, and environmental hope." />
+		<meta property="og:image" content="https://everdantia.art/images/environment/everdantia-glade/glade0.jpg" />
+		<meta property="og:site_name" content="Everdantia" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://everdantia.art/blog/welcome-to-everdantia" />
+		<meta property="twitter:title" content="Welcome to Everdantia - Everdantia Blog" />
+		<meta property="twitter:description" content="Discover the magical world where digital nature meets real conservation efforts. Step into a realm where every pixel tells a story of growth, wonder, and environmental hope." />
+		<meta property="twitter:image" content="https://everdantia.art/images/environment/everdantia-glade/glade0.jpg" />
+
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "BlogPosting",
+		  "headline": "Welcome to Everdantia",
+		  "description": "Discover the magical world where digital nature meets real conservation efforts. Step into a realm where every pixel tells a story of growth, wonder, and environmental hope.",
+		  "image": "https://everdantia.art/images/environment/everdantia-glade/glade0.jpg",
+		  "author": {
+			"@type": "Organization",
+			"name": "Everdantia"
+		  },
+		  "publisher": {
+			"@type": "Organization",
+			"name": "Everdantia",
+			"logo": {
+			  "@type": "ImageObject",
+			  "url": "https://everdantia.art/favicon.svg"
+			}
+		  },
+		  "datePublished": "2025-01-15",
+		  "mainEntityOfPage": "https://everdantia.art/blog/welcome-to-everdantia"
+		}
+		</script>
+
 		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
-		
+
 		<style>
 			* {
 				margin: 0;
@@ -284,9 +329,12 @@ import Layout from '../../layouts/Layout.astro';
 
 		<div class="container">
 			<article class="article">
-				<img src="/images/environment/everdantia-glade/glade0.jpg" 
-					 alt="Everdantia Glade" 
-					 class="featured-image" />
+			   <picture>
+				   <source srcset="/images/environment/everdantia-glade/glade0.webp" type="image/webp" />
+				   <img src="/images/environment/everdantia-glade/glade0.jpg" 
+						alt="Everdantia Glade" 
+						class="featured-image" />
+			   </picture>
 				
 				<div class="article-content">
 					<div class="content">

@@ -10,12 +10,54 @@ import Layout from '../layouts/Layout.astro';
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon.svg" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
-		
-		<title>Community - Everdantia</title>
-		<meta name="description" content="Join the Everdantia community - Where forest enthusiasts, digital artists, and environmentalists come together." />
-		
+
+		<!-- SEO Meta Tags -->
+		<title>Community - Everdantia: Where Digital Nature Grows Together</title>
+		<meta name="description" content="Join the Everdantia community—where forest enthusiasts, digital artists, and environmentalists unite to support conservation and creativity." />
+		<meta name="keywords" content="Everdantia community, NFT community, digital art, forest conservation, join, social, eco-friendly" />
+		<meta name="author" content="Everdantia" />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href="https://everdantia.art/community" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://everdantia.art/community" />
+		<meta property="og:title" content="Community - Everdantia: Where Digital Nature Grows Together" />
+		<meta property="og:description" content="Join the Everdantia community—where forest enthusiasts, digital artists, and environmentalists unite to support conservation and creativity." />
+		<meta property="og:image" content="https://everdantia.art/images/environment/everdantia-glade/glade0.jpg" />
+		<meta property="og:site_name" content="Everdantia" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://everdantia.art/community" />
+		<meta property="twitter:title" content="Community - Everdantia: Where Digital Nature Grows Together" />
+		<meta property="twitter:description" content="Join the Everdantia community—where forest enthusiasts, digital artists, and environmentalists unite to support conservation and creativity." />
+		<meta property="twitter:image" content="https://everdantia.art/images/environment/everdantia-glade/glade0.jpg" />
+
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "Organization",
+		  "name": "Everdantia Community",
+		  "url": "https://everdantia.art/community",
+		  "logo": "https://everdantia.art/favicon.svg",
+		  "description": "Join the Everdantia community—where forest enthusiasts, digital artists, and environmentalists unite to support conservation and creativity.",
+		  "sameAs": [
+			"https://twitter.com/Everdantia",
+			"https://discord.gg/enqAsyDU",
+			"https://instagram.com/EverdantiaNFT"
+		  ],
+		  "contactPoint": {
+			"@type": "ContactPoint",
+			"email": "everdantia@gmail.com",
+			"contactType": "Customer Service"
+		  }
+		}
+		</script>
+
 		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
-		
+
 		<style>
 			* {
 				margin: 0;
@@ -32,20 +74,20 @@ import Layout from '../layouts/Layout.astro';
 				position: relative;
 			}
 
-			body::before {
-				content: '';
-				position: fixed;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				background: url('/images/environment/everdantia-glade/glade2.jpg');
-				background-size: cover;
-				background-position: center;
-				background-attachment: fixed;
-				opacity: 0.4;
-				z-index: -2;
-			}
+		   body::before {
+			   content: '';
+			   position: fixed;
+			   top: 0;
+			   left: 0;
+			   right: 0;
+			   bottom: 0;
+			   background-image: url('/images/environment/everdantia-glade/glade2.webp'), url('/images/environment/everdantia-glade/glade2.jpg');
+			   background-size: cover;
+			   background-position: center;
+			   background-attachment: fixed;
+			   opacity: 0.4;
+			   z-index: -2;
+		   }
 
 			body::after {
 				content: '';

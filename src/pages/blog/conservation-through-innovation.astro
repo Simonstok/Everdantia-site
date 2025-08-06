@@ -8,12 +8,57 @@ import Layout from '../../layouts/Layout.astro';
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
-		
+
+		<!-- SEO Meta Tags -->
 		<title>Conservation Through Innovation - Everdantia Blog</title>
 		<meta name="description" content="How blockchain technology helps us support real-world reforestation. Innovation meets nature in our mission to heal the planet." />
-		
+		<meta name="keywords" content="Everdantia, NFT, blockchain, conservation, innovation, blog" />
+		<meta name="author" content="Everdantia" />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href="https://everdantia.art/blog/conservation-through-innovation" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="https://everdantia.art/blog/conservation-through-innovation" />
+		<meta property="og:title" content="Conservation Through Innovation - Everdantia Blog" />
+		<meta property="og:description" content="How blockchain technology helps us support real-world reforestation. Innovation meets nature in our mission to heal the planet." />
+		<meta property="og:image" content="https://everdantia.art/images/environment/forest-sanctuary/sanctuary0.jpg" />
+		<meta property="og:site_name" content="Everdantia" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://everdantia.art/blog/conservation-through-innovation" />
+		<meta property="twitter:title" content="Conservation Through Innovation - Everdantia Blog" />
+		<meta property="twitter:description" content="How blockchain technology helps us support real-world reforestation. Innovation meets nature in our mission to heal the planet." />
+		<meta property="twitter:image" content="https://everdantia.art/images/environment/forest-sanctuary/sanctuary0.jpg" />
+
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "BlogPosting",
+		  "headline": "Conservation Through Innovation",
+		  "description": "How blockchain technology helps us support real-world reforestation. Innovation meets nature in our mission to heal the planet.",
+		  "image": "https://everdantia.art/images/environment/forest-sanctuary/sanctuary0.jpg",
+		  "author": {
+			"@type": "Organization",
+			"name": "Everdantia"
+		  },
+		  "publisher": {
+			"@type": "Organization",
+			"name": "Everdantia",
+			"logo": {
+			  "@type": "ImageObject",
+			  "url": "https://everdantia.art/favicon.svg"
+			}
+		  },
+		  "datePublished": "2025-01-05",
+		  "mainEntityOfPage": "https://everdantia.art/blog/conservation-through-innovation"
+		}
+		</script>
+
 		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
-		
+
 		<style>
 			* {
 				margin: 0;
@@ -137,7 +182,10 @@ import Layout from '../../layouts/Layout.astro';
 		<article>
 			<div class="hero">
 				<div class="hero-image">
-					<img src="/images/environment/forest-sanctuary/sanctuary0.jpg" alt="Forest Conservation" />
+				   <picture>
+					   <source srcset="/images/environment/forest-sanctuary/sanctuary0.webp" type="image/webp" />
+					   <img src="/images/environment/forest-sanctuary/sanctuary0.jpg" alt="Forest Conservation" />
+				   </picture>
 				</div>
 				<div class="hero-overlay"></div>
 				<a href="/blog" class="nav-back">← Back to Blog</a>

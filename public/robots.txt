@@ -1,3 +1,16 @@
+
 User-agent: *
 Allow: /
 Sitemap: https://everdantia.art/sitemap.xml
+
+# Disallow sensitive or non-public paths (customize as needed)
+# Disallow: /private/
+# Disallow: /tmp/
+# Disallow: /api/
+
+# Crawl-delay for all bots (optional)
+# Crawl-delay: 10
+
+# Additional directives for specific bots (optional)
+# User-agent: Googlebot
+# Disallow: /no-google/

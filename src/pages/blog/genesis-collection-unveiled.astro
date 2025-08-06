@@ -8,12 +8,57 @@ import Layout from '../../layouts/Layout.astro';
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
-		
+
+		<!-- SEO Meta Tags -->
 		<title>The Genesis Collection Unveiled - Everdantia Blog</title>
 		<meta name="description" content="Meet the founding trees that will shape our enchanted forest realm. Each guardian holds secrets of ancient magic and promises of future growth." />
-		
+		<meta name="keywords" content="Everdantia, NFT, genesis collection, founding trees, blog, collection" />
+		<meta name="author" content="Everdantia" />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href="https://everdantia.art/blog/genesis-collection-unveiled" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="https://everdantia.art/blog/genesis-collection-unveiled" />
+		<meta property="og:title" content="The Genesis Collection Unveiled - Everdantia Blog" />
+		<meta property="og:description" content="Meet the founding trees that will shape our enchanted forest realm. Each guardian holds secrets of ancient magic and promises of future growth." />
+		<meta property="og:image" content="https://everdantia.art/images/environment/founding-grove/grove0.jpg" />
+		<meta property="og:site_name" content="Everdantia" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://everdantia.art/blog/genesis-collection-unveiled" />
+		<meta property="twitter:title" content="The Genesis Collection Unveiled - Everdantia Blog" />
+		<meta property="twitter:description" content="Meet the founding trees that will shape our enchanted forest realm. Each guardian holds secrets of ancient magic and promises of future growth." />
+		<meta property="twitter:image" content="https://everdantia.art/images/environment/founding-grove/grove0.jpg" />
+
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "BlogPosting",
+		  "headline": "The Genesis Collection Unveiled",
+		  "description": "Meet the founding trees that will shape our enchanted forest realm. Each guardian holds secrets of ancient magic and promises of future growth.",
+		  "image": "https://everdantia.art/images/environment/founding-grove/grove0.jpg",
+		  "author": {
+			"@type": "Organization",
+			"name": "Everdantia"
+		  },
+		  "publisher": {
+			"@type": "Organization",
+			"name": "Everdantia",
+			"logo": {
+			  "@type": "ImageObject",
+			  "url": "https://everdantia.art/favicon.svg"
+			}
+		  },
+		  "datePublished": "2025-01-10",
+		  "mainEntityOfPage": "https://everdantia.art/blog/genesis-collection-unveiled"
+		}
+		</script>
+
 		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
-		
+
 		<style>
 			* {
 				margin: 0;
@@ -137,7 +182,10 @@ import Layout from '../../layouts/Layout.astro';
 		<article>
 			<div class="hero">
 				<div class="hero-image">
-					<img src="/images/environment/founding-grove/grove0.jpg" alt="Genesis Collection" />
+				   <picture>
+					   <source srcset="/images/environment/founding-grove/grove0.webp" type="image/webp" />
+					   <img src="/images/environment/founding-grove/grove0.jpg" alt="Genesis Collection" />
+				   </picture>
 				</div>
 				<div class="hero-overlay"></div>
 				<a href="/blog" class="nav-back">← Back to Blog</a>

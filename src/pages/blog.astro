@@ -3,37 +3,37 @@ import layout from '../layouts/layout.astro';
 
 const blogPosts = [
   {
-    title: "Welcome to Everdantia",
-    date: "2025-01-15",
-    slug: "welcome-to-everdantia",
-    excerpt: "Discover the magical world where digital nature meets real conservation efforts. Step into a realm where every pixel tells a story of growth, wonder, and environmental hope.",
-    content: "Welcome to Everdantia, where each NFT represents more than just digital art...",
-    image: "/images/environment/everdantia-glade/glade0.jpg",
-    category: "Community",
-    readTime: "3 min read",
-    featured: true
+	title: "Welcome to Everdantia",
+	date: "2025-01-15",
+	slug: "welcome-to-everdantia",
+	excerpt: "Discover the magical world where digital nature meets real conservation efforts. Step into a realm where every pixel tells a story of growth, wonder, and environmental hope.",
+	content: "Welcome to Everdantia, where each NFT represents more than just digital art...",
+	image: "/images/environment/everdantia-glade/glade0.jpg",
+	category: "Community",
+	readTime: "3 min read",
+	featured: true
   },
   {
-    title: "The Genesis Collection Unveiled",
-    date: "2025-01-10", 
-    slug: "genesis-collection-unveiled",
-    excerpt: "Meet the founding trees that will shape our enchanted forest realm. Each guardian holds secrets of ancient magic and promises of future growth.",
-    content: "Our Genesis Collection features 100 unique trees, each with its own story...",
-    image: "/images/environment/founding-grove/grove0.jpg",
-    category: "Collection",
-    readTime: "5 min read",
-    featured: false
+	title: "The Genesis Collection Unveiled",
+	date: "2025-01-10", 
+	slug: "genesis-collection-unveiled",
+	excerpt: "Meet the founding trees that will shape our enchanted forest realm. Each guardian holds secrets of ancient magic and promises of future growth.",
+	content: "Our Genesis Collection features 100 unique trees, each with its own story...",
+	image: "/images/environment/founding-grove/grove0.jpg",
+	category: "Collection",
+	readTime: "5 min read",
+	featured: false
   },
   {
-    title: "Conservation Through Innovation",
-    date: "2025-01-05",
-    slug: "conservation-through-innovation", 
-    excerpt: "How blockchain technology helps us support real-world reforestation. Innovation meets nature in our mission to heal the planet.",
-    content: "Every Everdantia NFT purchase contributes to real forest conservation...",
-    image: "/images/environment/forest-sanctuary/sanctuary0.jpg",
-    category: "Conservation",
-    readTime: "4 min read",
-    featured: false
+	title: "Conservation Through Innovation",
+	date: "2025-01-05",
+	slug: "conservation-through-innovation", 
+	excerpt: "How blockchain technology helps us support real-world reforestation. Innovation meets nature in our mission to heal the planet.",
+	content: "Every Everdantia NFT purchase contributes to real forest conservation...",
+	image: "/images/environment/forest-sanctuary/sanctuary0.jpg",
+	category: "Conservation",
+	readTime: "4 min read",
+	featured: false
   }
 ];
 ---
@@ -46,12 +46,51 @@ const blogPosts = [
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon.svg" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
-		
-		<title>Blog - Everdantia</title>
-		<meta name="description" content="Read the latest updates from Everdantia - digital forest conservation through NFTs." />
-		
+
+		<!-- SEO Meta Tags -->
+		<title>Everdantia Blog - Digital Forest Stories & Conservation News</title>
+		<meta name="description" content="Read the latest stories, updates, and conservation news from the Everdantia digital forest community. Discover how NFTs support real-world reforestation." />
+		<meta name="keywords" content="Everdantia blog, NFT news, digital forest, conservation, reforestation, updates, stories" />
+		<meta name="author" content="Everdantia" />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href="https://everdantia.art/blog" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://everdantia.art/blog" />
+		<meta property="og:title" content="Everdantia Blog - Digital Forest Stories & Conservation News" />
+		<meta property="og:description" content="Read the latest stories, updates, and conservation news from the Everdantia digital forest community. Discover how NFTs support real-world reforestation." />
+		<meta property="og:image" content="https://everdantia.art/images/environment/everdantia-glade/glade0.jpg" />
+		<meta property="og:site_name" content="Everdantia" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://everdantia.art/blog" />
+		<meta property="twitter:title" content="Everdantia Blog - Digital Forest Stories & Conservation News" />
+		<meta property="twitter:description" content="Read the latest stories, updates, and conservation news from the Everdantia digital forest community. Discover how NFTs support real-world reforestation." />
+		<meta property="twitter:image" content="https://everdantia.art/images/environment/everdantia-glade/glade0.jpg" />
+
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "Blog",
+		  "name": "Everdantia Blog",
+		  "url": "https://everdantia.art/blog",
+		  "description": "Stories, updates, and conservation news from the Everdantia digital forest community.",
+		  "publisher": {
+			"@type": "Organization",
+			"name": "Everdantia",
+			"logo": {
+			  "@type": "ImageObject",
+			  "url": "https://everdantia.art/favicon.svg"
+			}
+		  }
+		}
+		</script>
+
 		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
-		
+
 		<style>
 			* {
 				margin: 0;
@@ -68,20 +107,20 @@ const blogPosts = [
 				position: relative;
 			}
 
-			body::before {
-				content: '';
-				position: fixed;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				background: url('/images/background/hilltop/hilltop1.jpg');
-				background-size: cover;
-				background-position: center;
-				background-attachment: fixed;
-				opacity: 0.4;
-				z-index: -2;
-			}
+		   body::before {
+			   content: '';
+			   position: fixed;
+			   top: 0;
+			   left: 0;
+			   right: 0;
+			   bottom: 0;
+			   background-image: url('/images/background/hilltop/hilltop1.webp'), url('/images/background/hilltop/hilltop1.jpg');
+			   background-size: cover;
+			   background-position: center;
+			   background-attachment: fixed;
+			   opacity: 0.4;
+			   z-index: -2;
+		   }
 
 			body::after {
 				content: '';
@@ -404,7 +443,10 @@ const blogPosts = [
 				<section class="featured-post fade-in">
 					<article class="featured-card">
 						<div class="featured-image">
-							<img src={post.image} alt={post.title} loading="eager" />
+		   <picture>
+			   <source srcSet={post.image.replace('.jpg', '.webp')} type="image/webp" />
+			   <img src={post.image} alt={post.title} loading="eager" />
+		   </picture>
 							<div class="featured-badge">Featured</div>
 						</div>
 						<div class="featured-content">
@@ -433,7 +475,10 @@ const blogPosts = [
 				{blogPosts.filter(post => !post.featured).map((post, index) => (
 					<article class="blog-post" style={`animation-delay: ${index * 0.1}s`}>
 						<div class="post-image">
-							<img src={post.image} alt={post.title} loading="lazy" />
+		   <picture>
+			   <source srcSet={post.image.replace('.jpg', '.webp')} type="image/webp" />
+			   <img src={post.image} alt={post.title} loading="lazy" />
+		   </picture>
 						</div>
 						<div class="post-content">
 							<div class="post-meta">
