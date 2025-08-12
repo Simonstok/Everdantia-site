@@ -192,17 +192,69 @@ const {
           }
           localStorage.setItem('everdantia_analytics', JSON.stringify(events));
           
-          // Send to analytics API endpoint
-          fetch('/api/analytics', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-          }).catch((error) => {
-            // Fail silently, but log in development
-            if (window.location.hostname === 'localhost') {
-              console.warn('Analytics failed to send:', error);
+          // Send to analytics API endpoint with retry logic
+          this.sendToAPI(data, 3); // Try up to 3 times
+        }
+      }
+
+      async sendToAPI(data, retries = 3) {
+        for (let attempt = 1; attempt <= retries; attempt++) {
+          try {
+            const response = await fetch('/api/analytics', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+              // Success - mark this event as synced if needed
+              if (window.location.hostname === 'localhost') {
+                console.log('✅ Analytics event sent successfully');
+              }
+              return;
+            } else {
+              throw new Error(`API returned ${response.status}: ${response.statusText}`);
             }
-          });
+          } catch (error) {
+            if (window.location.hostname === 'localhost') {
+              console.warn(`❌ Analytics attempt ${attempt}/${retries} failed:`, error.message);
+            }
+            
+            if (attempt === retries) {
+              // Final attempt failed - store for later retry
+              this.storeFailed(data);
+              if (window.location.hostname === 'localhost') {
+                console.error('💥 Analytics failed after all retries, stored for later');
+              }
+            } else {
+              // Wait before retry (exponential backoff)
+              await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+            }
+          }
+        }
+      }
+
+      storeFailed(data) {
+        // Store failed events for later retry
+        const failed = JSON.parse(localStorage.getItem('everdantia_analytics_failed') || '[]');
+        failed.push({...data, failedAt: Date.now()});
+        if (failed.length > 50) {
+          failed.splice(0, failed.length - 50); // Keep last 50 failed events
+        }
+        localStorage.setItem('everdantia_analytics_failed', JSON.stringify(failed));
+      }
+
+      // Method to retry failed events
+      async retryFailedEvents() {
+        const failed = JSON.parse(localStorage.getItem('everdantia_analytics_failed') || '[]');
+        if (failed.length === 0) return;
+
+        const toRetry = [...failed];
+        localStorage.removeItem('everdantia_analytics_failed'); // Clear the queue
+
+        for (const event of toRetry) {
+          await this.sendToAPI(event, 1); // Single retry attempt
+          await new Promise(resolve => setTimeout(resolve, 100)); // Small delay between requests
         }
       }
 
@@ -211,15 +263,37 @@ const {
         return JSON.parse(localStorage.getItem('everdantia_analytics') || '[]');
       }
 
+      // Method to get failed events (for debugging)
+      getFailedEvents() {
+        return JSON.parse(localStorage.getItem('everdantia_analytics_failed') || '[]');
+      }
+
       // Method to clear analytics data
       clearStoredEvents() {
         localStorage.removeItem('everdantia_analytics');
+        localStorage.removeItem('everdantia_analytics_failed');
+      }
+
+      // Method to get sync status
+      getSyncStatus() {
+        const stored = this.getStoredEvents().length;
+        const failed = this.getFailedEvents().length;
+        return {
+          totalStored: stored,
+          totalFailed: failed,
+          syncRate: stored > 0 ? ((stored - failed) / stored * 100).toFixed(1) + '%' : '100%'
+        };
       }
     }
 
     // Initialize analytics
     window.enableErrorTracking = true;
     window.everdantiaAnalytics = new EverdantiaAnalytics();
+
+    // Retry failed events when page loads
+    setTimeout(() => {
+      window.everdantiaAnalytics?.retryFailedEvents();
+    }, 2000); // Wait 2 seconds for page to fully load
 
     // Expose tracking method globally for manual event tracking
     window.trackEvent = (name, properties) => {
@@ -230,6 +304,9 @@ const {
     if (window.location.hostname === 'localhost' || window.location.hostname.includes('dev')) {
       console.log('🌿 Everdantia Analytics initialized');
       console.log('Use window.everdantiaAnalytics.getStoredEvents() to view tracked events');
+      console.log('Use window.everdantiaAnalytics.getFailedEvents() to view failed events');
+      console.log('Use window.everdantiaAnalytics.getSyncStatus() to check sync status');
+      console.log('Use window.everdantiaAnalytics.retryFailedEvents() to retry failed events');
       console.log('Use window.trackEvent("event_name", {prop: "value"}) to track custom events');
     }
   </script>
