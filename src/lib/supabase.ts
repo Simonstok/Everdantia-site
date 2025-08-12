@@ -3,8 +3,18 @@ import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.SUPABASE_URL || '';
 const supabaseAnonKey = import.meta.env.SUPABASE_ANON_KEY || '';
+const supabaseServiceKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
+// Client for public operations (client-side)
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+// Client for server-side operations (API routes)
+export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
+  auth: {
+    autoRefreshToken: false,
+    persistSession: false
+  }
+});
 
 // Database schema types
 export interface AnalyticsEvent {
@@ -30,7 +40,7 @@ export interface AnalyticsEvent {
 export class AnalyticsService {
   static async saveEvent(event: AnalyticsEvent) {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabaseAdmin
         .from('analytics_events')
         .insert([{
           type: event.type,
@@ -60,7 +70,7 @@ export class AnalyticsService {
 
   static async getEvents(limit = 100) {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabaseAdmin
         .from('analytics_events')
         .select('*')
         .order('timestamp', { ascending: false })
@@ -88,7 +98,7 @@ export class AnalyticsService {
       
       const since = new Date(now.getTime() - timeframeMs);
 
-      const { data, error } = await supabase
+      const { data, error } = await supabaseAdmin
         .from('analytics_events')
         .select('type, name, session_id')
         .gte('timestamp', since.getTime());
@@ -104,7 +114,7 @@ export class AnalyticsService {
         pageViews: data.filter(e => e.type === 'pageview').length,
         clicks: data.filter(e => e.type === 'event' && e.name === 'click').length,
         errors: data.filter(e => e.type === 'event' && e.name?.includes('error')).length,
-        uniqueSessions: [...new Set(data.map(e => e.session_id))].length
+        uniqueSessions: Array.from(new Set(data.map(e => e.session_id))).length
       };
 
       return { success: true, data: stats };
