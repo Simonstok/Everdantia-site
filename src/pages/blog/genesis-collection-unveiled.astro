@@ -1,221 +1,26 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import BlogLayout from '../../layouts/BlogLayout.astro';
 ---
 
-<Layout>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-
-		<!-- SEO Meta Tags -->
-		<title>The Genesis Collection Unveiled - Everdantia Blog</title>
-		<meta name="description" content="Meet the founding trees that will shape our enchanted forest realm. Each guardian holds secrets of ancient magic and promises of future growth." />
-		<meta name="keywords" content="Everdantia, NFT, genesis collection, founding trees, blog, collection" />
-		<meta name="author" content="Everdantia" />
-		<meta name="robots" content="index, follow" />
-		<link rel="canonical" href="https://everdantia.art/blog/genesis-collection-unveiled" />
-
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="article" />
-		<meta property="og:url" content="https://everdantia.art/blog/genesis-collection-unveiled" />
-		<meta property="og:title" content="The Genesis Collection Unveiled - Everdantia Blog" />
-		<meta property="og:description" content="Meet the founding trees that will shape our enchanted forest realm. Each guardian holds secrets of ancient magic and promises of future growth." />
-		<meta property="og:image" content="https://everdantia.art/images/environment/founding-grove/grove0.jpg" />
-		<meta property="og:site_name" content="Everdantia" />
-
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content="https://everdantia.art/blog/genesis-collection-unveiled" />
-		<meta property="twitter:title" content="The Genesis Collection Unveiled - Everdantia Blog" />
-		<meta property="twitter:description" content="Meet the founding trees that will shape our enchanted forest realm. Each guardian holds secrets of ancient magic and promises of future growth." />
-		<meta property="twitter:image" content="https://everdantia.art/images/environment/founding-grove/grove0.jpg" />
-
-		<!-- Structured Data -->
-		<script type="application/ld+json">
-		{
-		  "@context": "https://schema.org",
-		  "@type": "BlogPosting",
-		  "headline": "The Genesis Collection Unveiled",
-		  "description": "Meet the founding trees that will shape our enchanted forest realm. Each guardian holds secrets of ancient magic and promises of future growth.",
-		  "image": "https://everdantia.art/images/environment/founding-grove/grove0.jpg",
-		  "author": {
-			"@type": "Organization",
-			"name": "Everdantia"
-		  },
-		  "publisher": {
-			"@type": "Organization",
-			"name": "Everdantia",
-			"logo": {
-			  "@type": "ImageObject",
-			  "url": "https://everdantia.art/favicon.svg"
-			}
-		  },
-		  "datePublished": "2025-01-10",
-		  "mainEntityOfPage": "https://everdantia.art/blog/genesis-collection-unveiled"
-		}
-		</script>
-
-		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
-
-		<style>
-			* {
-				margin: 0;
-				padding: 0;
-				box-sizing: border-box;
-			}
-
-			body {
-				font-family: 'Inter', sans-serif;
-				background: #f8f6f2;
-				color: #4d6b3c;
-				line-height: 1.6;
-			}
-
-			.hero {
-				position: relative;
-				height: 60vh;
-				min-height: 500px;
-				color: white;
-				overflow: hidden;
-			}
-
-			.hero-image {
-				position: absolute;
-				inset: 0;
-				z-index: -2;
-			}
-
-			.hero-image img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
-
-			.hero-overlay {
-				position: absolute;
-				inset: 0;
-				background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2), rgba(0,0,0,0.4));
-				z-index: -1;
-			}
-
-			.hero-content {
-				position: relative;
-				height: 100%;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				padding: 2rem;
-				max-width: 800px;
-				margin: 0 auto;
-				text-align: center;
-			}
-
-			.nav-back {
-				position: absolute;
-				top: 2rem;
-				left: 2rem;
-				color: white;
-				text-decoration: none;
-				display: flex;
-				align-items: center;
-				gap: 0.5rem;
-				font-weight: 500;
-				background: rgba(255,255,255,0.1);
-				padding: 0.75rem 1.5rem;
-				border-radius: 2rem;
-				backdrop-filter: blur(10px);
-				transition: all 0.3s ease;
-			}
-
-			.nav-back:hover {
-				background: rgba(255,255,255,0.2);
-				transform: translateX(-5px);
-			}
-
-			.content {
-				max-width: 800px;
-				margin: 4rem auto;
-				padding: 0 2rem;
-				font-size: 1.1rem;
-				line-height: 1.8;
-			}
-
-			h1 {
-				font-family: 'Cormorant Garamond', serif;
-				font-size: clamp(2.5rem, 6vw, 4rem);
-				margin-bottom: 1rem;
-				line-height: 1.2;
-			}
-
-			.meta {
-				display: flex;
-				justify-content: center;
-				gap: 1rem;
-				color: rgba(255,255,255,0.9);
-				margin-bottom: 2rem;
-			}
-
-			h2 {
-				font-family: 'Cormorant Garamond', serif;
-				font-size: 2rem;
-				color: #6b4f2a;
-				margin: 2rem 0 1rem;
-			}
-
-			p {
-				margin-bottom: 1.5rem;
-			}
-
-			.category-tag {
-				background: rgba(139,171,93,0.1);
-				color: #6b4f2a;
-				padding: 0.25rem 0.75rem;
-				border-radius: 1rem;
-				font-size: 0.9rem;
-				font-weight: 500;
-			}
-		</style>
-	</head>
-	<body>
-		<article>
-			<div class="hero">
-				<div class="hero-image">
-				   <picture>
-					   <source srcset="/images/environment/founding-grove/grove0.webp" type="image/webp" />
-					   <img src="/images/environment/founding-grove/grove0.jpg" alt="Genesis Collection" />
-				   </picture>
-				</div>
-				<div class="hero-overlay"></div>
-				<a href="/blog" class="nav-back">← Back to Blog</a>
-				<div class="hero-content">
-					<h1>The Genesis Collection Unveiled</h1>
-					<div class="meta">
-						<span class="category-tag">Collection</span>
-						<span>•</span>
-						<span>January 10, 2025</span>
-						<span>•</span>
-						<span>5 min read</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="content">
-				<p>Our Genesis Collection features 100 unique trees, each with its own story and characteristics. These magnificent specimens represent the founding members of our digital forest, setting the stage for an ever-expanding ecosystem of art and conservation.</p>
-
-				<h2>The Founding Trees</h2>
-				<p>Each tree in the Genesis Collection has been carefully crafted to embody the spirit of Everdantia. From the ancient Whisperroot of the Hollow to the mysterious Gloomshade Elder, every piece tells a unique story of nature's resilience and magic.</p>
-
-				<h2>A New Chapter in Digital Conservation</h2>
-				<p>The Genesis Collection marks the beginning of our journey to bridge the digital and natural worlds. By owning one of these foundational pieces, collectors become guardians of both virtual and real forests, as each NFT directly supports conservation efforts.</p>
-
-				<h2>Join the Forest</h2>
-				<p>As we prepare for the Genesis Collection launch, we invite you to be part of this groundbreaking initiative. Together, we'll create a thriving ecosystem where digital art serves as a catalyst for real-world change.</p>
-
-				<p>Stay tuned for more updates as we approach the mint date, and join our community to be part of this historic moment in the evolution of NFTs and environmental conservation.</p>
-			</div>
-		</article>
-	</body>
-</html>
-</Layout>
+<BlogLayout
+  title="The Genesis Collection Unveiled - Everdantia Blog"
+  description="Meet the founding trees that will shape our enchanted forest realm. Each guardian holds secrets of ancient magic and promises of future growth."
+  keywords="Everdantia, NFT, genesis collection, founding trees, blog, collection"
+  author="Everdantia"
+  date="January 10, 2025"
+  readTime="5 min read"
+  category="Collection"
+  canonical="https://everdantia.art/blog/genesis-collection-unveiled"
+  ogImage="/images/environment/founding-grove/grove0.webp"
+  featuredImage="/images/environment/founding-grove/grove0.jpg"
+  featuredImageAlt="Genesis Collection"
+>
+  <p>Our Genesis Collection features 100 unique trees, each with its own story and characteristics. These magnificent specimens represent the founding members of our digital forest, setting the stage for an ever-expanding ecosystem of art and conservation.</p>
+  <h2>The Founding Trees</h2>
+  <p>Each tree in the Genesis Collection has been carefully crafted to embody the spirit of Everdantia. From the ancient Whisperroot of the Hollow to the mysterious Gloomshade Elder, every piece tells a unique story of nature's resilience and magic.</p>
+  <h2>A New Chapter in Digital Conservation</h2>
+  <p>The Genesis Collection marks the beginning of our journey to bridge the digital and natural worlds. By owning one of these foundational pieces, collectors become guardians of both virtual and real forests, as each NFT directly supports conservation efforts.</p>
+  <h2>Join the Forest</h2>
+  <p>As we prepare for the Genesis Collection launch, we invite you to be part of this groundbreaking initiative. Together, we'll create a thriving ecosystem where digital art serves as a catalyst for real-world change.</p>
+  <p>Stay tuned for more updates as we approach the mint date, and join our community to be part of this historic moment in the evolution of NFTs and environmental conservation.</p>
+</BlogLayout>

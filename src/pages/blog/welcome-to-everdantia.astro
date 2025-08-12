@@ -1,70 +1,35 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import BlogLayout from '../../layouts/BlogLayout.astro';
 ---
-
-<Layout>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-
-		<!-- SEO Meta Tags -->
-		<title>Welcome to Everdantia - Everdantia Blog</title>
-		<meta name="description" content="Discover the magical world where digital nature meets real conservation efforts. Step into a realm where every pixel tells a story of growth, wonder, and environmental hope." />
-		<meta name="keywords" content="Everdantia, NFT, digital nature, conservation, blog, welcome" />
-		<meta name="author" content="Everdantia" />
-		<meta name="robots" content="index, follow" />
-		<link rel="canonical" href="https://everdantia.art/blog/welcome-to-everdantia" />
-
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="article" />
-		<meta property="og:url" content="https://everdantia.art/blog/welcome-to-everdantia" />
-		<meta property="og:title" content="Welcome to Everdantia - Everdantia Blog" />
-		<meta property="og:description" content="Discover the magical world where digital nature meets real conservation efforts. Step into a realm where every pixel tells a story of growth, wonder, and environmental hope." />
-		<meta property="og:image" content="https://everdantia.art/images/environment/everdantia-glade/glade0.jpg" />
-		<meta property="og:site_name" content="Everdantia" />
-
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content="https://everdantia.art/blog/welcome-to-everdantia" />
-		<meta property="twitter:title" content="Welcome to Everdantia - Everdantia Blog" />
-		<meta property="twitter:description" content="Discover the magical world where digital nature meets real conservation efforts. Step into a realm where every pixel tells a story of growth, wonder, and environmental hope." />
-		<meta property="twitter:image" content="https://everdantia.art/images/environment/everdantia-glade/glade0.jpg" />
-
-		<!-- Structured Data -->
-		<script type="application/ld+json">
-		{
-		  "@context": "https://schema.org",
-		  "@type": "BlogPosting",
-		  "headline": "Welcome to Everdantia",
-		  "description": "Discover the magical world where digital nature meets real conservation efforts. Step into a realm where every pixel tells a story of growth, wonder, and environmental hope.",
-		  "image": "https://everdantia.art/images/environment/everdantia-glade/glade0.jpg",
-		  "author": {
-			"@type": "Organization",
-			"name": "Everdantia"
-		  },
-		  "publisher": {
-			"@type": "Organization",
-			"name": "Everdantia",
-			"logo": {
-			  "@type": "ImageObject",
-			  "url": "https://everdantia.art/favicon.svg"
-			}
-		  },
-		  "datePublished": "2025-01-15",
-		  "mainEntityOfPage": "https://everdantia.art/blog/welcome-to-everdantia"
-		}
-		</script>
-
-		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
-
-		<style>
-			* {
-				margin: 0;
-				padding: 0;
-				box-sizing: border-box;
-			}
+<BlogLayout
+  title="Welcome to Everdantia - Everdantia Blog"
+  description="Discover the magical world where digital nature meets real conservation efforts. Step into a realm where every pixel tells a story of growth, wonder, and environmental hope."
+  keywords="Everdantia, NFT, digital nature, conservation, blog, welcome"
+  author="Everdantia"
+  date="January 15, 2025"
+  readTime="3 min read"
+  category="Community"
+  canonical="https://everdantia.art/blog/welcome-to-everdantia"
+  ogImage="/images/environment/everdantia-glade/glade0.webp"
+  featuredImage="/images/environment/everdantia-glade/glade0.jpg"
+  featuredImageAlt="Everdantia Glade Banner"
+>
+  <span slot="featuredImageSlot">
+	<picture>
+	  <source srcset="/images/chatgpt-illustration.webp" type="image/webp" />
+	  <img src="/images/chatgpt-illustration.png" alt="ChatGPT illustratie Everdantia" class="featured-image chatgpt-image" />
+	</picture>
+  </span>
+  <p>Welcome to Everdantia, where each NFT represents more than just digital art—it's a gateway to a living, breathing world where imagination meets purpose.</p>
+  <p>In our enchanted realm, every tree tells a story. From the ancient Elder Oak that holds the memories of countless generations to the shimmering Crystal Birch that reflects the magic flowing through our forest, each creation is born from a vision of harmony between the digital and natural worlds.</p>
+  <h2>A New Kind of NFT Project</h2>
+  <p>Everdantia isn't just another collection of digital art pieces. We're building a community-driven narrative where your participation shapes the story. As an NFT holder, you become part of our ever-expanding lore, with opportunities to influence seasonal events, vote on new additions, and help write the future chapters of our enchanted forest.</p>
+  <p>But our mission extends beyond the digital realm. Each purchase supports real-world conservation efforts, making your investment in digital nature a contribution to protecting actual forests. This is where blockchain technology meets environmental responsibility.</p>
+  <h2>The Journey Begins</h2>
+  <p>Our Genesis Collection of 100 unique trees represents the foundation of Everdantia. These aren't randomly generated images—each tree is carefully crafted with its own personality, backstory, and role in our growing mythology.</p>
+  <p>As we prepare for our August 1st mint, we invite you to explore our world, join our community, and become part of something truly special. This is just the beginning of what promises to be an extraordinary journey through the digital wilderness.</p>
+  <p>Welcome to Everdantia. Welcome home.</p>
+</BlogLayout>
 
 			body {
 				font-family: 'Inter', sans-serif;
@@ -193,6 +158,16 @@ import Layout from '../../layouts/Layout.astro';
 				height: 400px;
 				object-fit: cover;
 			}
+			.chatgpt-image {
+				object-fit: contain;
+				background: #f8f6f2;
+				height: 350px;
+				display: block;
+				margin: 0 auto;
+				border-radius: 1.5rem;
+				box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+				padding: 1.5rem 0;
+			}
 
 			.article-content {
 				padding: 4rem;
@@ -311,10 +286,18 @@ import Layout from '../../layouts/Layout.astro';
 	</head>
 	<body>
 		<section class="hero-section">
+			<!-- Hero Banner Image -->
+			<div class="hero-image">
+				<picture>
+					<source srcset="/images/environment/everdantia-glade/glade0.webp" type="image/webp" />
+					<img src="/images/environment/everdantia-glade/glade0.jpg" alt="Everdantia Glade Banner" style="width:100%;height:100%;object-fit:cover;" />
+				</picture>
+			</div>
+
 			<a href="/blog" class="nav-back">
 				← Back to Blog
 			</a>
-			
+
 			<div class="hero-content">
 				<div class="article-meta">
 					<span class="category-tag">Community</span>
@@ -330,10 +313,10 @@ import Layout from '../../layouts/Layout.astro';
 		<div class="container">
 			<article class="article">
 			   <picture>
-				   <source srcset="/images/environment/everdantia-glade/glade0.webp" type="image/webp" />
-				   <img src="/images/environment/everdantia-glade/glade0.jpg" 
-						alt="Everdantia Glade" 
-						class="featured-image" />
+				   <source srcset="/images/chatgpt-illustration.webp" type="image/webp" />
+				   <img src="/images/chatgpt-illustration.png" 
+						alt="ChatGPT illustratie Everdantia" 
+						class="featured-image chatgpt-image" />
 			   </picture>
 				
 				<div class="article-content">

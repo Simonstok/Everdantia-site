@@ -1,5 +1,5 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import BlogLayout from '../../layouts/BlogLayout.astro';
 ---
 
 <Layout>
@@ -69,52 +69,28 @@ import Layout from '../../layouts/Layout.astro';
 			body {
 				font-family: 'Inter', sans-serif;
 				background: #f8f6f2;
-				color: #4d6b3c;
-				line-height: 1.6;
-			}
-
-			.hero {
-				position: relative;
-				height: 60vh;
-				min-height: 500px;
-				color: white;
-				overflow: hidden;
-			}
-
-			.hero-image {
-				position: absolute;
-				inset: 0;
-				z-index: -2;
-			}
-
-			.hero-image img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
-
-			.hero-overlay {
-				position: absolute;
-				inset: 0;
-				background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2), rgba(0,0,0,0.4));
-				z-index: -1;
-			}
-
-			.hero-content {
-				position: relative;
-				height: 100%;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				padding: 2rem;
-				max-width: 800px;
-				margin: 0 auto;
-				text-align: center;
-			}
-
-			.nav-back {
-				position: absolute;
-				top: 2rem;
+<BlogLayout
+  title="Conservation Through Innovation - Everdantia Blog"
+  description="How blockchain technology helps us support real-world reforestation. Innovation meets nature in our mission to heal the planet."
+  keywords="Everdantia, NFT, blockchain, conservation, innovation, blog"
+  author="Everdantia"
+  date="January 5, 2025"
+  readTime="4 min read"
+  category="Conservation"
+  canonical="https://everdantia.art/blog/conservation-through-innovation"
+  ogImage="/images/environment/forest-sanctuary/sanctuary0.webp"
+  featuredImage="/images/environment/forest-sanctuary/sanctuary0.jpg"
+  featuredImageAlt="Forest Conservation"
+>
+  <p>Every Everdantia NFT purchase contributes to real forest conservation efforts. Through our innovative approach to digital art and blockchain technology, we're creating a direct link between virtual collectibles and environmental impact.</p>
+  <h2>The Power of Digital Conservation</h2>
+  <p>By leveraging blockchain technology, we ensure complete transparency in how your contributions support conservation efforts. Each NFT is not just a piece of digital art - it's a commitment to preserving our planet's natural wonders.</p>
+  <h2>Real Impact, Real Change</h2>
+  <p>Our partnerships with conservation organizations ensure that your investment in Everdantia translates into tangible environmental benefits. From reforestation projects to protecting endangered habitats, your digital tree helps grow and protect real forests.</p>
+  <h2>A Sustainable Future</h2>
+  <p>We believe that technology and nature can coexist harmoniously. By bridging the digital and natural worlds, we're creating new opportunities for conservation that speak to both traditional environmentalists and digital natives.</p>
+  <p>Join us in this innovative approach to conservation, where every NFT minted brings us one step closer to a greener, more sustainable future. Together, we can harness the power of blockchain technology to make a real difference in the world.</p>
+</BlogLayout>
 				left: 2rem;
 				color: white;
 				text-decoration: none;
