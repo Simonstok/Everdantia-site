@@ -141,11 +141,11 @@ if (!isDev && !hasDevAccess) {
       async function refreshData() {
         try {
           // Fetch stats from API
-          const statsResponse = await fetch('/api/analytics?type=stats&secret=everdantia2025&timeframe=24h');
+          const statsResponse = await fetch('/api/analytics?type=stats&secret=everdantia2025_secure_dashboard_2025&timeframe=24h');
           const stats = await statsResponse.json();
           
           // Fetch recent events from API
-          const eventsResponse = await fetch('/api/analytics?type=events&secret=everdantia2025&limit=50');
+          const eventsResponse = await fetch('/api/analytics?type=events&secret=everdantia2025_secure_dashboard_2025&limit=50');
           const events = await eventsResponse.json();
 
           // Fallback to localStorage if API fails
@@ -226,23 +226,23 @@ if (!isDev && !hasDevAccess) {
         statsGrid.innerHTML = `
           <div class="stat-card">
             <div class="stat-number">${stats.totalEvents}</div>
-            <div class="stat-label">Total Events (Local)</div>
+            <div class="stat-label">Total Events (Fallback)</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">${stats.pageViews}</div>
-            <div class="stat-label">Page Views (Local)</div>
+            <div class="stat-label">Page Views (Fallback)</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">${stats.clicks}</div>
-            <div class="stat-label">Clicks (Local)</div>
+            <div class="stat-label">Clicks (Fallback)</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">${stats.uniqueSessions}</div>
-            <div class="stat-label">Unique Sessions (Local)</div>
+            <div class="stat-label">Unique Sessions (Fallback)</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">${stats.errors}</div>
-            <div class="stat-label">Errors (Local)</div>
+            <div class="stat-label">Errors (Fallback)</div>
           </div>
         `;
 
