@@ -3,6 +3,13 @@ import { AnalyticsService } from '../../lib/supabase';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Log environment check
+    console.log('🔧 Environment check:', {
+      hasUrl: !!process.env.SUPABASE_URL,
+      hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+      urlStart: process.env.SUPABASE_URL?.substring(0, 20)
+    });
+
     const data = await request.json();
     
     // Validate the incoming data
@@ -22,17 +29,18 @@ export const POST: APIRoute = async ({ request }) => {
     };
 
     // Save to Supabase
+    console.log('💾 Attempting to save event to Supabase...');
     const result = await AnalyticsService.saveEvent(analyticsEvent);
     
     if (!result.success) {
-      console.error('Failed to save analytics event:', result.error);
+      console.error('❌ Failed to save analytics event:', result.error);
       // Still return success to client to avoid disrupting user experience
+    } else {
+      console.log('✅ Successfully saved analytics event');
     }
 
     // Log in development
-    if (import.meta.env.DEV) {
-      console.log('📊 Analytics Event:', JSON.stringify(analyticsEvent, null, 2));
-    }
+    console.log('📊 Analytics Event:', JSON.stringify(analyticsEvent, null, 2));
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
@@ -40,9 +48,12 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
   } catch (error) {
-    console.error('Analytics API Error:', error);
+    console.error('💥 Analytics API Error:', error);
     
-    return new Response(JSON.stringify({ error: 'Internal server error' }), {
+    return new Response(JSON.stringify({ 
+      error: 'Internal server error',
+      message: error instanceof Error ? error.message : 'Unknown error'
+    }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });

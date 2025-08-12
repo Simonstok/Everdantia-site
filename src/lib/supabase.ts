@@ -1,9 +1,10 @@
 // Supabase client configuration
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.SUPABASE_ANON_KEY || '';
-const supabaseServiceKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY || '';
+// Environment variables - these should be loaded from .env (with ANALYTICS_ prefix to avoid conflicts)
+const supabaseUrl = process.env.ANALYTICS_SUPABASE_URL || 'https://vfwcdrwxvzjzzesktymq.supabase.co';
+const supabaseAnonKey = process.env.ANALYTICS_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmd2Nkcnd4dnpqenplc2t0eW1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwMDAxNTksImV4cCI6MjA3MDU3NjE1OX0.sR2iR7Huljia9NERc1zbGmQGdaNGs2flFQt7l7v5GOw';
+const supabaseServiceKey = process.env.ANALYTICS_SUPABASE_SERVICE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmd2Nkcnd4dnpqenplc2t0eW1xIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NTAwMDE1OSwiZXhwIjoyMDcwNTc2MTU5fQ.wLslGGWGtpEcIfO0kpW-knncO7fc3NWxLIOQZDYQWgQ';
 
 // Client for public operations (client-side)
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
