@@ -1,8 +1,10 @@
 ---
-// Simple analytics dashboard - only accessible in development
+// Analytics dashboard - accessible in development or with special query param
 const isDev = import.meta.env.DEV;
+const hasDevAccess = Astro.url.searchParams.get('dev') === 'everdantia2025';
 
-if (!isDev) {
+// Allow access in development mode OR with special query parameter
+if (!isDev && !hasDevAccess) {
   return Astro.redirect('/');
 }
 ---
@@ -136,7 +138,78 @@ if (!isDev) {
     </div>
 
     <script>
-      function refreshData() {
+      async function refreshData() {
+        try {
+          // Fetch stats from API
+          const statsResponse = await fetch('/api/analytics?type=stats&secret=everdantia2025&timeframe=24h');
+          const stats = await statsResponse.json();
+          
+          // Fetch recent events from API
+          const eventsResponse = await fetch('/api/analytics?type=events&secret=everdantia2025&limit=50');
+          const events = await eventsResponse.json();
+
+          // Fallback to localStorage if API fails
+          if (!statsResponse.ok || !eventsResponse.ok) {
+            console.warn('API failed, falling back to localStorage');
+            return refreshDataFromLocalStorage();
+          }
+
+          // Update stats grid
+          const statsGrid = document.getElementById('statsGrid');
+          statsGrid.innerHTML = `
+            <div class="stat-card">
+              <div class="stat-number">${stats.totalEvents || 0}</div>
+              <div class="stat-label">Total Events (24h)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">${stats.pageViews || 0}</div>
+              <div class="stat-label">Page Views (24h)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">${stats.clicks || 0}</div>
+              <div class="stat-label">Clicks (24h)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">${stats.uniqueSessions || 0}</div>
+              <div class="stat-label">Unique Sessions (24h)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">${stats.errors || 0}</div>
+              <div class="stat-label">Errors (24h)</div>
+            </div>
+          `;
+
+          // Update events table
+          const tbody = document.querySelector('#eventsTable tbody');
+          tbody.innerHTML = events
+            .map(event => {
+              const time = new Date(event.timestamp).toLocaleTimeString();
+              const eventClass = `event-${event.type === 'event' && event.name?.includes('error') ? 'error' : event.type}`;
+              
+              return `
+                <tr>
+                  <td>${time}</td>
+                  <td><span class="event-type ${eventClass}">${event.type}</span></td>
+                  <td>${event.name || '-'}</td>
+                  <td>${event.url || '-'}</td>
+                  <td>${JSON.stringify(event.properties || {}).substring(0, 100)}...</td>
+                </tr>
+              `;
+            })
+            .join('');
+
+          // Update JSON view with recent events
+          const jsonView = document.getElementById('jsonView');
+          jsonView.textContent = JSON.stringify(events.slice(0, 10), null, 2);
+
+        } catch (error) {
+          console.error('Failed to refresh data:', error);
+          // Fallback to localStorage
+          refreshDataFromLocalStorage();
+        }
+      }
+
+      function refreshDataFromLocalStorage() {
         const events = JSON.parse(localStorage.getItem('everdantia_analytics') || '[]');
         
         // Calculate stats
@@ -153,23 +226,23 @@ if (!isDev) {
         statsGrid.innerHTML = `
           <div class="stat-card">
             <div class="stat-number">${stats.totalEvents}</div>
-            <div class="stat-label">Total Events</div>
+            <div class="stat-label">Total Events (Local)</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">${stats.pageViews}</div>
-            <div class="stat-label">Page Views</div>
+            <div class="stat-label">Page Views (Local)</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">${stats.clicks}</div>
-            <div class="stat-label">Clicks</div>
+            <div class="stat-label">Clicks (Local)</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">${stats.uniqueSessions}</div>
-            <div class="stat-label">Unique Sessions</div>
+            <div class="stat-label">Unique Sessions (Local)</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">${stats.errors}</div>
-            <div class="stat-label">Errors</div>
+            <div class="stat-label">Errors (Local)</div>
           </div>
         `;
 
@@ -200,7 +273,7 @@ if (!isDev) {
       }
 
       function clearData() {
-        if (confirm('Are you sure you want to clear all analytics data?')) {
+        if (confirm('Are you sure you want to clear all local analytics data? (This will not affect Supabase data)')) {
           localStorage.removeItem('everdantia_analytics');
           refreshData();
         }
@@ -209,8 +282,8 @@ if (!isDev) {
       // Initial load
       refreshData();
 
-      // Auto-refresh every 10 seconds
-      setInterval(refreshData, 10000);
+      // Auto-refresh every 30 seconds
+      setInterval(refreshData, 30000);
     </script>
   </body>
 </html>
