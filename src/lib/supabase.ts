@@ -27,6 +27,8 @@ export interface AnalyticsEvent {
   referrer?: string;
   timestamp: number;
   session_id: string;
+  visitor_id?: string;
+  is_first_visit?: boolean;
   user_agent?: string;
   viewport?: {
     width: number;
@@ -51,6 +53,8 @@ export class AnalyticsService {
           referrer: event.referrer,
           timestamp: event.timestamp,
           session_id: event.session_id,
+          visitor_id: event.visitor_id,
+          is_first_visit: event.is_first_visit,
           user_agent: event.user_agent,
           viewport: event.viewport,
           ip: event.ip,
@@ -101,7 +105,7 @@ export class AnalyticsService {
 
       const { data, error } = await supabaseAdmin
         .from('analytics_events')
-        .select('type, name, session_id')
+        .select('type, name, session_id, visitor_id, is_first_visit')
         .gte('timestamp', since.getTime());
 
       if (error) {
@@ -115,7 +119,9 @@ export class AnalyticsService {
         pageViews: data.filter(e => e.type === 'pageview').length,
         clicks: data.filter(e => e.type === 'event' && e.name === 'click').length,
         errors: data.filter(e => e.type === 'event' && e.name?.includes('error')).length,
-        uniqueSessions: Array.from(new Set(data.map(e => e.session_id))).length
+        uniqueSessions: Array.from(new Set(data.map(e => e.session_id))).length,
+        uniqueVisitors: Array.from(new Set(data.map(e => e.visitor_id).filter(Boolean))).length,
+        newVisitors: data.filter(e => e.is_first_visit).length
       };
 
       return { success: true, data: stats };

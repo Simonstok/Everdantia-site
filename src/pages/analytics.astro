@@ -166,12 +166,20 @@ if (!isDev && !hasDevAccess) {
               <div class="stat-label">Page Views (24h)</div>
             </div>
             <div class="stat-card">
+              <div class="stat-number">${stats.uniqueVisitors || 0}</div>
+              <div class="stat-label">Unique Visitors (24h)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">${stats.newVisitors || 0}</div>
+              <div class="stat-label">New Visitors (24h)</div>
+            </div>
+            <div class="stat-card">
               <div class="stat-number">${stats.clicks || 0}</div>
               <div class="stat-label">Clicks (24h)</div>
             </div>
             <div class="stat-card">
               <div class="stat-number">${stats.uniqueSessions || 0}</div>
-              <div class="stat-label">Unique Sessions (24h)</div>
+              <div class="stat-label">Sessions (24h)</div>
             </div>
             <div class="stat-card">
               <div class="stat-number">${stats.errors || 0}</div>
@@ -218,7 +226,9 @@ if (!isDev && !hasDevAccess) {
           pageViews: events.filter(e => e.type === 'pageview').length,
           clicks: events.filter(e => e.type === 'event' && e.name === 'click').length,
           errors: events.filter(e => e.type === 'event' && e.name?.includes('error')).length,
-          uniqueSessions: [...new Set(events.map(e => e.sessionId))].length
+          uniqueSessions: [...new Set(events.map(e => e.sessionId))].length,
+          uniqueVisitors: [...new Set(events.map(e => e.visitorId).filter(Boolean))].length,
+          newVisitors: events.filter(e => e.isFirstVisit).length
         };
 
         // Update stats grid
@@ -233,12 +243,20 @@ if (!isDev && !hasDevAccess) {
             <div class="stat-label">Page Views (Fallback)</div>
           </div>
           <div class="stat-card">
+            <div class="stat-number">${stats.uniqueVisitors}</div>
+            <div class="stat-label">Unique Visitors (Fallback)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">${stats.newVisitors}</div>
+            <div class="stat-label">New Visitors (Fallback)</div>
+          </div>
+          <div class="stat-card">
             <div class="stat-number">${stats.clicks}</div>
             <div class="stat-label">Clicks (Fallback)</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">${stats.uniqueSessions}</div>
-            <div class="stat-label">Unique Sessions (Fallback)</div>
+            <div class="stat-label">Sessions (Fallback)</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">${stats.errors}</div>

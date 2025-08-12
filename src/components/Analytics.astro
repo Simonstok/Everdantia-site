@@ -13,6 +13,7 @@ const {
     class EverdantiaAnalytics {
       constructor() {
         this.sessionId = this.generateSessionId();
+        this.visitorId = this.getOrCreateVisitorId();
         this.startTime = Date.now();
         this.events = [];
         this.init();
@@ -20,6 +21,17 @@ const {
 
       generateSessionId() {
         return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      }
+
+      getOrCreateVisitorId() {
+        // Get existing visitor ID or create new one (persists across sessions)
+        let visitorId = localStorage.getItem('everdantia_visitor_id');
+        if (!visitorId) {
+          visitorId = 'v_' + Math.random().toString(36).substring(2, 15) + '_' + Date.now().toString(36);
+          localStorage.setItem('everdantia_visitor_id', visitorId);
+          localStorage.setItem('everdantia_first_visit', Date.now().toString());
+        }
+        return visitorId;
       }
 
       init() {
@@ -39,12 +51,19 @@ const {
       }
 
       trackPageView() {
+        const isFirstVisit = !localStorage.getItem('everdantia_has_visited');
+        if (isFirstVisit) {
+          localStorage.setItem('everdantia_has_visited', 'true');
+        }
+
         const data = {
           type: 'pageview',
           url: window.location.pathname,
           referrer: document.referrer,
           timestamp: Date.now(),
           sessionId: this.sessionId,
+          visitorId: this.visitorId,
+          isFirstVisit: isFirstVisit,
           userAgent: navigator.userAgent,
           viewport: {
             width: window.innerWidth,
@@ -62,7 +81,8 @@ const {
           properties,
           url: window.location.pathname,
           timestamp: Date.now(),
-          sessionId: this.sessionId
+          sessionId: this.sessionId,
+          visitorId: this.visitorId
         };
         
         this.sendEvent(data);

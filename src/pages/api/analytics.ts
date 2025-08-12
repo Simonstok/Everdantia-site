@@ -42,6 +42,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Sanitize and validate data
     const sessionId = (data.sessionId || data.session_id || '').toString().slice(0, 50);
+    const visitorId = (data.visitorId || data.visitor_id || '').toString().slice(0, 50);
     const eventType = data.type.toString().slice(0, 50);
     const url = (data.url || '').toString().slice(0, 500);
     
@@ -63,6 +64,8 @@ export const POST: APIRoute = async ({ request }) => {
       referrer: data.referrer ? data.referrer.toString().slice(0, 500) : null,
       timestamp: Math.max(0, parseInt(data.timestamp) || 0),
       session_id: sessionId,
+      visitor_id: visitorId || null,
+      is_first_visit: Boolean(data.isFirstVisit),
       user_agent: (data.userAgent || data.user_agent || '').toString().slice(0, 300),
       viewport: data.viewport && typeof data.viewport === 'object' ? data.viewport : null,
       server_timestamp: Date.now(),
