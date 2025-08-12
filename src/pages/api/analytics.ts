@@ -5,15 +5,17 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     // Log environment check
     console.log('🔧 Environment check:', {
-      hasUrl: !!process.env.SUPABASE_URL,
-      hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-      urlStart: process.env.SUPABASE_URL?.substring(0, 20)
+      hasUrl: !!process.env.ANALYTICS_SUPABASE_URL,
+      hasServiceKey: !!process.env.ANALYTICS_SUPABASE_SERVICE_KEY,
+      urlStart: process.env.ANALYTICS_SUPABASE_URL?.substring(0, 20)
     });
 
     const data = await request.json();
+    console.log('📥 Received analytics data:', data);
     
     // Validate the incoming data
     if (!data.type || !data.timestamp) {
+      console.error('❌ Invalid data format:', data);
       return new Response(JSON.stringify({ error: 'Invalid data format' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
@@ -28,21 +30,30 @@ export const POST: APIRoute = async ({ request }) => {
       ip: request.headers.get('x-forwarded-for')?.split('.').slice(0, 3).join('.') + '.0' || 'unknown'
     };
 
+    console.log('💾 Attempting to save event to Supabase:', analyticsEvent);
+
     // Save to Supabase
-    console.log('💾 Attempting to save event to Supabase...');
     const result = await AnalyticsService.saveEvent(analyticsEvent);
+    
+    console.log('🔄 Supabase save result:', result);
     
     if (!result.success) {
       console.error('❌ Failed to save analytics event:', result.error);
-      // Still return success to client to avoid disrupting user experience
+      
+      // Return the actual error to help with debugging
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: 'Database save failed',
+        details: result.error
+      }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
     } else {
       console.log('✅ Successfully saved analytics event');
     }
 
-    // Log in development
-    console.log('📊 Analytics Event:', JSON.stringify(analyticsEvent, null, 2));
-
-    return new Response(JSON.stringify({ success: true }), {
+    return new Response(JSON.stringify({ success: true, saved: true }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
@@ -52,7 +63,8 @@ export const POST: APIRoute = async ({ request }) => {
     
     return new Response(JSON.stringify({ 
       error: 'Internal server error',
-      message: error instanceof Error ? error.message : 'Unknown error'
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined
     }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
