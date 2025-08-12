@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Analytics from '../components/Analytics.astro';
 ---
 <Layout>
 <html lang="en">
@@ -37,6 +38,10 @@ import Layout from '../layouts/Layout.astro';
 		<link rel="dns-prefetch" href="//fonts.googleapis.com">
 		
 		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+		
+		<!-- Analytics and Performance Monitoring -->
+		<Analytics enableAnalytics={true} enableErrorTracking={true} />
+		
 		<style>
 			* {
 				margin: 0;

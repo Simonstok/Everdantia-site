@@ -1,0 +1,216 @@
+---
+// Simple analytics dashboard - only accessible in development
+const isDev = import.meta.env.DEV;
+
+if (!isDev) {
+  return Astro.redirect('/');
+}
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Analytics Dashboard - Everdantia</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #f5f5f5; 
+        padding: 2rem;
+        line-height: 1.6;
+      }
+      .container { max-width: 1200px; margin: 0 auto; }
+      .card { 
+        background: white; 
+        border-radius: 8px; 
+        padding: 2rem; 
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      .stats-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      .stat-card {
+        background: linear-gradient(135deg, #8bab5d, #6b4f2a);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .stat-number { font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem; }
+      .stat-label { font-size: 0.9rem; opacity: 0.9; }
+      table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+      th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #eee; }
+      th { background: #f8f9fa; font-weight: 600; }
+      .event-type { 
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+      .event-pageview { background: #e3f2fd; color: #1976d2; }
+      .event-click { background: #f3e5f5; color: #7b1fa2; }
+      .event-performance { background: #e8f5e8; color: #388e3c; }
+      .event-error { background: #ffebee; color: #d32f2f; }
+      .refresh-btn {
+        background: #8bab5d;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+      }
+      .clear-btn {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        margin-left: 1rem;
+      }
+      .json-view {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 4px;
+        padding: 1rem;
+        font-family: 'Monaco', 'Consolas', monospace;
+        font-size: 0.85rem;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="color: #6b4f2a; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
+        🌿 Everdantia Analytics Dashboard
+        <span style="font-size: 1rem; background: #8bab5d; color: white; padding: 0.25rem 0.75rem; border-radius: 20px;">DEV ONLY</span>
+      </h1>
+
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h2>Overview</h2>
+          <div>
+            <button class="refresh-btn" onclick="refreshData()">🔄 Refresh</button>
+            <button class="clear-btn" onclick="clearData()">🗑️ Clear Data</button>
+          </div>
+        </div>
+        
+        <div class="stats-grid" id="statsGrid">
+          <!-- Stats will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Recent Events</h2>
+        <table id="eventsTable">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Type</th>
+              <th>Event</th>
+              <th>URL</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Events will be populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Raw Data (JSON)</h2>
+        <div class="json-view" id="jsonView">
+          <!-- JSON data will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function refreshData() {
+        const events = JSON.parse(localStorage.getItem('everdantia_analytics') || '[]');
+        
+        // Calculate stats
+        const stats = {
+          totalEvents: events.length,
+          pageViews: events.filter(e => e.type === 'pageview').length,
+          clicks: events.filter(e => e.type === 'event' && e.name === 'click').length,
+          errors: events.filter(e => e.type === 'event' && e.name?.includes('error')).length,
+          uniqueSessions: [...new Set(events.map(e => e.sessionId))].length
+        };
+
+        // Update stats grid
+        const statsGrid = document.getElementById('statsGrid');
+        statsGrid.innerHTML = `
+          <div class="stat-card">
+            <div class="stat-number">${stats.totalEvents}</div>
+            <div class="stat-label">Total Events</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">${stats.pageViews}</div>
+            <div class="stat-label">Page Views</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">${stats.clicks}</div>
+            <div class="stat-label">Clicks</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">${stats.uniqueSessions}</div>
+            <div class="stat-label">Unique Sessions</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">${stats.errors}</div>
+            <div class="stat-label">Errors</div>
+          </div>
+        `;
+
+        // Update events table
+        const tbody = document.querySelector('#eventsTable tbody');
+        tbody.innerHTML = events
+          .sort((a, b) => b.timestamp - a.timestamp)
+          .slice(0, 50) // Show last 50 events
+          .map(event => {
+            const time = new Date(event.timestamp).toLocaleTimeString();
+            const eventClass = `event-${event.type === 'event' && event.name?.includes('error') ? 'error' : event.type}`;
+            
+            return `
+              <tr>
+                <td>${time}</td>
+                <td><span class="event-type ${eventClass}">${event.type}</span></td>
+                <td>${event.name || '-'}</td>
+                <td>${event.url || '-'}</td>
+                <td>${JSON.stringify(event.properties || {}).substring(0, 100)}...</td>
+              </tr>
+            `;
+          })
+          .join('');
+
+        // Update JSON view
+        const jsonView = document.getElementById('jsonView');
+        jsonView.textContent = JSON.stringify(events.slice(-10), null, 2); // Show last 10 events
+      }
+
+      function clearData() {
+        if (confirm('Are you sure you want to clear all analytics data?')) {
+          localStorage.removeItem('everdantia_analytics');
+          refreshData();
+        }
+      }
+
+      // Initial load
+      refreshData();
+
+      // Auto-refresh every 10 seconds
+      setInterval(refreshData, 10000);
+    </script>
+  </body>
+</html>

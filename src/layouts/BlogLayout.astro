@@ -1,4 +1,6 @@
 ---
+import Analytics from '../components/Analytics.astro';
+
 // Props:
 // title, description, keywords, author, date, readTime, category, canonical, ogImage, children, featuredImage, featuredImageAlt
 const {
@@ -58,6 +60,10 @@ const {
         mainEntityOfPage: canonical
       })}
     </script>
+    
+    <!-- Analytics and Performance Monitoring -->
+    <Analytics enableAnalytics={true} enableErrorTracking={true} />
+    
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }

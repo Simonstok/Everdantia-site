@@ -1,5 +1,5 @@
 ---
-
+import Analytics from '../components/Analytics.astro';
 ---
 
 <html lang="en">
@@ -77,6 +77,9 @@
 			}
 		}
 		</script>
+		
+		<!-- Analytics and Performance Monitoring -->
+		<Analytics enableAnalytics={true} enableErrorTracking={true} />
 		
 		<style>
 			* {
