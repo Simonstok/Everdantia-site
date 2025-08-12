@@ -3,26 +3,51 @@ import { AnalyticsService } from '../../lib/supabase';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    // Log environment check
-    console.log('🔧 Environment check:', {
-      hasUrl: !!process.env.ANALYTICS_SUPABASE_URL,
-      hasServiceKey: !!process.env.ANALYTICS_SUPABASE_SERVICE_KEY,
-      urlStart: process.env.ANALYTICS_SUPABASE_URL?.substring(0, 20)
-    });
+    // Rate limiting check (simple implementation)
+    const userAgent = request.headers.get('user-agent') || '';
+    const referer = request.headers.get('referer') || '';
+    
+    // Basic bot detection
+    const botPatterns = /bot|crawler|spider|scraper/i;
+    if (botPatterns.test(userAgent)) {
+      return new Response(JSON.stringify({ error: 'Bot traffic detected' }), {
+        status: 403,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Verify request comes from your domain (in production)
+    if (process.env.NODE_ENV === 'production') {
+      const allowedOrigins = ['https://everdantia.com', 'https://www.everdantia.com'];
+      const origin = request.headers.get('origin');
+      if (origin && !allowedOrigins.includes(origin)) {
+        return new Response(JSON.stringify({ error: 'Invalid origin' }), {
+          status: 403,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+    }
 
     const data = await request.json();
-    console.log('📥 Received analytics data:', data);
     
-    // Validate the incoming data
+    // Enhanced validation with data sanitization
     if (!data.type || !data.timestamp || !(data.sessionId || data.session_id)) {
-      console.error('❌ Invalid data format:', data);
       return new Response(JSON.stringify({ 
-        error: 'Invalid data format',
-        missing: {
-          type: !data.type,
-          timestamp: !data.timestamp,
-          sessionId: !(data.sessionId || data.session_id)
-        }
+        error: 'Invalid data format'
+      }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Sanitize and validate data
+    const sessionId = (data.sessionId || data.session_id || '').toString().slice(0, 50);
+    const eventType = data.type.toString().slice(0, 50);
+    const url = (data.url || '').toString().slice(0, 500);
+    
+    if (sessionId.length < 6 || eventType.length < 1) {
+      return new Response(JSON.stringify({ 
+        error: 'Invalid data values'
       }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
@@ -31,55 +56,46 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Add server-side timestamp and IP (anonymized)
     const analyticsEvent = {
-      type: data.type,
-      name: data.name,
-      properties: data.properties || {},
-      url: data.url,
-      referrer: data.referrer,
-      timestamp: data.timestamp,
-      session_id: data.sessionId || data.session_id, // Handle both camelCase and snake_case
-      user_agent: data.userAgent || data.user_agent,
-      viewport: data.viewport,
+      type: eventType,
+      name: data.name ? data.name.toString().slice(0, 100) : null,
+      properties: typeof data.properties === 'object' ? data.properties : {},
+      url: url,
+      referrer: data.referrer ? data.referrer.toString().slice(0, 500) : null,
+      timestamp: Math.max(0, parseInt(data.timestamp) || 0),
+      session_id: sessionId,
+      user_agent: (data.userAgent || data.user_agent || '').toString().slice(0, 300),
+      viewport: data.viewport && typeof data.viewport === 'object' ? data.viewport : null,
       server_timestamp: Date.now(),
       // Anonymize IP by removing last octet
       ip: request.headers.get('x-forwarded-for')?.split('.').slice(0, 3).join('.') + '.0' || 'unknown'
     };
 
-    console.log('💾 Attempting to save event to Supabase:', analyticsEvent);
-
     // Save to Supabase
     const result = await AnalyticsService.saveEvent(analyticsEvent);
     
-    console.log('🔄 Supabase save result:', result);
-    
     if (!result.success) {
-      console.error('❌ Failed to save analytics event:', result.error);
+      // Log error server-side but don't expose details to client
+      console.error('Analytics save failed:', result.error);
       
-      // Return the actual error to help with debugging
       return new Response(JSON.stringify({ 
         success: false, 
-        error: 'Database save failed',
-        details: result.error
+        error: 'Database save failed'
       }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' }
       });
-    } else {
-      console.log('✅ Successfully saved analytics event');
     }
 
-    return new Response(JSON.stringify({ success: true, saved: true }), {
+    return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
 
   } catch (error) {
-    console.error('💥 Analytics API Error:', error);
+    console.error('Analytics API Error:', error);
     
     return new Response(JSON.stringify({ 
-      error: 'Internal server error',
-      message: error instanceof Error ? error.message : 'Unknown error',
-      stack: error instanceof Error ? error.stack : undefined
+      error: 'Internal server error'
     }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
@@ -92,11 +108,12 @@ export const GET: APIRoute = async ({ url }) => {
   try {
     const searchParams = new URL(url).searchParams;
     const secret = searchParams.get('secret');
-    const limit = parseInt(searchParams.get('limit') || '100');
+    const limit = Math.min(parseInt(searchParams.get('limit') || '100'), 1000); // Cap at 1000
     const type = searchParams.get('type') || 'events';
 
-    // Verify access
-    if (secret !== 'everdantia2025') {
+    // Verify access with environment variable
+    const expectedSecret = process.env.ANALYTICS_DASHBOARD_SECRET || 'everdantia2025';
+    if (secret !== expectedSecret) {
       return new Response(JSON.stringify({ error: 'Unauthorized' }), {
         status: 401,
         headers: { 'Content-Type': 'application/json' }
