@@ -14,9 +14,16 @@ export const POST: APIRoute = async ({ request }) => {
     console.log('📥 Received analytics data:', data);
     
     // Validate the incoming data
-    if (!data.type || !data.timestamp) {
+    if (!data.type || !data.timestamp || !(data.sessionId || data.session_id)) {
       console.error('❌ Invalid data format:', data);
-      return new Response(JSON.stringify({ error: 'Invalid data format' }), {
+      return new Response(JSON.stringify({ 
+        error: 'Invalid data format',
+        missing: {
+          type: !data.type,
+          timestamp: !data.timestamp,
+          sessionId: !(data.sessionId || data.session_id)
+        }
+      }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
@@ -24,7 +31,15 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Add server-side timestamp and IP (anonymized)
     const analyticsEvent = {
-      ...data,
+      type: data.type,
+      name: data.name,
+      properties: data.properties || {},
+      url: data.url,
+      referrer: data.referrer,
+      timestamp: data.timestamp,
+      session_id: data.sessionId || data.session_id, // Handle both camelCase and snake_case
+      user_agent: data.userAgent || data.user_agent,
+      viewport: data.viewport,
       server_timestamp: Date.now(),
       // Anonymize IP by removing last octet
       ip: request.headers.get('x-forwarded-for')?.split('.').slice(0, 3).join('.') + '.0' || 'unknown'
