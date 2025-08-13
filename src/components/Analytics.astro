@@ -26,7 +26,6 @@ const {
       getOrCreateVisitorId() {
         // Get existing visitor ID or create new one (persists across sessions)
         let visitorId = localStorage.getItem('everdantia_visitor_id');
-        let isNewVisitor = false;
         
         if (!visitorId) {
           // Create a more robust visitor ID that's less likely to collide
@@ -37,8 +36,7 @@ const {
           
           localStorage.setItem('everdantia_visitor_id', visitorId);
           localStorage.setItem('everdantia_first_visit', Date.now().toString());
-          localStorage.setItem('everdantia_has_visited', 'true');
-          isNewVisitor = true;
+          // Don't set 'has_visited' here - let trackPageView handle it
           
           // Debug logging
           if (window.location.hostname === 'localhost' || window.location.search.includes('debug=true')) {
@@ -102,7 +100,15 @@ const {
             visitorId: this.visitorId,
             sessionId: this.sessionId,
             isFirstVisit: isFirstVisit,
+            hasVisitedBefore: !!hasVisitedBefore,
             url: window.location.pathname
+          });
+          
+          // Show what's in localStorage for debugging
+          console.log('🔍 localStorage state:', {
+            visitor_id: localStorage.getItem('everdantia_visitor_id'),
+            has_visited: localStorage.getItem('everdantia_has_visited'),
+            first_visit: localStorage.getItem('everdantia_first_visit')
           });
         }
         
