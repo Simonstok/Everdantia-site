@@ -1,12 +1,12 @@
 ---
 import Analytics from '../components/Analytics.astro';
+import SEO from '../components/SEO.astro';
 
 // Props:
-// title, description, keywords, author, date, readTime, category, canonical, ogImage, children, featuredImage, featuredImageAlt
 const {
   title,
   description,
-  keywords = '',
+  keywords = 'sustainable living, environmental conservation, reforestation, green technology, eco-friendly',
   author = 'Everdantia',
   date,
   readTime = '3 min read',
@@ -17,17 +17,51 @@ const {
   featuredImage,
   featuredImageAlt = '',
 } = Astro.props;
+
+// Create structured data for blog posts
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "author": {
+    "@type": "Organization",
+    "name": author
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Everdantia",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://everdantia.art/favicon.svg"
+    }
+  },
+  "datePublished": date,
+  "dateModified": date,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonical || Astro.url.href
+  },
+  "image": featuredImage ? `https://everdantia.art${featuredImage}` : "https://everdantia.art/images/og-default.jpg"
+};
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta name="keywords" content={keywords} />
-    <meta name="author" content={author} />
-    <meta name="robots" content="index, follow" />
+    
+    <!-- SEO Component -->
+    <SEO 
+      title={title}
+      description={description}
+      keywords={keywords}
+      author={author}
+      canonical={canonical}
+      ogImage={featuredImage || ogImage}
+      ogType="article"
+      structuredData={structuredData}
+    />
     {canonical && <link rel="canonical" href={canonical} />}
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article" />
