@@ -1,0 +1,225 @@
+---
+// SEO Audit component - checks for common SEO issues and provides diagnostics
+// This component should only be included in development mode
+const isDev = import.meta.env.DEV;
+---
+
+{isDev && (
+  <script type="module">
+    // SEO Audit Script - Development Only
+    class SEOAuditor {
+      constructor() {
+        this.issues = [];
+        this.warnings = [];
+        this.passed = [];
+      }
+
+      audit() {
+        console.log('🔍 Running SEO Audit...');
+        
+        this.checkTitle();
+        this.checkMetaDescription();
+        this.checkHeadings();
+        this.checkImages();
+        this.checkLinks();
+        this.checkCanonical();
+        this.checkStructuredData();
+        this.checkPerformance();
+        
+        this.displayResults();
+      }
+
+      checkTitle() {
+        const title = document.querySelector('title');
+        if (!title) {
+          this.issues.push('❌ Missing <title> tag');
+        } else if (title.textContent.length < 30) {
+          this.warnings.push('⚠️ Title too short (< 30 characters)');
+        } else if (title.textContent.length > 60) {
+          this.warnings.push('⚠️ Title too long (> 60 characters)');
+        } else {
+          this.passed.push('✅ Title length is optimal');
+        }
+      }
+
+      checkMetaDescription() {
+        const description = document.querySelector('meta[name="description"]');
+        if (!description) {
+          this.issues.push('❌ Missing meta description');
+        } else if (description.content.length < 120) {
+          this.warnings.push('⚠️ Meta description too short (< 120 characters)');
+        } else if (description.content.length > 160) {
+          this.warnings.push('⚠️ Meta description too long (> 160 characters)');
+        } else {
+          this.passed.push('✅ Meta description length is optimal');
+        }
+      }
+
+      checkHeadings() {
+        const h1s = document.querySelectorAll('h1');
+        if (h1s.length === 0) {
+          this.issues.push('❌ Missing H1 tag');
+        } else if (h1s.length > 1) {
+          this.warnings.push('⚠️ Multiple H1 tags found');
+        } else {
+          this.passed.push('✅ Single H1 tag found');
+        }
+
+        const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        let lastLevel = 0;
+        for (const heading of headings) {
+          const level = parseInt(heading.tagName.substring(1));
+          if (level > lastLevel + 1) {
+            this.warnings.push(`⚠️ Heading hierarchy skip detected: ${heading.tagName}`);
+          }
+          lastLevel = level;
+        }
+      }
+
+      checkImages() {
+        const images = document.querySelectorAll('img');
+        const imagesWithoutAlt = Array.from(images).filter(img => !img.alt || img.alt.trim() === '');
+        
+        if (imagesWithoutAlt.length > 0) {
+          this.issues.push(`❌ ${imagesWithoutAlt.length} images missing alt text`);
+        } else {
+          this.passed.push('✅ All images have alt text');
+        }
+
+        const largeImages = Array.from(images).filter(img => {
+          return img.naturalWidth > 1920 || img.naturalHeight > 1080;
+        });
+        
+        if (largeImages.length > 0) {
+          this.warnings.push(`⚠️ ${largeImages.length} images larger than recommended (1920x1080)`);
+        }
+      }
+
+      checkLinks() {
+        const links = document.querySelectorAll('a[href]');
+        const externalLinks = Array.from(links).filter(link => {
+          return link.href.startsWith('http') && !link.href.includes(window.location.hostname);
+        });
+
+        const externalLinksWithoutRel = externalLinks.filter(link => {
+          return !link.rel || (!link.rel.includes('noopener') && !link.rel.includes('noreferrer'));
+        });
+
+        if (externalLinksWithoutRel.length > 0) {
+          this.warnings.push(`⚠️ ${externalLinksWithoutRel.length} external links missing rel="noopener noreferrer"`);
+        }
+      }
+
+      checkCanonical() {
+        const canonical = document.querySelector('link[rel="canonical"]');
+        if (!canonical) {
+          this.warnings.push('⚠️ Missing canonical URL');
+        } else {
+          this.passed.push('✅ Canonical URL present');
+        }
+      }
+
+      checkStructuredData() {
+        const structuredData = document.querySelectorAll('script[type="application/ld+json"]');
+        if (structuredData.length === 0) {
+          this.warnings.push('⚠️ No structured data found');
+        } else {
+          this.passed.push(`✅ ${structuredData.length} structured data blocks found`);
+          
+          // Validate JSON
+          structuredData.forEach((script, index) => {
+            try {
+              JSON.parse(script.textContent);
+            } catch (e) {
+              this.issues.push(`❌ Invalid JSON in structured data block ${index + 1}`);
+            }
+          });
+        }
+      }
+
+      checkPerformance() {
+        // Check for performance best practices
+        const criticalResources = document.querySelectorAll('link[rel="preload"], link[rel="preconnect"]');
+        if (criticalResources.length > 0) {
+          this.passed.push(`✅ ${criticalResources.length} performance optimizations found`);
+        }
+
+        const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        if (lazyImages.length > 0) {
+          this.passed.push(`✅ ${lazyImages.length} images using lazy loading`);
+        }
+      }
+
+      displayResults() {
+        const totalChecks = this.issues.length + this.warnings.length + this.passed.length;
+        const score = Math.round((this.passed.length / totalChecks) * 100);
+
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log(`🎯 SEO AUDIT RESULTS - Score: ${score}%`);
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+
+        if (this.issues.length > 0) {
+          console.log('🚨 CRITICAL ISSUES:');
+          this.issues.forEach(issue => console.log(issue));
+          console.log('');
+        }
+
+        if (this.warnings.length > 0) {
+          console.log('⚠️ WARNINGS:');
+          this.warnings.forEach(warning => console.log(warning));
+          console.log('');
+        }
+
+        if (this.passed.length > 0) {
+          console.log('✅ PASSED CHECKS:');
+          this.passed.forEach(pass => console.log(pass));
+          console.log('');
+        }
+
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        
+        if (score >= 90) {
+          console.log('🎉 Excellent SEO! Your page is well-optimized.');
+        } else if (score >= 75) {
+          console.log('👍 Good SEO! Consider addressing warnings for better optimization.');
+        } else if (score >= 60) {
+          console.log('👌 Fair SEO. Please fix critical issues and warnings.');
+        } else {
+          console.log('⚠️ Poor SEO. Immediate attention required for critical issues.');
+        }
+      }
+    }
+
+    // Run audit when page loads
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const auditor = new SEOAuditor();
+        auditor.audit();
+      }, 1000); // Wait for images to load
+    });
+  </script>
+)}
+
+<!-- Development-only SEO checker styles -->
+{isDev && (
+  <style>
+    /* Visual indicators for SEO issues in development */
+    img:not([alt]), img[alt=""] {
+      border: 3px solid red !important;
+      position: relative;
+    }
+    
+    img:not([alt])::after, img[alt=""]::after {
+      content: "Missing ALT text";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: red;
+      color: white;
+      padding: 2px 4px;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 1000;
+    }
+  </style>
+)}

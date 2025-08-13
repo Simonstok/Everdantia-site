@@ -1,0 +1,106 @@
+---
+// Enhanced SEO Component specifically for blog posts
+export interface BlogPostSEOProps {
+  title: string;
+  description: string;
+  author?: string;
+  publishDate: string;
+  modifiedDate?: string;
+  featuredImage?: string;
+  category?: string;
+  tags?: string[];
+  readTime?: string;
+  url: string;
+}
+
+const {
+  title,
+  description,
+  author = 'Everdantia',
+  publishDate,
+  modifiedDate,
+  featuredImage = '/images/og-default.jpg',
+  category = 'Blog',
+  tags = [],
+  readTime = '5 min read',
+  url
+} = Astro.props as BlogPostSEOProps;
+
+// Article structured data for blog posts
+const articleStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "image": featuredImage.startsWith('http') ? featuredImage : `https://everdantia.art${featuredImage}`,
+  "author": {
+    "@type": "Person",
+    "name": author
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Everdantia",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://everdantia.art/favicon/favicon.svg"
+    }
+  },
+  "datePublished": publishDate,
+  "dateModified": modifiedDate || publishDate,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": url
+  },
+  "articleSection": category,
+  "keywords": tags.join(', '),
+  "wordCount": readTime,
+  "inLanguage": "en-US"
+};
+
+// Create breadcrumb structured data
+const breadcrumbStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://everdantia.art"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://everdantia.art/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": title,
+      "item": url
+    }
+  ]
+};
+---
+
+<!-- Article Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(articleStructuredData)} />
+
+<!-- Breadcrumb Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbStructuredData)} />
+
+<!-- Enhanced meta tags for articles -->
+<meta property="article:published_time" content={publishDate} />
+{modifiedDate && <meta property="article:modified_time" content={modifiedDate} />}
+<meta property="article:author" content={author} />
+<meta property="article:section" content={category} />
+{tags.map(tag => <meta property="article:tag" content={tag} />)}
+
+<!-- Reading time for user experience -->
+<meta name="twitter:data1" content={readTime} />
+<meta name="twitter:label1" content="Reading time" />
+
+<!-- Category for better organization -->
+<meta name="twitter:data2" content={category} />
+<meta name="twitter:label2" content="Filed under" />

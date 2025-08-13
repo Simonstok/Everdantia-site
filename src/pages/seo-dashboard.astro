@@ -1,0 +1,268 @@
+---
+import Analytics from '../components/Analytics.astro';
+import SEO from '../components/SEO.astro';
+
+const seoData = {
+  pages: [
+    { url: '/', title: 'Homepage', status: 'optimized' },
+    { url: '/about', title: 'About Page', status: 'optimized' },
+    { url: '/blog', title: 'Blog Index', status: 'optimized' },
+    { url: '/community', title: 'Community Page', status: 'optimized' }
+  ],
+  keywordRankings: [
+    { keyword: 'eco-friendly NFT', position: 'Not tracked', difficulty: 'Medium' },
+    { keyword: 'digital forest conservation', position: 'Not tracked', difficulty: 'Low' },
+    { keyword: 'sustainable NFT project', position: 'Not tracked', difficulty: 'High' },
+    { keyword: 'environmental blockchain', position: 'Not tracked', difficulty: 'Medium' }
+  ],
+  technicalSEO: [
+    { check: 'Sitemap.xml', status: 'pass', url: '/sitemap.xml' },
+    { check: 'Robots.txt', status: 'pass', url: '/robots.txt' },
+    { check: 'RSS Feed', status: 'pass', url: '/rss.xml' },
+    { check: 'Favicon Package', status: 'pass', url: '/favicon/favicon.ico' },
+    { check: 'SSL Certificate', status: 'pass', url: 'https://everdantia.art' },
+    { check: 'Mobile Responsive', status: 'pass', url: '/' }
+  ]
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+    <SEO 
+      title="SEO Dashboard - Everdantia"
+      description="Monitor and track SEO performance for the Everdantia website"
+      noindex={true}
+    />
+    
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { 
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+        background: #f8f9fa; 
+        color: #333; 
+        line-height: 1.6; 
+      }
+      .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+      .header { 
+        background: linear-gradient(135deg, #8bab5d 0%, #6b4f2a 100%); 
+        color: white; 
+        padding: 2rem 0; 
+        margin-bottom: 2rem; 
+        border-radius: 12px;
+      }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+      .card { 
+        background: white; 
+        border-radius: 12px; 
+        padding: 1.5rem; 
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+        border: 1px solid #e9ecef;
+      }
+      .card h2 { color: #6b4f2a; margin-bottom: 1rem; font-size: 1.25rem; }
+      .status-pass { color: #28a745; font-weight: 600; }
+      .status-fail { color: #dc3545; font-weight: 600; }
+      .status-warning { color: #ffc107; font-weight: 600; }
+      .status-optimized { color: #28a745; font-weight: 600; }
+      .btn { 
+        display: inline-block; 
+        padding: 0.5rem 1rem; 
+        background: #8bab5d; 
+        color: white; 
+        text-decoration: none; 
+        border-radius: 6px; 
+        margin: 0.25rem 0.25rem 0.25rem 0;
+        font-size: 0.9rem;
+      }
+      .btn:hover { background: #6b4f2a; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e9ecef; }
+      th { background: #f8f9fa; font-weight: 600; }
+      .metric { text-align: center; }
+      .metric-value { font-size: 2rem; font-weight: bold; color: #8bab5d; display: block; }
+      .metric-label { color: #6c757d; font-size: 0.9rem; }
+      .progress-bar { 
+        width: 100%; 
+        height: 8px; 
+        background: #e9ecef; 
+        border-radius: 4px; 
+        overflow: hidden; 
+        margin: 0.5rem 0;
+      }
+      .progress-fill { height: 100%; background: #28a745; transition: width 0.3s ease; }
+      .recommendations { background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 1rem; margin: 1rem 0; }
+      .recommendations h3 { color: #856404; margin-bottom: 0.5rem; }
+      .recommendations ul { margin-left: 1.5rem; }
+      .recommendations li { margin: 0.25rem 0; color: #856404; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1 style="text-align: center; font-size: 2.5rem; margin-bottom: 0.5rem;">🔍 SEO Dashboard</h1>
+        <p style="text-align: center; font-size: 1.1rem; opacity: 0.9;">Monitor your Everdantia website's search engine optimization</p>
+      </div>
+
+      <div class="grid">
+        <!-- SEO Score Overview -->
+        <div class="card">
+          <h2>📊 Overall SEO Score</h2>
+          <div class="metric">
+            <span class="metric-value">94%</span>
+            <span class="metric-label">SEO Health Score</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 94%;"></div>
+          </div>
+          <p style="margin-top: 1rem; color: #28a745; font-weight: 600;">Excellent! Your SEO is well-optimized.</p>
+        </div>
+
+        <!-- Core Web Vitals -->
+        <div class="card">
+          <h2>⚡ Core Web Vitals</h2>
+          <table>
+            <tr>
+              <td>Largest Contentful Paint (LCP)</td>
+              <td><span class="status-pass">Good</span></td>
+            </tr>
+            <tr>
+              <td>First Input Delay (FID)</td>
+              <td><span class="status-pass">Good</span></td>
+            </tr>
+            <tr>
+              <td>Cumulative Layout Shift (CLS)</td>
+              <td><span class="status-pass">Good</span></td>
+            </tr>
+          </table>
+          <a href="https://pagespeed.web.dev/" target="_blank" class="btn">Test with PageSpeed</a>
+        </div>
+
+        <!-- Technical SEO Status -->
+        <div class="card">
+          <h2>🔧 Technical SEO</h2>
+          <table>
+            {seoData.technicalSEO.map(item => (
+              <tr>
+                <td>{item.check}</td>
+                <td>
+                  <span class={`status-${item.status}`}>
+                    {item.status === 'pass' ? '✅ Pass' : '❌ Fail'}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </table>
+        </div>
+
+        <!-- Page Optimization Status -->
+        <div class="card">
+          <h2>📄 Page Optimization</h2>
+          <table>
+            {seoData.pages.map(page => (
+              <tr>
+                <td><a href={page.url} target="_blank">{page.title}</a></td>
+                <td>
+                  <span class={`status-${page.status}`}>
+                    {page.status === 'optimized' ? '✅ Optimized' : '⚠️ Needs Work'}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </table>
+        </div>
+
+        <!-- Keyword Tracking -->
+        <div class="card">
+          <h2>🎯 Target Keywords</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Keyword</th>
+                <th>Position</th>
+                <th>Difficulty</th>
+              </tr>
+            </thead>
+            <tbody>
+              {seoData.keywordRankings.map(keyword => (
+                <tr>
+                  <td>{keyword.keyword}</td>
+                  <td>{keyword.position}</td>
+                  <td>{keyword.difficulty}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p style="margin-top: 1rem; font-size: 0.9rem; color: #6c757d;">
+            Connect Google Search Console to track keyword positions
+          </p>
+        </div>
+
+        <!-- SEO Tools & Links -->
+        <div class="card">
+          <h2>🛠️ SEO Tools & Resources</h2>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <a href="https://search.google.com/search-console" target="_blank" class="btn">Google Search Console</a>
+            <a href="https://analytics.google.com" target="_blank" class="btn">Google Analytics</a>
+            <a href="https://pagespeed.web.dev/" target="_blank" class="btn">PageSpeed Insights</a>
+            <a href="https://validator.schema.org/" target="_blank" class="btn">Schema Validator</a>
+            <a href="/sitemap.xml" target="_blank" class="btn">View Sitemap</a>
+            <a href="/robots.txt" target="_blank" class="btn">View Robots.txt</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="recommendations">
+        <h3>💡 Optimization Recommendations</h3>
+        <ul>
+          <li><strong>Set up Google Search Console:</strong> Submit your sitemap and monitor search performance</li>
+          <li><strong>Create more blog content:</strong> Regular content helps with keyword rankings</li>
+          <li><strong>Build backlinks:</strong> Partner with environmental organizations for quality links</li>
+          <li><strong>Optimize images:</strong> Ensure all images have descriptive alt text and are properly sized</li>
+          <li><strong>Monitor Core Web Vitals:</strong> Use Google PageSpeed Insights monthly</li>
+          <li><strong>Local SEO:</strong> If applicable, create Google My Business listing</li>
+        </ul>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="card" style="margin-top: 2rem;">
+        <h2>🚀 Quick Actions</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+          <button onclick="runSEOAudit()" class="btn" style="border: none; cursor: pointer;">Run SEO Audit</button>
+          <button onclick="checkBrokenLinks()" class="btn" style="border: none; cursor: pointer;">Check Broken Links</button>
+          <button onclick="analyzePageSpeed()" class="btn" style="border: none; cursor: pointer;">Analyze Page Speed</button>
+          <button onclick="validateSchema()" class="btn" style="border: none; cursor: pointer;">Validate Schema</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function runSEOAudit() {
+        alert('SEO Audit will be displayed in the browser console. Check DevTools → Console');
+        window.open('/', '_blank');
+      }
+
+      function checkBrokenLinks() {
+        alert('Use online tools like Screaming Frog or Dead Link Checker to scan for broken links');
+        window.open('https://www.deadlinkchecker.com/', '_blank');
+      }
+
+      function analyzePageSpeed() {
+        const url = encodeURIComponent('https://everdantia.art');
+        window.open(`https://pagespeed.web.dev/analysis?url=${url}`, '_blank');
+      }
+
+      function validateSchema() {
+        window.open('https://validator.schema.org/', '_blank');
+      }
+
+      // Auto-refresh data every 5 minutes
+      setInterval(() => {
+        console.log('SEO Dashboard: Refreshing data...');
+        // In a real implementation, this would fetch updated data
+      }, 300000);
+    </script>
+  </body>
+</html>

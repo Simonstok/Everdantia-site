@@ -1,5 +1,9 @@
 ---
 // SEO Component for consistent meta tags across all pages
+import PerformanceOptimization from './PerformanceOptimization.astro';
+import AccessibilityOptimization from './AccessibilityOptimization.astro';
+import SEOAudit from './SEOAudit.astro';
+
 export interface SEOProps {
   title: string;
   description: string;
@@ -97,3 +101,14 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : `${Astro.site?.origin
 
 <!-- RSS Feed (great for SEO) -->
 <link rel="alternate" type="application/rss+xml" title="Everdantia Blog RSS Feed" href="/rss.xml" />
+
+<!-- Performance Optimization -->
+<PerformanceOptimization 
+  preloadImages={['/images/background/hilltop/hilltop0.webp']}
+/>
+
+<!-- Accessibility Optimization -->
+<AccessibilityOptimization />
+
+<!-- SEO Audit (Development only) -->
+<SEOAudit />
