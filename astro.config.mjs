@@ -6,6 +6,8 @@ import sitemap from "@astrojs/sitemap";
 import netlify from '@astrojs/netlify';
 
 export default defineConfig({
-  output: 'server',
+  site: 'https://everdantia.art',
+  output: 'static',
   adapter: netlify(),
+  integrations: [sitemap()],
 });
