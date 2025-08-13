@@ -26,11 +26,31 @@ const {
       getOrCreateVisitorId() {
         // Get existing visitor ID or create new one (persists across sessions)
         let visitorId = localStorage.getItem('everdantia_visitor_id');
+        let isNewVisitor = false;
+        
         if (!visitorId) {
-          visitorId = 'v_' + Math.random().toString(36).substring(2, 15) + '_' + Date.now().toString(36);
+          // Create a more robust visitor ID that's less likely to collide
+          const timestamp = Date.now().toString(36);
+          const random1 = Math.random().toString(36).substring(2, 10);
+          const random2 = Math.random().toString(36).substring(2, 10);
+          visitorId = `v_${timestamp}_${random1}_${random2}`;
+          
           localStorage.setItem('everdantia_visitor_id', visitorId);
           localStorage.setItem('everdantia_first_visit', Date.now().toString());
+          localStorage.setItem('everdantia_has_visited', 'true');
+          isNewVisitor = true;
+          
+          // Debug logging
+          if (window.location.hostname === 'localhost' || window.location.search.includes('debug=true')) {
+            console.log('🆕 New visitor created:', visitorId);
+          }
+        } else {
+          // Debug logging for returning visitors
+          if (window.location.hostname === 'localhost' || window.location.search.includes('debug=true')) {
+            console.log('👋 Returning visitor:', visitorId);
+          }
         }
+        
         return visitorId;
       }
 
@@ -51,9 +71,14 @@ const {
       }
 
       trackPageView() {
-        const isFirstVisit = !localStorage.getItem('everdantia_has_visited');
+        // Check if this is truly a first visit (never visited before)
+        const hasVisitedBefore = localStorage.getItem('everdantia_has_visited');
+        const isFirstVisit = !hasVisitedBefore;
+        
+        // Mark as visited if it's the first time
         if (isFirstVisit) {
           localStorage.setItem('everdantia_has_visited', 'true');
+          localStorage.setItem('everdantia_first_visit', Date.now().toString());
         }
 
         const data = {
@@ -70,6 +95,16 @@ const {
             height: window.innerHeight
           }
         };
+        
+        // Debug logging
+        if (window.location.hostname === 'localhost' || window.location.search.includes('debug=true')) {
+          console.log('📊 Page view tracked:', {
+            visitorId: this.visitorId,
+            sessionId: this.sessionId,
+            isFirstVisit: isFirstVisit,
+            url: window.location.pathname
+          });
+        }
         
         this.sendEvent(data);
       }
@@ -304,6 +339,18 @@ const {
           syncRate: stored > 0 ? ((stored - failed) / stored * 100).toFixed(1) + '%' : '100%'
         };
       }
+
+      // Debug method to get visitor info
+      getVisitorInfo() {
+        return {
+          visitorId: this.visitorId,
+          sessionId: this.sessionId,
+          hasVisited: localStorage.getItem('everdantia_has_visited'),
+          firstVisit: localStorage.getItem('everdantia_first_visit'),
+          storedEvents: this.getStoredEvents().length,
+          failedEvents: this.getFailedEvents().length
+        };
+      }
     }
 
     // Initialize analytics
@@ -321,8 +368,9 @@ const {
     };
 
     // Console helper for debugging (remove in production)
-    if (window.location.hostname === 'localhost' || window.location.hostname.includes('dev')) {
+    if (window.location.hostname === 'localhost' || window.location.hostname.includes('dev') || window.location.search.includes('debug=true')) {
       console.log('🌿 Everdantia Analytics initialized');
+      console.log('Use window.everdantiaAnalytics.getVisitorInfo() to view visitor information');
       console.log('Use window.everdantiaAnalytics.getStoredEvents() to view tracked events');
       console.log('Use window.everdantiaAnalytics.getFailedEvents() to view failed events');
       console.log('Use window.everdantiaAnalytics.getSyncStatus() to check sync status');
