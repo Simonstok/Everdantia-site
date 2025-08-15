@@ -137,7 +137,7 @@ const featuredImageAlt = "Mystical forest scene showcasing the four founding tre
 
     <section class="closing-section">
       <h2>🌿 Closing the Ring</h2>
-      <p>These five trunks form the backbone of Everdantia's first forest. In time, branches, leaves, and countless smaller traits will shape each tree into a singular presence — but the trunk remains its anchor.</p>
+      <p>These five trunks form the backbone of Everdantia's first forest. In time, branches, leaves, and countless smaller traits will shape each tree into a singular presence — but the trunk remains the visible heart, expressing the deep character that flows from unseen roots to reaching crown.</p>
 
       <p>In choosing your tree, you choose the story it carries. Will it be the Oak's unshaken roots, the Willow's gentle resilience, the Pine's far-reaching vision, the Emberwood's phoenix fire, or the rarest gift of all — the Mystic Elder's ancient wisdom?</p>
 
@@ -404,6 +404,65 @@ const featuredImageAlt = "Mystical forest scene showcasing the four founding tre
   .cta-secondary:hover {
     background: #8bab5d;
     color: white;
+  }
+
+  /* Rarity badge styles */
+  .rarity-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rarity-badge.rare {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+  }
+
+  .rarity-badge.legendary {
+    background: linear-gradient(135deg, #f39c12, #e67e22, #d35400);
+    color: white;
+    animation: legendaryGlow 3s ease-in-out infinite;
+  }
+
+  .rarity-badge.legendary::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+    transform: rotate(45deg);
+    animation: legendaryShine 4s ease-in-out infinite;
+  }
+
+  @keyframes legendaryGlow {
+    0%, 100% {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15), 0 0 20px rgba(243, 156, 18, 0.3);
+    }
+    50% {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15), 0 0 30px rgba(243, 156, 18, 0.6);
+    }
+  }
+
+  @keyframes legendaryShine {
+    0% {
+      transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    50% {
+      transform: translateX(0%) translateY(0%) rotate(45deg);
+    }
+    100% {
+      transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
   }
 
   /* Related posts styles */
