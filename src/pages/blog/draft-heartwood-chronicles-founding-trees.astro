@@ -111,8 +111,8 @@ const featuredImageAlt = "Mystical forest scene showcasing the four founding tre
 
     <section class="trunk-section">
       <h2>4. Emberwood — The Phoenix of the Forest</h2>
-      <div class="rarity-badge rare">5% Rarity</div>
       <div class="image-placeholder">
+        <div class="rarity-badge rare">5% Rarity</div>
         <img src="/images/environment/forest-sanctuary/sanctuary3.jpg" alt="A charred tree trunk with glowing embers threading through its dark bark, rising phoenix-like from ash-covered ground" loading="lazy" />
         <em>Placeholder image: A charred tree trunk with glowing embers threading through its dark bark, rising phoenix-like from ash-covered ground.</em>
       </div>
@@ -124,8 +124,8 @@ const featuredImageAlt = "Mystical forest scene showcasing the four founding tre
 
     <section class="trunk-section">
       <h2>5. Mystic Elder — The Hidden Origin</h2>
-      <div class="rarity-badge legendary">1% Rarity</div>
       <div class="image-placeholder">
+        <div class="rarity-badge legendary">1% Rarity</div>
         <img src="/images/environment/hidden-bridge/bridge0.jpg" alt="An ancient towering trunk carved with glowing runes, shrouded in mist and moonlight, emanating an otherworldly presence" loading="lazy" />
         <em>Placeholder image: An ancient towering trunk carved with glowing runes, shrouded in mist and moonlight, emanating an otherworldly presence.</em>
       </div>
@@ -266,6 +266,7 @@ const featuredImageAlt = "Mystical forest scene showcasing the four founding tre
   .image-placeholder {
     margin: 2rem 0;
     text-align: center;
+    position: relative;
   }
 
   .image-placeholder img {
@@ -408,16 +409,18 @@ const featuredImageAlt = "Mystical forest scene showcasing the four founding tre
 
   /* Rarity badge styles */
   .rarity-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
     display: inline-block;
     padding: 0.5rem 1rem;
     border-radius: 2rem;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    position: relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 10;
     overflow: hidden;
   }
 
