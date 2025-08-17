@@ -1,0 +1,55 @@
+---
+title: "Genesis Collection — Coming Soon"
+description: "The Genesis Collection of Everdantia is still growing. Return soon to discover the first mystical trees."
+---
+
+<main class="coming-soon">
+  <section>
+    <h1>🌱 The Genesis Collection is Growing...</h1>
+    <p>
+      In the heart of Everdantia, new trunks are taking root. The Genesis Collection is still growing — soon, you’ll be able to discover and nurture your own mystical tree.
+    </p>
+    <p>
+      Return soon to witness the first sprouts of the enchanted forest.
+    </p>
+    <div class="sprout-emoji">🌿</div>
+  </section>
+</main>
+
+<style>
+.coming-soon {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #eafaf1 0%, #f9fbe7 100%);
+}
+.coming-soon section {
+  text-align: center;
+  background: rgba(255,255,255,0.85);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(139,171,93,0.08);
+  padding: 3rem 2rem;
+  max-width: 480px;
+}
+.coming-soon h1 {
+  font-family: 'Cormorant Garamond', serif;
+  color: #6b4f2a;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+.coming-soon p {
+  color: #4e5d3a;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+.sprout-emoji {
+  font-size: 2.5rem;
+  margin-top: 2rem;
+  animation: sproutGrow 2.5s infinite alternate ease-in-out;
+}
+@keyframes sproutGrow {
+  0% { transform: scale(1) rotate(-2deg); }
+  100% { transform: scale(1.15) rotate(2deg); }
+}
+</style>
