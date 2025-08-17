@@ -1,55 +1,167 @@
 ---
-title: "Genesis Collection — Coming Soon"
-description: "The Genesis Collection of Everdantia is still growing. Return soon to discover the first mystical trees."
+import Analytics from '../components/Analytics.astro';
+import SEO from '../components/SEO.astro';
+
+const title = "Genesis Collection — Coming Soon | Everdantia";
+const description = "The Genesis Collection of Everdantia is still growing. Return soon to discover the first mystical trees.";
+const image = "/images/blog/oak.jpg";
+const url = "https://everdantia.art/collection";
+
+// Collection page structured data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Genesis Collection",
+  "description": description,
+  "url": url,
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Everdantia",
+    "url": "https://everdantia.art"
+  }
+};
 ---
 
-<main class="coming-soon">
-  <section>
-    <h1>🌱 The Genesis Collection is Growing...</h1>
-    <p>
-      In the heart of Everdantia, new trunks are taking root. The Genesis Collection is still growing — soon, you’ll be able to discover and nurture your own mystical tree.
-    </p>
-    <p>
-      Return soon to witness the first sprouts of the enchanted forest.
-    </p>
-    <div class="sprout-emoji">🌿</div>
-  </section>
-</main>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+    <SEO 
+      title={title}
+      description={description}
+      image={image}
+      url={url}
+      structuredData={structuredData}
+    />
+    
+    <Analytics />
+  </head>
+  <body>
+    <main class="coming-soon">
+      <section class="container">
+        <h1>🌱 The Genesis Collection is Growing...</h1>
+        <p>
+          In the heart of Everdantia, new trunks are taking root. The Genesis Collection is still growing — soon, you'll be able to discover and nurture your own mystical tree.
+        </p>
+        <p>
+          Return soon to witness the first sprouts of the enchanted forest.
+        </p>
+        <div class="sprout-emoji">🌿</div>
+        
+        <div class="back-link">
+          <a href="/">← Return to the Grove</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
 
 <style>
-.coming-soon {
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #eafaf1 0%, #f9fbe7 100%);
-}
-.coming-soon section {
-  text-align: center;
-  background: rgba(255,255,255,0.85);
-  border-radius: 1.5rem;
-  box-shadow: 0 4px 24px rgba(139,171,93,0.08);
-  padding: 3rem 2rem;
-  max-width: 480px;
-}
-.coming-soon h1 {
-  font-family: 'Cormorant Garamond', serif;
-  color: #6b4f2a;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-}
-.coming-soon p {
-  color: #4e5d3a;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-}
-.sprout-emoji {
-  font-size: 2.5rem;
-  margin-top: 2rem;
-  animation: sproutGrow 2.5s infinite alternate ease-in-out;
-}
-@keyframes sproutGrow {
-  0% { transform: scale(1) rotate(-2deg); }
-  100% { transform: scale(1.15) rotate(2deg); }
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #eafaf1 0%, #f9fbe7 100%);
+    color: #2d3748;
+    line-height: 1.6;
+  }
+
+  .coming-soon {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .container {
+    text-align: center;
+    background: rgba(255,255,255,0.9);
+    border-radius: 2rem;
+    box-shadow: 0 8px 32px rgba(139,171,93,0.15);
+    padding: 4rem 3rem;
+    max-width: 600px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(139,171,93,0.1);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #6b4f2a;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+
+  p {
+    color: #4a5568;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sprout-emoji {
+    font-size: 3rem;
+    margin: 3rem 0;
+    animation: sproutGrow 3s infinite alternate ease-in-out;
+  }
+
+  .back-link {
+    margin-top: 2rem;
+  }
+
+  .back-link a {
+    color: #8bab5d;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #8bab5d;
+    border-radius: 2rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+
+  .back-link a:hover {
+    background: #8bab5d;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139,171,93,0.3);
+  }
+
+  @keyframes sproutGrow {
+    0% { 
+      transform: scale(1) rotate(-2deg); 
+      filter: brightness(1);
+    }
+    100% { 
+      transform: scale(1.1) rotate(2deg); 
+      filter: brightness(1.1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 3rem 2rem;
+      margin: 1rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+
+    .sprout-emoji {
+      font-size: 2.5rem;
+    }
+  }
 </style>
