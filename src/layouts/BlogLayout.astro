@@ -18,6 +18,14 @@ const {
   featuredImageAlt = '',
 } = Astro.props;
 
+// Convert relative image URLs to absolute URLs for social sharing
+const absoluteFeaturedImage = featuredImage ? 
+  (featuredImage.startsWith('http') ? featuredImage : `https://everdantia.art${featuredImage}`) : 
+  null;
+const absoluteOgImage = ogImage ? 
+  (ogImage.startsWith('http') ? ogImage : `https://everdantia.art${ogImage}`) : 
+  null;
+
 // Create structured data for blog posts
 const structuredData = {
   "@context": "https://schema.org",
@@ -57,7 +65,7 @@ const structuredData = {
       keywords={keywords}
       author={author}
       canonical={canonical}
-      ogImage={featuredImage || ogImage}
+      ogImage={absoluteFeaturedImage || absoluteOgImage}
       ogType="article"
       structuredData={structuredData}
     />
@@ -67,14 +75,14 @@ const structuredData = {
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage || featuredImage} />
+    <meta property="og:image" content={absoluteOgImage || absoluteFeaturedImage} />
     <meta property="og:site_name" content="Everdantia" />
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonical} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={ogImage || featuredImage} />
+    <meta property="twitter:image" content={absoluteOgImage || absoluteFeaturedImage} />
     <!-- Structured Data -->
     <script type="application/ld+json">
       {JSON.stringify({
@@ -82,7 +90,7 @@ const structuredData = {
         '@type': 'BlogPosting',
         headline: title,
         description,
-        image: ogImage || featuredImage,
+        image: absoluteOgImage || absoluteFeaturedImage,
         author: { '@type': 'Organization', name: author },
         publisher: {
           '@type': 'Organization',

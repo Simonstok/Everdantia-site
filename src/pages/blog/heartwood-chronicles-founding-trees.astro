@@ -547,17 +547,16 @@ const featuredImageAlt = "Majestic oak tree trunk closeup view with deep, textur
       event.stopPropagation();
     }
     
-    alert('Twitter share function called!'); // Test alert
-    
     const url = encodeURIComponent(window.location.href);
     const text = encodeURIComponent("Discover the mystical trunk types that form the backbone of Everdantia's forest 🌳✨");
     const twitterUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
     
-    // Simple window.open
+    // Open Twitter share window
     const newWindow = window.open(twitterUrl, '_blank', 'width=600,height=400');
     
     if (!newWindow) {
-      alert('Popup blocked! Twitter URL: ' + twitterUrl);
+      // Fallback if popup is blocked
+      window.location.href = twitterUrl;
     }
   };
 

@@ -1,5 +1,13 @@
 ---
-const { title = "Everdantia – A Living Forest of Care", description = "Everdantia is a storybook world where NFTs are living trees rooted in care, restoration, and ecological Magic.", image = "/og-image.jpg", url = "https://everdantia.art" } = Astro.props;
+const { 
+  title = "Everdantia – A Living Forest of Care", 
+  description = "Everdantia is a storybook world where NFTs are living trees rooted in care, restoration, and ecological Magic.", 
+  image = "/og-image.jpg", 
+  url = "https://everdantia.art" 
+} = Astro.props;
+
+// Convert relative image URLs to absolute URLs for social sharing
+const absoluteImage = image.startsWith('http') ? image : `https://everdantia.art${image}`;
 ---
 
 <html lang="en">
@@ -19,14 +27,14 @@ const { title = "Everdantia – A Living Forest of Care", description = "Everdan
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={absoluteImage} />
     <meta property="og:url" content={url} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image" content={absoluteImage} />
   </head>
   <body>
     <slot />
