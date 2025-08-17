@@ -454,14 +454,10 @@ const blogPosts = [
 				<section class="featured-post fade-in">
 					<article class="featured-card">
 						<div class="featured-image">
-							{post.image.includes('/blog/') ? (
-								<img src={post.image} alt={post.title} loading="eager" />
-							) : (
-								<picture>
-									<source srcSet={post.image.replace('.jpg', '.webp')} type="image/webp" />
-									<img src={post.image} alt={post.title} loading="eager" />
-								</picture>
-							)}
+		   <picture>
+			   <source srcSet={post.image.replace('.jpg', '.webp')} type="image/webp" />
+			   <img src={post.image} alt={post.title} loading="eager" />
+		   </picture>
 							<div class="featured-badge">Featured</div>
 						</div>
 						<div class="featured-content">
@@ -490,14 +486,10 @@ const blogPosts = [
 				{blogPosts.filter(post => !post.featured).map((post, index) => (
 					<article class="blog-post" style={`animation-delay: ${index * 0.1}s`}>
 						<div class="post-image">
-							{post.image.includes('/blog/') ? (
-								<img src={post.image} alt={post.title} loading="lazy" />
-							) : (
-								<picture>
-									<source srcSet={post.image.replace('.jpg', '.webp')} type="image/webp" />
-									<img src={post.image} alt={post.title} loading="lazy" />
-								</picture>
-							)}
+		   <picture>
+			   <source srcSet={post.image.replace('.jpg', '.webp')} type="image/webp" />
+			   <img src={post.image} alt={post.title} loading="lazy" />
+		   </picture>
 						</div>
 						<div class="post-content">
 							<div class="post-meta">
