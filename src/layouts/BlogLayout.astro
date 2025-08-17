@@ -143,7 +143,7 @@ const structuredData = {
         <div class="article-meta">
           <span class="category-tag">{category}</span>
           <span>•</span>
-          <span>{date}</span>
+          <span>{new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
           <span>•</span>
           <span>{readTime}</span>
         </div>
