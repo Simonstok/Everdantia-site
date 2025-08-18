@@ -9,7 +9,8 @@
     "astro": "astro",
     "optimize-images": "python convert_to_webp.py",
     "validate-twitter": "node scripts/validate-twitter-cards.js",
-    "check-performance": "node scripts/pre-build-check.js"
+    "check-performance": "node scripts/pre-build-check.js",
+    "check-404": "node scripts/check-404-errors.js"
   },
   "dependencies": {
     "@astrojs/netlify": "^6.5.4",
