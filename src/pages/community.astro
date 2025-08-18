@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { socialLinks, socialLinksArray } from '../config/social.ts';
 ---
 
 <html lang="en">
@@ -45,7 +46,7 @@ import Layout from '../layouts/Layout.astro';
 		  "description": "Join the Everdantia community—where forest enthusiasts, digital artists, and environmentalists unite to support conservation and creativity.",
 		  "sameAs": [
 			"https://twitter.com/Everdantia",
-			"https://discord.gg/enqAsyDU",
+		"sameAs": socialLinksArray,
 			"https://instagram.com/EverdantiaNFT"
 		  ],
 		  "contactPoint": {
@@ -333,7 +334,7 @@ import Layout from '../layouts/Layout.astro';
 					</div>
 					<h3>Discord Community</h3>
 					<p>Join our vibrant Discord server where forest guardians gather to discuss conservation, share stories, and participate in exclusive events.</p>
-					<a href="https://discord.gg/enqAsyDU" target="_blank" rel="noopener noreferrer" class="community-link">
+					<a href={socialLinks.discord} target="_blank" rel="noopener noreferrer" class="community-link">
 						Join Discord
 						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 							<path d="M5 12h14M12 5l7 7-7 7"/>

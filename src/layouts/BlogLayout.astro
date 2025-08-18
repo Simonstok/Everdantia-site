@@ -1,6 +1,7 @@
 ---
 import Analytics from '../components/Analytics.astro';
 import SEO from '../components/SEO.astro';
+import { socialLinks } from '../config/social.ts';
 
 // Props:
 const {
@@ -173,7 +174,7 @@ const structuredData = {
             <h3>Share this story</h3>
             <div class="share-buttons">
               <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent('Just read "' + title + '" - ' + description + ' 🌿✨')}&url=${encodeURIComponent(canonical)}`} target="_blank" rel="noopener noreferrer" class="share-btn">🐦 Share on Twitter</a>
-              <a href="https://discord.gg/enqAsyDU" target="_blank" rel="noopener noreferrer" class="share-btn">💬 Join Discord</a>
+              <a href={socialLinks.discord} target="_blank" rel="noopener noreferrer" class="share-btn">💬 Join Discord</a>
             </div>
           </div>
         </div>
