@@ -1,25 +1,5 @@
 ---
-import BlogLayout from '../../layouts/BlogLa		<section cl		<section class="domain-section">
-			<div class="domain-image">
-				<img src="/images/blog/oak.jpg" alt="Forest Domain - The Verdant Haven" loading="lazy" />
-			</div>
-			<h2>🌳 Forest — The Verdant Haven</h2>
-			<p>The forest is the oldest and most abundant Domain in Everdantia. Here, towering trunks rise shoulder to shoulder, their branches weaving into vast canopies that let only golden shafts of sunlight break through. The air is thick with the scent of moss and rich earth, alive with the rustle of hidden creatures. Beneath this endless green, time feels slower, measured not by hours but by seasons.</p>
-			<p>The Verdant Haven is a sanctuary of resilience. Within its shadows, countless generations have grown, fallen, and grown again. Legends speak of wanderers who entered the forest and found themselves in a place where centuries could pass in the blink of an eye. To dwell here is to become part of Everdantia's deepest rhythm — enduring, breathing, and eternal.</p>
-		</section>domain-sectio		<section class="domain-section">
-			<div class="domain-image">
-				<img src="/images/environment/hidden-bridge/bridge0.jpg" alt="Night Sky Domain - The Celestial Veil" loading="lazy" />
-			</div>
-			<h2>🌌 Night Sky — The Celestial Veil</h2>
-			<p>The Night Sky Domain is where the heavens unfold in their full majesty. Countless stars scatter like runes across the darkness, their constellations shifting with the passage of ages. Moonlight silvers the land below, and sometimes, faint nebulae ripple in the distance, painting the night in soft hues of violet and blue.</p>
-			<p>Those who walk beneath the Celestial Veil speak of awe and humility. To stand here is to feel the smallness of one's being and yet the immensity of connection. Lorekeepers say that the trees and stones of this Domain drink starlight, storing it in silence until the right moment comes to release it.</p>
-		</section>			<div class="domain-image">
-				<img src="/images/environment/forest-sanctuary/sanctuary1.jpg" alt="Forest Domain - The Verdant Haven" loading="lazy" />
-			</div>
-			<h2>🌳 Forest — The Verdant Haven</h2>
-			<p>The forest is the oldest and most abundant Domain in Everdantia. Here, towering trunks rise shoulder to shoulder, their branches weaving into vast canopies that let only golden shafts of sunlight break through. The air is thick with the scent of moss and rich earth, alive with the rustle of hidden creatures. Beneath this endless green, time feels slower, measured not by hours but by seasons.</p>
-			<p>The Verdant Haven is a sanctuary of resilience. Within its shadows, countless generations have grown, fallen, and grown again. Legends speak of wanderers who entered the forest and found themselves in a place where centuries could pass in the blink of an eye. To dwell here is to become part of Everdantia's deepest rhythm — enduring, breathing, and eternal.</p>
-		</section>astro';
+import BlogLayout from '../../layouts/BlogLayout.astro';
 
 const title = 'The Heartwood Chronicles: The Domains of Everdantia';
 const description = 'Explore the living Domains of Everdantia — Forest, Hilltop, Clearing, Night Sky, Ancient Ruins, and Aurora Canopy — and how they shape the destiny of every tree.';
@@ -28,12 +8,6 @@ const author = 'Everdantia';
 const readTime = '6 min read';
 const category = 'Lore';
 const keywords = 'Everdantia, domains, forest, hilltop, clearing, night sky, ruins, aurora, lore, worldbuilding, digital forest';
-const canonical = 'https://everdantia.art/blog/heartwood-chronicles-domains'; // Final URL when published
-
-// Hero/OG images (existing assets)
-const ogImage = '/images/environment/forest-sanctuary/sanctuary1.webp';
-const featuredImage = '/images/environment/forest-sanctuary/sanctuary1.jpg';
-const featuredImageAlt = 'Sunlit forest sanctuary with deep green canopy and golden rays';
 ---
 
 <BlogLayout 
@@ -44,42 +18,34 @@ const featuredImageAlt = 'Sunlit forest sanctuary with deep green canopy and gol
 	readTime={readTime}
 	category={category}
 	keywords={keywords}
-	canonical={canonical}
-	ogImage={ogImage}
-	featuredImage={featuredImage}
-	featuredImageAlt={featuredImageAlt}
 >
-	<!-- Draft Notice -->
-	<div class="draft-notice">
-		<div class="draft-content">
-			<h3>📝 Draft Preview</h3>
-			<p>This is a draft version for review. It’s not yet publicly available.</p>
-			<p><strong>Draft URL:</strong> /blog/draft-heartwood-chronicles-domains</p>
-			<p><strong>Final URL:</strong> /blog/heartwood-chronicles-domains (when published)</p>
-		</div>
-	</div>
+	<article class="blog-post">
+		<header class="post-header">
+			<h1>The Heartwood Chronicles: The Domains of Everdantia</h1>
+			<p class="post-intro">Six realms within a world, each holding its own character and calling. From the ancient roots of Forest to the ethereal glow of Aurora Canopy, discover the living Domains that define Everdantia.</p>
+		</header>
 
-	<div class="prose">
-		<h1>🌍 The Heartwood Chronicles: The Domains of Everdantia</h1>
-		<p class="subtitle">Series Two — The Living Realms</p>
-
-		<blockquote class="opening-quote">A Domain is a covenant between tree and land, between spirit and sky.</blockquote>
-
-		<p>In Everdantia, no tree stands alone. Each one takes root in a chosen <em>Domain</em> — the living environment that surrounds it, nurtures it, and shapes its destiny. To step into these Domains is to cross thresholds between realms, each one whispering its own story.</p>
-
-		<section class="domain-section">
-			<h2>🌳 Forest — The Verdant Haven</h2>
-			<p>The forest is the oldest and most abundant Domain in Everdantia. Here, towering trunks rise shoulder to shoulder, their branches weaving into vast canopies that let only golden shafts of sunlight break through. The air is thick with the scent of moss and rich earth, alive with the rustle of hidden creatures. Beneath this endless green, time feels slower, measured not by hours but by seasons.</p>
-			<p>The Verdant Haven is a sanctuary of resilience. Within its shadows, countless generations have grown, fallen, and grown again. Legends speak of wanderers who entered the forest and found themselves in a place where centuries could pass in the blink of an eye. To dwell here is to become part of Everdantia’s deepest rhythm — enduring, breathing, and eternal.</p>
+		<section class="intro-section">
+			<p>In Everdantia, nature is not just scenery — it is story. Every tree draws its essence not only from soil and sunlight, but from the Domain it calls home. Six Domains shape this living world, each a distinct realm with its own rhythm, its own mysteries, and its own gifts to offer those who understand them.</p>
+			<p>To know the Domains is to know the soul of Everdantia itself. Whether you seek the timeless wisdom of ancient groves or the rare wonder of auroral skies, each Domain offers a different path to connection with the natural world.</p>
 		</section>
 
 		<section class="domain-section">
 			<div class="domain-image">
-				<img src="/images/blog/pine.jpg" alt="Hilltop Domain - The Skyward Watch" loading="lazy" />
+				<img src="/images/blog/oak.jpg" alt="Forest Domain - The Verdant Haven" loading="lazy" />
 			</div>
-			<h2>🏞 Hilltop — The Skyward Watch</h2>
-			<p>Hilltops are the vantage points of Everdantia, where earth meets the endless sky. The wind never rests here, carrying whispers of seas, mountains, and valleys from far away. Grasses ripple like waves in the breeze, while the horizon stretches unbroken in every direction.</p>
-			<p>The Skyward Watch is a place of guardianship. Those who climb these heights feel the presence of the Watchers — trees and spirits who have stood for ages, gazing into the distance. The hilltop is where dawn breaks first and twilight lingers longest, a place of foresight and resilience. Many believe that truths carried by the wind gather here, waiting to be heard by those who listen.</p>
+			<h2>🌳 Forest — The Verdant Haven</h2>
+			<p>The forest is the oldest and most abundant Domain in Everdantia. Here, towering trunks rise shoulder to shoulder, their branches weaving into vast canopies that let only golden shafts of sunlight break through. The air is thick with the scent of moss and rich earth, alive with the rustle of hidden creatures. Beneath this endless green, time feels slower, measured not by hours but by seasons.</p>
+			<p>The Verdant Haven is a sanctuary of resilience. Within its shadows, countless generations have grown, fallen, and grown again. Legends speak of wanderers who entered the forest and found themselves in a place where centuries could pass in the blink of an eye. To dwell here is to become part of Everdantia's deepest rhythm — enduring, breathing, and eternal.</p>
+		</section>
+
+		<section class="domain-section">
+			<div class="domain-image">
+				<img src="/images/blog/pine.jpg" alt="Hilltop Domain - The Windswept Peaks" loading="lazy" />
+			</div>
+			<h2>⛰️ Hilltop — The Windswept Peaks</h2>
+			<p>High above the valleys, where the air grows thin and the wind never stops singing, lies the Hilltop Domain. Here, trees must be strong to survive. Their roots dig deep into rocky soil, their branches bend but do not break. The view from these heights stretches endlessly — a tapestry of all the other Domains spread below like a living map.</p>
+			<p>The Windswept Peaks are places of clarity and vision. Those who climb here often speak of revelations that come with altitude — insights that only emerge when you can see the whole of the world laid out beneath you. The trees of this Domain are hardy, weathered, and wise.</p>
 		</section>
 
 		<section class="domain-section">
@@ -97,7 +63,7 @@ const featuredImageAlt = 'Sunlit forest sanctuary with deep green canopy and gol
 			</div>
 			<h2>🌌 Night Sky — The Celestial Veil</h2>
 			<p>The Night Sky Domain is where the heavens unfold in their full majesty. Countless stars scatter like runes across the darkness, their constellations shifting with the passage of ages. Moonlight silvers the land below, and sometimes, faint nebulae ripple in the distance, painting the night in soft hues of violet and blue.</p>
-			<p>Those who walk beneath the Celestial Veil speak of awe and humility. To stand here is to feel the smallness of one’s being and yet the immensity of connection. Lorekeepers say that the trees and stones of this Domain drink starlight, storing it in silence until the right moment comes to release it.</p>
+			<p>Those who walk beneath the Celestial Veil speak of awe and humility. To stand here is to feel the smallness of one's being and yet the immensity of connection. Lorekeepers say that the trees and stones of this Domain drink starlight, storing it in silence until the right moment comes to release it.</p>
 		</section>
 
 		<section class="domain-section">
@@ -123,63 +89,143 @@ const featuredImageAlt = 'Sunlit forest sanctuary with deep green canopy and gol
 		<section class="closing-section">
 			<h2>🌿 The Living Realms of Everdantia</h2>
 			<p>The Domains of Everdantia are more than settings — they are living sanctuaries where the land itself breathes with myth. To hold a tree is to hold not only its lineage, but the world it has chosen to root in. Whether among the timeless Forest, the windswept Hilltop, the sacred Clearing, the starlit Night Sky, the silent Ruins, or the rare Aurora Canopy, each Domain invites you to step inside its story.</p>
+			<p>Which Domain calls to you? In Everdantia, every choice becomes part of the story — and every story becomes part of the living world.</p>
 		</section>
+	</article>
 
-		<section class="related-posts">
-			<h3>🌿 Continue Your Journey</h3>
-			<div class="related-grid">
-				<article class="related-post">
-					<img src="/images/environment/forest-sanctuary/sanctuary1.jpg" alt="Behind the Scenes" loading="lazy" />
-					<div class="related-content">
-						<h4><a href="/blog/behind-the-scenes-growing-our-impact">Behind the Scenes: Growing Our Impact</a></h4>
-						<p>Discover how every NFT sale connects to real-world conservation efforts.</p>
-						<span class="read-time">3 min read</span>
-					</div>
-				</article>
-				<article class="related-post">
-					<img src="/images/environment/everdantia-glade/glade0.jpg" alt="Welcome to Everdantia" loading="lazy" />
-					<div class="related-content">
-						<h4><a href="/blog/welcome-to-everdantia">Welcome to Everdantia</a></h4>
-						<p>Step into a realm where digital nature meets environmental hope.</p>
-						<span class="read-time">3 min read</span>
-					</div>
-				</article>
-				<article class="related-post">
-					<img src="/images/environment/founding-grove/grove0.jpg" alt="Genesis Collection" loading="lazy" />
-					<div class="related-content">
-						<h4><a href="/blog/genesis-collection-unveiled">The Genesis Collection Unveiled</a></h4>
-						<p>Meet the founding trees that shape our enchanted forest realm.</p>
-						<span class="read-time">5 min read</span>
-					</div>
-				</article>
-			</div>
-		</section>
-	</div>
+	<style>
+		.blog-post {
+			max-width: 800px;
+			margin: 0 auto;
+			line-height: 1.8;
+		}
+
+		.post-header {
+			text-align: center;
+			margin-bottom: 3rem;
+			padding-bottom: 2rem;
+			border-bottom: 1px solid #e5e5e5;
+		}
+
+		.post-header h1 {
+			font-family: 'Cormorant Garamond', serif;
+			font-size: 2.5rem;
+			font-weight: 700;
+			color: #2d3748;
+			margin-bottom: 1rem;
+			line-height: 1.2;
+		}
+
+		.post-intro {
+			font-size: 1.2rem;
+			color: #4a5568;
+			font-style: italic;
+			margin-bottom: 0;
+		}
+
+		.intro-section {
+			background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+			padding: 2rem;
+			border-radius: 12px;
+			margin-bottom: 3rem;
+			border-left: 4px solid #48bb78;
+		}
+
+		.domain-section {
+			margin-bottom: 3rem;
+			padding-bottom: 2rem;
+			border-bottom: 1px solid #e2e8f0;
+			position: relative;
+		}
+
+		.domain-image {
+			width: 100%;
+			height: 300px;
+			border-radius: 12px;
+			overflow: hidden;
+			margin-bottom: 1.5rem;
+			position: relative;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		}
+
+		.domain-image img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 0.3s ease;
+		}
+
+		.domain-image:hover img {
+			transform: scale(1.05);
+		}
+
+		.rarity-banner {
+			position: absolute;
+			top: 12px;
+			right: 12px;
+			padding: 0.5rem 1rem;
+			border-radius: 20px;
+			font-size: 0.9rem;
+			font-weight: 600;
+			color: white;
+			z-index: 2;
+			text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+		}
+
+		.rarity-4 {
+			background: linear-gradient(135deg, #9f7aea 0%, #805ad5 100%);
+			box-shadow: 0 2px 8px rgba(159, 122, 234, 0.4);
+		}
+
+		.rarity-3 {
+			background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+			box-shadow: 0 2px 8px rgba(237, 137, 54, 0.4);
+		}
+
+		.domain-section h2 {
+			font-family: 'Cormorant Garamond', serif;
+			font-size: 1.8rem;
+			font-weight: 600;
+			color: #2d3748;
+			margin-bottom: 1rem;
+		}
+
+		.domain-section p {
+			color: #4a5568;
+			margin-bottom: 1rem;
+		}
+
+		.closing-section {
+			background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+			color: white;
+			padding: 2rem;
+			border-radius: 12px;
+			margin-top: 3rem;
+			text-align: center;
+		}
+
+		.closing-section h2 {
+			color: white;
+			margin-bottom: 1rem;
+		}
+
+		@media (max-width: 768px) {
+			.post-header h1 {
+				font-size: 2rem;
+			}
+
+			.post-intro {
+				font-size: 1.1rem;
+			}
+
+			.domain-image {
+				height: 200px;
+			}
+
+			.intro-section,
+			.closing-section {
+				padding: 1.5rem;
+			}
+		}
+	</style>
 </BlogLayout>
-
-<style>
-	.draft-notice { background: linear-gradient(135deg, #fff3cd, #ffeaa7); border: 2px solid #f39c12; border-radius: 1rem; margin: 2rem auto; max-width: 800px; box-shadow: 0 4px 16px rgba(243, 156, 18, 0.2); }
-	.draft-content { padding: 2rem; text-align: center; }
-	.draft-content h3 { color: #d68910; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 1rem; }
-	.draft-content p { color: #8b6914; margin-bottom: 0.5rem; font-size: 0.95rem; }
-	.prose { max-width: 800px; margin: 0 auto; line-height: 1.8; }
-	.subtitle { font-style: italic; color: #8bab5d; font-size: 1.1rem; margin-bottom: 2rem; text-align: center; }
-	.opening-quote { font-size: 1.2rem; font-style: italic; color: #6b4f2a; border-left: 4px solid #8bab5d; margin: 2rem 0; background: rgba(139, 171, 93, 0.05); padding: 1.25rem 1.5rem; border-radius: 0 0.5rem 0.5rem 0; }
-	.domain-section { margin: 3rem 0; padding: 2rem 0; border-bottom: 1px solid rgba(107, 79, 42, 0.1); }
-	.domain-section:last-of-type { border-bottom: none; }
-	.domain-image { position: relative; margin-bottom: 1.5rem; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-	.domain-image img { width: 100%; height: 300px; object-fit: cover; }
-	.rarity-banner { position: absolute; top: 1rem; right: 1rem; background: linear-gradient(135deg, #f39c12, #e67e22); color: white; padding: 0.5rem 1rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; text-shadow: 0 1px 2px rgba(0,0,0,0.3); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-	.rarity-4 { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
-	.rarity-3 { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-	.domain-section h2 { color: #6b4f2a; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 1rem; }
-	.closing-section { margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #8bab5d; }
-	.related-posts { margin-top: 3rem; }
-	.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-	.related-post { background: #fff; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-	.related-post img { width: 100%; height: 150px; object-fit: cover; }
-	.related-content { padding: 1rem; }
-	.related-content h4 { margin-bottom: 0.5rem; font-family: 'Cormorant Garamond', serif; color: #6b4f2a; }
-	.read-time { font-size: 0.85rem; color: #666; }
-	@media (max-width: 800px) { .related-grid { grid-template-columns: 1fr; } }
-</style>
