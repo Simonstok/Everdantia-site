@@ -306,14 +306,16 @@ const structuredData = {
 		</div>
 
 		<section style="position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; color: white;">
-		   <picture>
-			   <source type="image/webp" srcset="/images/background/hilltop/hilltop0-768.webp 768w, /images/background/hilltop/hilltop0-1280.webp 1280w, /images/background/hilltop/hilltop0-1920.webp 1920w" sizes="100vw" />
-			   <source srcset="/images/background/hilltop/hilltop0-768.jpg 768w, /images/background/hilltop/hilltop0-1280.jpg 1280w, /images/background/hilltop/hilltop0-1920.jpg 1920w" sizes="100vw" />
-			   <img src="/images/background/hilltop/hilltop0-1280.jpg" 
-					alt="Forest background" 
-					loading="eager"
-					style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;" />
-		   </picture>
+  <picture>
+    <!-- Prefer responsive WebP variants -->
+    <source type="image/webp" srcset="/images/background/hilltop/hilltop0-768.webp 768w, /images/background/hilltop/hilltop0-1280.webp 1280w, /images/background/hilltop/hilltop0-1920.webp 1920w" sizes="100vw" />
+    <!-- Fallback to original WebP if variants are missing -->
+    <source type="image/webp" srcset="/images/background/hilltop/hilltop0.webp" />
+    <!-- JPEG responsive variants -->
+    <source srcset="/images/background/hilltop/hilltop0-768.jpg 768w, /images/background/hilltop/hilltop0-1280.jpg 1280w, /images/background/hilltop/hilltop0-1920.jpg 1920w" sizes="100vw" />
+    <!-- Final fallback to original JPEG -->
+    <img src="/images/background/hilltop/hilltop0.jpg" alt="Forest background" loading="eager" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;" />
+  </picture>
 			<div style="position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2), rgba(0,0,0,0.4)); z-index: -1;"></div>
 			
 			<h1 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; margin-bottom: 1.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3); max-width: 1000px; line-height: 1.1;">
@@ -517,7 +519,7 @@ const structuredData = {
 					</div>
 					<div style="text-align: center;">
 						<div style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">x.xx ETH</div>
-						<div style="color: rgba(255,255,255,0.7); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">Mint Price</div>
+						<div style="color: rgba(255,255,255,0.7); font-size: 1rem; text-transform: uppercase, letter-spacing: 0.1em;">Mint Price</div>
 					</div>
 					<div style="text-align: center;">
 						<div style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">TBD</div>
