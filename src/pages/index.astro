@@ -60,8 +60,7 @@ const structuredData = {
 		}
 		</script>
 		
-		<!-- Analytics and Performance Monitoring -->
-		<Analytics enableAnalytics={true} enableErrorTracking={true} />
+		<link rel="preload" as="image" href="/images/background/hilltop/hilltop0-1280.webp" imagesrcset="/images/background/hilltop/hilltop0-768.webp 768w, /images/background/hilltop/hilltop0-1280.webp 1280w, /images/background/hilltop/hilltop0-1920.webp 1920w" imagesizes="100vw" />
 		
 		<style>
 			* {
@@ -308,15 +307,16 @@ const structuredData = {
 
 		<section style="position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; color: white;">
 		   <picture>
-			   <source srcset="/images/background/hilltop/hilltop0.webp" type="image/webp" />
-			   <img src="/images/background/hilltop/hilltop0.jpg" 
+			   <source type="image/webp" srcset="/images/background/hilltop/hilltop0-768.webp 768w, /images/background/hilltop/hilltop0-1280.webp 1280w, /images/background/hilltop/hilltop0-1920.webp 1920w" sizes="100vw" />
+			   <source srcset="/images/background/hilltop/hilltop0-768.jpg 768w, /images/background/hilltop/hilltop0-1280.jpg 1280w, /images/background/hilltop/hilltop0-1920.jpg 1920w" sizes="100vw" />
+			   <img src="/images/background/hilltop/hilltop0-1280.jpg" 
 					alt="Forest background" 
 					loading="eager"
 					style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;" />
 		   </picture>
 			<div style="position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2), rgba(0,0,0,0.4)); z-index: -1;"></div>
 			
-			<h1 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; margin-bottom: 1.5rem; text-shadow: 0 2px 24px rgba(0,0,0,0.3); max-width: 1000px; line-height: 1.1;">
+			<h1 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; margin-bottom: 1.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3); max-width: 1000px; line-height: 1.1;">
 				"A living world, rooted in imagination."
 			</h1>
 			<p style="font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 400; color: rgba(255,255,255,0.9); margin-bottom: 3rem; max-width: 600px; line-height: 1.6;">
@@ -722,5 +722,8 @@ const structuredData = {
 				this.style.background = 'rgba(255,255,255,0.1)';
 			});
 		</script>
+
+		<!-- Move analytics just before closing body to avoid early main-thread work -->
+		<Analytics enableAnalytics={true} enableErrorTracking={true} />
 	</body>
 </html>

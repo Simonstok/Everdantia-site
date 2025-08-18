@@ -95,4 +95,56 @@ async function createResponsiveImages() {
   console.log('💡 Expected savings: 50-70% reduction in image payload for mobile users');
 }
 
-createResponsiveImages().catch(console.error);
+async function createHeroResponsive() {
+  console.log('🖼️  Creating hero image sizes...\n');
+  
+  const heroJpg = path.join(__dirname, '../public/images/background/hilltop/hilltop0.jpg');
+  if (!fs.existsSync(heroJpg)) {
+    console.log('❌ Source hero image not found: hilltop0.jpg');
+    return;
+  }
+
+  console.log(`📏 Processing hero image...`);
+  
+  // Get original stats
+  const originalStats = fs.statSync(heroJpg);
+  console.log(`   Original JPG: ${(originalStats.size / 1024).toFixed(0)}KB`);
+  
+  const sizes = [
+    { suffix: '-small', width: 768, quality: 80 },
+    { suffix: '-medium', width: 1280, quality: 80 },
+    { suffix: '', width: 1920, quality: 75 } // Default size
+  ];
+  
+  for (const size of sizes) {
+    try {
+      // WebP version
+      const webpPath = path.join(__dirname, `../public/images/background/hilltop/hilltop0${size.suffix}.webp`);
+      await sharp(heroJpg)
+        .resize(size.width)
+        .webp({ quality: size.quality })
+        .toFile(webpPath);
+      
+      // JPG fallback
+      const jpgPath = path.join(__dirname, `../public/images/background/hilltop/hilltop0${size.suffix}.jpg`);
+      await sharp(heroJpg)
+        .resize(size.width)
+        .jpeg({ quality: size.quality })
+        .toFile(jpgPath);
+      
+      const webpStats = fs.statSync(webpPath);
+      const jpgStats = fs.statSync(jpgPath);
+      
+      console.log(`   ${size.width}: ${(webpStats.size / 1024).toFixed(0)}KB WebP, ${(jpgStats.size / 1024).toFixed(0)}KB JPG`);
+      
+    } catch (error) {
+      console.error(`   ❌ Error creating hero ${size.width}: ${error.message}`);
+    }
+  }
+  
+  console.log('\n✨ Hero image generation complete!');
+}
+
+createResponsiveImages()
+  .then(createHeroResponsive)
+  .catch(console.error);
