@@ -9,7 +9,8 @@ const readTime = '5 min read';
 const category = 'NFT Collection';
 const keywords = 'Everdantia, NFT, trees, heartwood chronicles, oak, willow, pine, emberwood, mystic elder, blockchain art, digital forest, rarity';
 const canonical = 'https://everdantia.art/blog/heartwood-chronicles-founding-trees'; // Final URL when published
-const featuredImage = '/images/blog/oak.jpg';
+const featuredImage = '/images/blog/oak.webp';
+const featuredImageFallback = '/images/blog/oak.jpg';
 const featuredImageAlt = "Majestic oak tree trunk closeup view with deep, textured bark and golden light";
 ---
 
@@ -23,6 +24,7 @@ const featuredImageAlt = "Majestic oak tree trunk closeup view with deep, textur
   keywords={keywords}
   canonical={canonical}
   featuredImage={featuredImage}
+  featuredImageFallback={featuredImageFallback}
   featuredImageAlt={featuredImageAlt}
 >
   <div class="prose">

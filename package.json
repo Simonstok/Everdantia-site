@@ -4,9 +4,12 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/pre-build-check.js && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "optimize-images": "python convert_to_webp.py",
+    "validate-twitter": "node scripts/validate-twitter-cards.js",
+    "check-performance": "node scripts/pre-build-check.js"
   },
   "dependencies": {
     "@astrojs/netlify": "^6.5.4",
@@ -16,6 +19,7 @@
     "astro": "^5.12.3",
     "reveal": "^0.0.4",
     "scroll": "^3.0.1",
-    "scrollreveal": "^4.0.9"
+    "scrollreveal": "^4.0.9",
+    "sharp": "^0.34.3"
   }
 }
