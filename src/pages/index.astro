@@ -340,8 +340,12 @@ const structuredData = {
 					<div class="tree-card" style="background: white; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); transition: all 0.3s ease;">
 						<div style="position: relative; height: 300px;">
 						   <picture>
-							   <source srcset="/images/trees/14.webp" type="image/webp" />
-							   <img src="/images/trees/14.jpg" 
+							   <source srcset="/images/trees/14-small.webp 300w, /images/trees/14-medium.webp 600w, /images/trees/14.webp 800w" 
+							           type="image/webp"
+							           sizes="(max-width: 600px) 300px, (max-width: 1200px) 600px, 800px" />
+							   <source srcset="/images/trees/14-small.jpg 300w, /images/trees/14-medium.jpg 600w, /images/trees/14.jpg 800w" 
+							           sizes="(max-width: 600px) 300px, (max-width: 1200px) 600px, 800px" />
+							   <img src="/images/trees/14-medium.jpg" 
 									alt="Whisperroot of the Hollow" 
 									loading="lazy"
 									style="width: 100%; height: 100%; object-fit: cover;" />
@@ -362,8 +366,12 @@ const structuredData = {
 					<div class="tree-card" style="background: white; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); transition: all 0.3s ease;">
 						<div style="position: relative; height: 300px;">
 						   <picture>
-							   <source srcset="/images/trees/74.webp" type="image/webp" />
-							   <img src="/images/trees/74.jpg" 
+							   <source srcset="/images/trees/74-small.webp 300w, /images/trees/74-medium.webp 600w, /images/trees/74.webp 800w" 
+							           type="image/webp"
+							           sizes="(max-width: 600px) 300px, (max-width: 1200px) 600px, 800px" />
+							   <source srcset="/images/trees/74-small.jpg 300w, /images/trees/74-medium.jpg 600w, /images/trees/74.jpg 800w" 
+							           sizes="(max-width: 600px) 300px, (max-width: 1200px) 600px, 800px" />
+							   <img src="/images/trees/74-medium.jpg" 
 									alt="Gloomshade Elder" 
 									style="width: 100%; height: 100%; object-fit: cover;" />
 						   </picture>
@@ -383,8 +391,12 @@ const structuredData = {
 					<div class="tree-card" style="background: white; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); transition: all 0.3s ease;">
 						<div style="position: relative; height: 300px;">
 						   <picture>
-							   <source srcset="/images/trees/100.webp" type="image/webp" />
-							   <img src="/images/trees/100.jpg" 
+							   <source srcset="/images/trees/100-small.webp 300w, /images/trees/100-medium.webp 600w, /images/trees/100.webp 800w" 
+							           type="image/webp"
+							           sizes="(max-width: 600px) 300px, (max-width: 1200px) 600px, 800px" />
+							   <source srcset="/images/trees/100-small.jpg 300w, /images/trees/100-medium.jpg 600w, /images/trees/100.jpg 800w" 
+							           sizes="(max-width: 600px) 300px, (max-width: 1200px) 600px, 800px" />
+							   <img src="/images/trees/100-medium.jpg" 
 									alt="Crown of Return" 
 									style="width: 100%; height: 100%; object-fit: cover;" />
 						   </picture>
@@ -466,9 +478,12 @@ const structuredData = {
 			<div style="max-width: 1200px; margin: 0 auto;">
 				<div class="story-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
 				   <picture>
-					   <source srcset="/images/environment/everdantia-glade/glade0.webp" type="image/webp" />
+					   <source srcset="/images/environment/everdantia-glade/glade0.webp" 
+					           type="image/webp"
+					           sizes="(max-width: 768px) 100vw, 50vw" />
 					   <img src="/images/environment/everdantia-glade/glade0.jpg" 
 							alt="Magical forest glade" 
+							loading="lazy"
 							style="width: 100%; height: 400px; object-fit: cover; border-radius: 1rem; box-shadow: 0 4px 24px rgba(0,0,0,0.12);" />
 				   </picture>
 					<div>

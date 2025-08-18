@@ -8,6 +8,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "optimize-images": "python convert_to_webp.py",
+    "create-responsive": "node scripts/create-responsive-images.js",
     "validate-twitter": "node scripts/validate-twitter-cards.js",
     "check-performance": "node scripts/pre-build-check.js",
     "check-404": "node scripts/check-404-errors.js"
