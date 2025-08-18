@@ -1,5 +1,18 @@
 ---
-import BlogLayout from '../../layouts/BlogLayout.astro';
+import BlogLayout from '../../layouts/BlogLa		<section class="domain-sectio		<section class="domain-section">
+			<div class="domain-image">
+				<img src="/images/environment/hidden-bridge/bridge0.jpg" alt="Night Sky Domain - The Celestial Veil" loading="lazy" />
+			</div>
+			<h2>🌌 Night Sky — The Celestial Veil</h2>
+			<p>The Night Sky Domain is where the heavens unfold in their full majesty. Countless stars scatter like runes across the darkness, their constellations shifting with the passage of ages. Moonlight silvers the land below, and sometimes, faint nebulae ripple in the distance, painting the night in soft hues of violet and blue.</p>
+			<p>Those who walk beneath the Celestial Veil speak of awe and humility. To stand here is to feel the smallness of one's being and yet the immensity of connection. Lorekeepers say that the trees and stones of this Domain drink starlight, storing it in silence until the right moment comes to release it.</p>
+		</section>			<div class="domain-image">
+				<img src="/images/environment/forest-sanctuary/sanctuary1.jpg" alt="Forest Domain - The Verdant Haven" loading="lazy" />
+			</div>
+			<h2>🌳 Forest — The Verdant Haven</h2>
+			<p>The forest is the oldest and most abundant Domain in Everdantia. Here, towering trunks rise shoulder to shoulder, their branches weaving into vast canopies that let only golden shafts of sunlight break through. The air is thick with the scent of moss and rich earth, alive with the rustle of hidden creatures. Beneath this endless green, time feels slower, measured not by hours but by seasons.</p>
+			<p>The Verdant Haven is a sanctuary of resilience. Within its shadows, countless generations have grown, fallen, and grown again. Legends speak of wanderers who entered the forest and found themselves in a place where centuries could pass in the blink of an eye. To dwell here is to become part of Everdantia's deepest rhythm — enduring, breathing, and eternal.</p>
+		</section>astro';
 
 const title = 'The Heartwood Chronicles: The Domains of Everdantia';
 const description = 'Explore the living Domains of Everdantia — Forest, Hilltop, Clearing, Night Sky, Ancient Ruins, and Aurora Canopy — and how they shape the destiny of every tree.';
@@ -54,12 +67,18 @@ const featuredImageAlt = 'Sunlit forest sanctuary with deep green canopy and gol
 		</section>
 
 		<section class="domain-section">
+			<div class="domain-image">
+				<img src="/images/background/hilltop/hilltop0.jpg" alt="Hilltop Domain - The Skyward Watch" loading="lazy" />
+			</div>
 			<h2>🏞 Hilltop — The Skyward Watch</h2>
 			<p>Hilltops are the vantage points of Everdantia, where earth meets the endless sky. The wind never rests here, carrying whispers of seas, mountains, and valleys from far away. Grasses ripple like waves in the breeze, while the horizon stretches unbroken in every direction.</p>
 			<p>The Skyward Watch is a place of guardianship. Those who climb these heights feel the presence of the Watchers — trees and spirits who have stood for ages, gazing into the distance. The hilltop is where dawn breaks first and twilight lingers longest, a place of foresight and resilience. Many believe that truths carried by the wind gather here, waiting to be heard by those who listen.</p>
 		</section>
 
 		<section class="domain-section">
+			<div class="domain-image">
+				<img src="/images/environment/everdantia-glade/glade0.jpg" alt="Clearing Domain - The Quiet Grove" loading="lazy" />
+			</div>
 			<h2>🌿 Clearing — The Quiet Grove</h2>
 			<p>Between the depth of forests and the openness of meadows lies the Clearing Domain — a place of harmony and stillness. Here, the sunlight falls unbroken, bathing grasses and wildflowers in warmth. Forest edges frame the space like watchful guardians, but within, peace reigns.</p>
 			<p>Clearings have long been considered sacred in Everdantia. They are natural gathering places, chosen by clans and wanderers alike when truth must be spoken. The air in a clearing feels expectant, as though the world itself leans closer to listen. Those who step into the Quiet Grove often describe a strange calm, as though their burdens grow lighter in the open light.</p>
@@ -72,12 +91,20 @@ const featuredImageAlt = 'Sunlit forest sanctuary with deep green canopy and gol
 		</section>
 
 		<section class="domain-section">
+			<div class="domain-image">
+				<div class="rarity-banner rarity-4">4% Rarity</div>
+				<img src="/images/environment/everdantia-edge/edge0.jpg" alt="Ancient Ruins Domain - The Memory Keepers" loading="lazy" />
+			</div>
 			<h2>🏛 Ancient Ruins — The Memory Keepers</h2>
 			<p>In Everdantia, not all places are untouched by time. The Ruins Domain lies where civilizations once thrived and have long since fallen, their remnants now entwined with moss, ivy, and silence. Crumbling arches and weathered columns rise like bones from the earth, their carvings eroded but not forgotten.</p>
 			<p>The Memory Keepers are not mournful, but steadfast. Here, stone and root grow together, sharing the patience of centuries. Travelers who linger among the ruins often feel the press of history — the weight of lives once lived, of knowledge once held.</p>
 		</section>
 
 		<section class="domain-section">
+			<div class="domain-image">
+				<div class="rarity-banner rarity-3">3% Rarity</div>
+				<img src="/images/environment/founding-grove/grove0.jpg" alt="Aurora Canopy Domain - The Dreamlit Realm" loading="lazy" />
+			</div>
 			<h2>✨ Aurora Canopy — The Dreamlit Realm</h2>
 			<p>The rarest of all Domains, the Aurora Canopy transforms the night sky into a living river of light. Curtains of emerald, violet, and gold ripple endlessly, drifting like celestial banners that fold and unfold as though the heavens themselves are breathing.</p>
 			<p>Beneath this shifting glow, the land is bathed in color, each stone and blade of grass touched by magic. Lorekeepers claim that the auroras are not just beauty, but messages — fragments of memory from beyond Everdantia, carried on the currents of the cosmos.</p>
@@ -130,6 +157,11 @@ const featuredImageAlt = 'Sunlit forest sanctuary with deep green canopy and gol
 	.opening-quote { font-size: 1.2rem; font-style: italic; color: #6b4f2a; border-left: 4px solid #8bab5d; margin: 2rem 0; background: rgba(139, 171, 93, 0.05); padding: 1.25rem 1.5rem; border-radius: 0 0.5rem 0.5rem 0; }
 	.domain-section { margin: 3rem 0; padding: 2rem 0; border-bottom: 1px solid rgba(107, 79, 42, 0.1); }
 	.domain-section:last-of-type { border-bottom: none; }
+	.domain-image { position: relative; margin-bottom: 1.5rem; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+	.domain-image img { width: 100%; height: 300px; object-fit: cover; }
+	.rarity-banner { position: absolute; top: 1rem; right: 1rem; background: linear-gradient(135deg, #f39c12, #e67e22); color: white; padding: 0.5rem 1rem; border-radius: 999px; font-weight: 600; font-size: 0.9rem; text-shadow: 0 1px 2px rgba(0,0,0,0.3); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+	.rarity-4 { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+	.rarity-3 { background: linear-gradient(135deg, #e74c3c, #c0392b); }
 	.domain-section h2 { color: #6b4f2a; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 1rem; }
 	.closing-section { margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #8bab5d; }
 	.related-posts { margin-top: 3rem; }
