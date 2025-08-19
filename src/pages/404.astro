@@ -341,23 +341,25 @@ const description = 'The path you seek has grown over with time. Explore the liv
 			</div>
 		</div>
 
-		<script>
+		<script is:inline>
 			// Track 404 errors - basic logging only
 			if (typeof window !== 'undefined') {
-				console.log('404 Page View: Lost in the Forest');
+				console.log('404 Page View: Lost in the Forest', {
 					page_location: window.location.href,
 					custom_parameter: '404_error'
 				});
 			}
 
 			// Add some interactive sparkle effect on hover
-			document.querySelectorAll('.quick-link, .btn').forEach(link => {
-				link.addEventListener('mouseenter', function() {
-					this.style.transform = 'translateY(-2px)';
-				});
-				
-				link.addEventListener('mouseleave', function() {
-					this.style.transform = 'translateY(0)';
+			document.addEventListener('DOMContentLoaded', function() {
+				document.querySelectorAll('.quick-link, .btn').forEach(link => {
+					link.addEventListener('mouseenter', function() {
+						this.style.transform = 'translateY(-2px)';
+					});
+					
+					link.addEventListener('mouseleave', function() {
+						this.style.transform = 'translateY(0)';
+					});
 				});
 			});
 		</script>
