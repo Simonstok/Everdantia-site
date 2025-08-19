@@ -48,6 +48,9 @@ const sizeClasses = {
     border: 2px solid transparent;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari/Webkit support */
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
   .search-input-group:focus-within {
@@ -63,18 +66,28 @@ const sizeClasses = {
     background: transparent;
     font-size: 0.9rem;
     color: #4d6b3c;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 3rem 0.75rem 1rem;
     border-radius: 50px;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-appearance: none; /* Remove Safari styling */
+    -moz-appearance: none; /* Remove Firefox styling */
+    appearance: none;
   }
 
   .search-input::placeholder {
     color: #9ca3af;
+    opacity: 1; /* Firefox fallback */
   }
 
   .search-button {
+    position: absolute;
+    right: 0.25rem;
+    top: 50%;
+    transform: translateY(-50%);
     background: none;
     border: none;
-    padding: 0.75rem;
+    padding: 0.5rem;
     cursor: pointer;
     color: #6b7280;
     transition: all 0.3s ease;
@@ -82,7 +95,13 @@ const sizeClasses = {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 0.25rem;
+    width: 2rem;
+    height: 2rem;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    z-index: 2;
   }
 
   .search-button:hover {
@@ -97,35 +116,47 @@ const sizeClasses = {
 
   /* Size variants */
   .search-small .search-input {
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 2.5rem 0.5rem 0.75rem;
     font-size: 0.8rem;
+    min-height: 1.75rem;
   }
 
   .search-small .search-button {
-    padding: 0.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0.375rem;
+    right: 0.125rem;
   }
 
   .search-small .search-button svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
   }
 
   .search-medium .search-input {
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 3rem 0.75rem 1rem;
     font-size: 0.9rem;
+    min-height: 2rem;
   }
 
   .search-medium .search-button {
-    padding: 0.75rem;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.5rem;
+    right: 0.25rem;
   }
 
   .search-large .search-input {
-    padding: 1rem 1.25rem;
+    padding: 1rem 3.5rem 1rem 1.25rem;
     font-size: 1rem;
+    min-height: 2.5rem;
   }
 
   .search-large .search-button {
-    padding: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.625rem;
+    right: 0.25rem;
   }
 
   .search-large .search-button svg {
@@ -137,6 +168,35 @@ const sizeClasses = {
   @media (max-width: 768px) {
     .search-input {
       font-size: 16px; /* Prevents zoom on iOS */
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    .search-input-group {
+      min-height: 44px; /* iOS touch target minimum */
+    }
+  }
+
+  /* Browser-specific fixes */
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    /* Chrome, Safari, Edge, Brave specific fixes */
+    .search-input {
+      -webkit-appearance: none;
+    }
+    
+    .search-button {
+      -webkit-appearance: none;
+    }
+  }
+
+  /* Firefox specific fixes */
+  @-moz-document url-prefix() {
+    .search-input {
+      -moz-appearance: none;
+    }
+    
+    .search-button {
+      -moz-appearance: none;
     }
   }
 
@@ -144,14 +204,19 @@ const sizeClasses = {
   .search-component.dark .search-input-group {
     background: rgba(0, 0, 0, 0.3);
     border-color: rgba(255, 255, 255, 0.2);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
 
   .search-component.dark .search-input {
     color: white;
+    -webkit-text-fill-color: white; /* Webkit autofill override */
   }
 
   .search-component.dark .search-input::placeholder {
     color: rgba(255, 255, 255, 0.6);
+    opacity: 1;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.6);
   }
 
   .search-component.dark .search-button {
