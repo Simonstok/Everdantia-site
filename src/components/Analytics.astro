@@ -243,7 +243,7 @@ const {
       }
 
       sendEvent(data) {
-        // Store locally for offline capability
+        // Store locally for client-side analytics (static site compatible)
         if (typeof window !== 'undefined') {
           const events = JSON.parse(localStorage.getItem('everdantia_analytics') || '[]');
           events.push(data);
@@ -253,70 +253,31 @@ const {
           }
           localStorage.setItem('everdantia_analytics', JSON.stringify(events));
           
-          // Send to analytics API endpoint with retry logic
-          this.sendToAPI(data, 3); // Try up to 3 times
-        }
-      }
-
-      async sendToAPI(data, retries = 3) {
-        for (let attempt = 1; attempt <= retries; attempt++) {
-          try {
-            const response = await fetch('/api/analytics', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(data)
-            });
-
-            if (response.ok) {
-              // Success - mark this event as synced if needed
-              if (window.location.hostname === 'localhost') {
-                console.log('✅ Analytics event sent successfully');
-              }
-              return;
-            } else {
-              throw new Error(`API returned ${response.status}: ${response.statusText}`);
-            }
-          } catch (error) {
-            if (window.location.hostname === 'localhost') {
-              console.warn(`❌ Analytics attempt ${attempt}/${retries} failed:`, error.message);
-            }
-            
-            if (attempt === retries) {
-              // Final attempt failed - store for later retry
-              this.storeFailed(data);
-              if (window.location.hostname === 'localhost') {
-                console.error('💥 Analytics failed after all retries, stored for later');
-              }
-            } else {
-              // Wait before retry (exponential backoff)
-              await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
-            }
+          // For static sites, we only store locally
+          // API calls are disabled to prevent 404 errors
+          if (window.location.hostname === 'localhost' || window.location.search.includes('debug=true')) {
+            console.log('📊 Analytics event stored locally:', data.type, data);
           }
         }
       }
 
-      storeFailed(data) {
-        // Store failed events for later retry
-        const failed = JSON.parse(localStorage.getItem('everdantia_analytics_failed') || '[]');
-        failed.push({...data, failedAt: Date.now()});
-        if (failed.length > 50) {
-          failed.splice(0, failed.length - 50); // Keep last 50 failed events
+      // API methods disabled for static site compatibility
+      // All analytics data is stored client-side only
+      
+      sendToAPIDisabled(data, retries = 3) {
+        // This method is disabled to prevent 404 errors in static sites
+        if (window.location.hostname === 'localhost' || window.location.search.includes('debug=true')) {
+          console.log('� Analytics API disabled for static site. Data stored locally only.');
         }
-        localStorage.setItem('everdantia_analytics_failed', JSON.stringify(failed));
       }
 
-      // Method to retry failed events
-      async retryFailedEvents() {
-        const failed = JSON.parse(localStorage.getItem('everdantia_analytics_failed') || '[]');
-        if (failed.length === 0) return;
+      // Retry methods disabled for static site compatibility
+      storeFailedDisabled(data) {
+        // This method is disabled for static sites
+      }
 
-        const toRetry = [...failed];
-        localStorage.removeItem('everdantia_analytics_failed'); // Clear the queue
-
-        for (const event of toRetry) {
-          await this.sendToAPI(event, 1); // Single retry attempt
-          await new Promise(resolve => setTimeout(resolve, 100)); // Small delay between requests
-        }
+      retryFailedEventsDisabled() {
+        // This method is disabled for static sites
       }
 
       // Method to get analytics data (for debugging)
@@ -363,11 +324,8 @@ const {
     window.enableErrorTracking = true;
     window.everdantiaAnalytics = new EverdantiaAnalytics();
 
-    // Retry failed events when page loads
-    setTimeout(() => {
-      window.everdantiaAnalytics?.retryFailedEvents();
-    }, 2000); // Wait 2 seconds for page to fully load
-
+    // Note: API retry disabled for static site compatibility
+    
     // Expose tracking method globally for manual event tracking
     window.trackEvent = (name, properties) => {
       window.everdantiaAnalytics?.trackEvent(name, properties);
@@ -375,13 +333,11 @@ const {
 
     // Console helper for debugging (remove in production)
     if (window.location.hostname === 'localhost' || window.location.hostname.includes('dev') || window.location.search.includes('debug=true')) {
-      console.log('🌿 Everdantia Analytics initialized');
+      console.log('🌿 Everdantia Analytics initialized (client-side only)');
       console.log('Use window.everdantiaAnalytics.getVisitorInfo() to view visitor information');
       console.log('Use window.everdantiaAnalytics.getStoredEvents() to view tracked events');
-      console.log('Use window.everdantiaAnalytics.getFailedEvents() to view failed events');
-      console.log('Use window.everdantiaAnalytics.getSyncStatus() to check sync status');
-      console.log('Use window.everdantiaAnalytics.retryFailedEvents() to retry failed events');
       console.log('Use window.trackEvent("event_name", {prop: "value"}) to track custom events');
+      console.log('📊 Analytics data is stored locally only (static site mode)');
     }
   </script>
 )}
