@@ -244,6 +244,7 @@ const {
 
       sendEvent(data) {
         // Store locally for client-side analytics (static site compatible)
+        // NO API CALLS - STATIC SITE MODE
         if (typeof window !== 'undefined') {
           const events = JSON.parse(localStorage.getItem('everdantia_analytics') || '[]');
           events.push(data);
@@ -253,10 +254,10 @@ const {
           }
           localStorage.setItem('everdantia_analytics', JSON.stringify(events));
           
-          // For static sites, we only store locally
-          // API calls are disabled to prevent 404 errors
+          // Debug logging only - no server communication
           if (window.location.hostname === 'localhost' || window.location.search.includes('debug=true')) {
-            console.log('📊 Analytics event stored locally:', data.type, data);
+            console.log('📊 Analytics event stored locally only:', data.type, data);
+            console.log('🚫 No API calls made (static site mode)');
           }
         }
       }
@@ -320,7 +321,8 @@ const {
       }
     }
 
-    // Initialize analytics
+    // Initialize analytics - UPDATED FOR STATIC SITE COMPATIBILITY
+    // Version: 2.0 - API calls removed for static deployment
     window.enableErrorTracking = true;
     window.everdantiaAnalytics = new EverdantiaAnalytics();
 
