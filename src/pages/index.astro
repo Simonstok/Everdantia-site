@@ -58,7 +58,11 @@ const structuredData = {
 		}
 		</script>
 		
-		<link rel="preload" as="image" href="/images/background/hilltop/hilltop0.webp" />
+		<link rel="preload" as="image" href="/images/background/hilltop/hilltop0-medium.webp" 
+		      imagesrcset="/images/background/hilltop/hilltop0-small.webp 768w,
+		                   /images/background/hilltop/hilltop0-medium.webp 1280w,
+		                   /images/background/hilltop/hilltop0-1920.webp 1920w"
+		      imagesizes="100vw" />
 		
 		<style>
 			* {
@@ -313,9 +317,21 @@ const structuredData = {
 
 		<section style="position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; color: white;">
   <picture>
-    <!-- Use original WebP for best compression -->
-    <source type="image/webp" srcset="/images/background/hilltop/hilltop0.webp" />
-    <!-- Final fallback to original JPEG -->
+    <!-- Responsive WebP sources -->
+    <source type="image/webp" 
+            srcset="/images/background/hilltop/hilltop0-small.webp 768w,
+                    /images/background/hilltop/hilltop0-medium.webp 1280w,
+                    /images/background/hilltop/hilltop0-1920.webp 1920w,
+                    /images/background/hilltop/hilltop0.webp 2560w"
+            sizes="100vw" />
+    <!-- Responsive JPEG fallbacks -->
+    <source type="image/jpeg"
+            srcset="/images/background/hilltop/hilltop0-small.jpg 768w,
+                    /images/background/hilltop/hilltop0-medium.jpg 1280w,
+                    /images/background/hilltop/hilltop0-1920.jpg 1920w,
+                    /images/background/hilltop/hilltop0.jpg 2560w"
+            sizes="100vw" />
+    <!-- Final fallback -->
     <img src="/images/background/hilltop/hilltop0.jpg" alt="Forest background" loading="eager" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;" />
   </picture>
 			<div style="position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2), rgba(0,0,0,0.4)); z-index: -1;"></div>
@@ -684,7 +700,9 @@ const structuredData = {
 			}
 
 			// Preload hero image for faster display (WebP for better performance)
-			preloadImage('/images/background/hilltop/hilltop0.webp');
+			// Preload responsive hero images
+			preloadImage('/images/background/hilltop/hilltop0-medium.webp');
+			preloadImage('/images/background/hilltop/hilltop0-1920.webp');
 
 			// Whitelist form handling
 			const whitelistForm = document.getElementById('whitelistForm');

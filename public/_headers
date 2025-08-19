@@ -1,0 +1,27 @@
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/_astro/*.css
+  Content-Type: text/css; charset=utf-8
+
+/_astro/*.js
+  Content-Type: application/javascript; charset=utf-8
+
+/*.webp
+  Content-Type: image/webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  Content-Type: image/jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Content-Type: image/png
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.svg
+  Content-Type: image/svg+xml
+  Cache-Control: public, max-age=31536000, immutable

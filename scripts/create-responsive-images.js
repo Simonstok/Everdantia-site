@@ -113,7 +113,8 @@ async function createHeroResponsive() {
   const sizes = [
     { suffix: '-small', width: 768, quality: 80 },
     { suffix: '-medium', width: 1280, quality: 80 },
-    { suffix: '', width: 1920, quality: 75 } // Default size
+    { suffix: '-1920', width: 1920, quality: 75 }, // Large size
+    { suffix: '', width: 1920, quality: 75 } // Default size (keep original)
   ];
   
   for (const size of sizes) {

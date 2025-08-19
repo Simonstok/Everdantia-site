@@ -4,6 +4,9 @@
 const CACHE_NAME = 'everdantia-v1';
 const STATIC_ASSETS = [
   '/',
+  '/images/background/hilltop/hilltop0-small.webp',
+  '/images/background/hilltop/hilltop0-medium.webp',
+  '/images/background/hilltop/hilltop0-1920.webp',
   '/images/background/hilltop/hilltop0.webp',
   '/images/blog/oak.webp'
 ];
