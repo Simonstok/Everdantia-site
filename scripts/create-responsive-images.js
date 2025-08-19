@@ -38,8 +38,8 @@ async function createResponsiveImages() {
     // Create optimized versions for different screen densities
     const sizes = [
       { suffix: '-small', width: 300, height: 300, quality: 85 },
-      { suffix: '-medium', width: 600, height: 600, quality: 85 },
-      { suffix: '', width: 800, height: 800, quality: 80 } // Default size
+      { suffix: '-medium', width: 600, height: 600, quality: 85 }
+      // Remove default size that conflicts with original
     ];
     
     for (const size of sizes) {
@@ -113,8 +113,8 @@ async function createHeroResponsive() {
   const sizes = [
     { suffix: '-small', width: 768, quality: 80 },
     { suffix: '-medium', width: 1280, quality: 80 },
-    { suffix: '-1920', width: 1920, quality: 75 }, // Large size
-    { suffix: '', width: 1920, quality: 75 } // Default size (keep original)
+    { suffix: '-1920', width: 1920, quality: 75 } // Large size
+    // Remove default size that conflicts with original
   ];
   
   for (const size of sizes) {

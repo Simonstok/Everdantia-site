@@ -37,13 +37,15 @@ const currentUrl = new URL(Astro.url.pathname, Astro.site);
 const canonicalUrl = canonical || currentUrl.href;
 
 // Ensure title is properly formatted
-const pageTitle = title.includes('Everdantia') ? title : `${title} | Everdantia`;
+const pageTitle = title && title.includes('Everdantia') ? title : `${title || 'Everdantia'} | Everdantia`;
 
 // Clean description (max 160 characters for optimal SEO)
-const cleanDescription = description.length > 160 ? description.substring(0, 157) + '...' : description;
+const cleanDescription = description && description.length > 160 ? description.substring(0, 157) + '...' : (description || 'A digital forest where NFTs support real-world conservation.');
 
 // Build full image URL for OG tags
-const fullOgImage = ogImage.startsWith('http') ? ogImage : `${Astro.site?.origin || 'https://everdantia.art'}${ogImage}`;
+const fullOgImage = ogImage && ogImage.startsWith('http') 
+  ? ogImage 
+  : `${Astro.site?.origin || 'https://everdantia.art'}${ogImage || '/og-image.png'}`;
 ---
 
 <!-- Primary Meta Tags -->
