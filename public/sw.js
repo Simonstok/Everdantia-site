@@ -1,7 +1,7 @@
 // Simple service worker for Everdantia
 // This prevents 404 errors when browsers try to register the service worker
 
-const CACHE_NAME = 'everdantia-v1';
+const CACHE_NAME = 'everdantia-v2-no-analytics';
 const STATIC_ASSETS = [
   '/',
   '/images/background/hilltop/hilltop0-small.webp',
