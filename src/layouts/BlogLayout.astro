@@ -1,5 +1,4 @@
 ---
-import Analytics from '../components/Analytics.astro';
 import SEO from '../components/SEO.astro';
 import { socialLinks } from '../config/social.ts';
 
@@ -106,9 +105,6 @@ const structuredData = {
         mainEntityOfPage: canonical
       })}
     </script>
-    
-    <!-- Analytics and Performance Monitoring -->
-    <Analytics enableAnalytics={true} enableErrorTracking={true} />
     
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
     <style>

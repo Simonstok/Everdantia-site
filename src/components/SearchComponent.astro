@@ -249,17 +249,14 @@ const sizeClasses = {
       }
     });
 
-    // Add search analytics tracking
+    // Basic search tracking - simplified
     searchInputs.forEach(input => {
       const form = input.closest('form');
       if (form) {
         form.addEventListener('submit', (e) => {
           const query = input.value.trim();
-          if (query && typeof window !== 'undefined' && window.gtag) {
-            window.gtag('event', 'search', {
-              search_term: query,
-              custom_parameter: 'header_search'
-            });
+          if (query) {
+            console.log('Search performed:', query);
           }
         });
       }

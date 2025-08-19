@@ -1,5 +1,4 @@
 ---
-import Analytics from '../components/Analytics.astro';
 import SEO from '../components/SEO.astro';
 import { socialLinks } from '../config/social.ts';
 
@@ -342,13 +341,10 @@ const description = 'The path you seek has grown over with time. Explore the liv
 			</div>
 		</div>
 
-		<Analytics enableAnalytics={true} enableErrorTracking={true} />
-
 		<script>
-			// Track 404 errors for analytics
-			if (typeof window !== 'undefined' && window.gtag) {
-				window.gtag('event', 'page_view', {
-					page_title: 'Lost in the Forest - 404',
+			// Track 404 errors - basic logging only
+			if (typeof window !== 'undefined') {
+				console.log('404 Page View: Lost in the Forest');
 					page_location: window.location.href,
 					custom_parameter: '404_error'
 				});

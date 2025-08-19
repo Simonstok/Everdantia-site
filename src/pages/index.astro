@@ -1,5 +1,4 @@
 ---
-import Analytics from '../components/Analytics.astro';
 import SEO from '../components/SEO.astro';
 import SearchComponent from '../components/SearchComponent.astro';
 import { socialLinks, socialLinksArray } from '../config/social.ts';
@@ -748,7 +747,5 @@ const structuredData = {
 			});
 		</script>
 
-		<!-- Move analytics just before closing body to avoid early main-thread work -->
-		<Analytics enableAnalytics={true} enableErrorTracking={true} />
 	</body>
 </html>

@@ -1,5 +1,4 @@
 ---
-import Analytics from '../components/Analytics.astro';
 import SEO from '../components/SEO.astro';
 import SearchComponent from '../components/SearchComponent.astro';
 import { socialLinks } from '../config/social.ts';
@@ -713,9 +712,6 @@ const description = 'Find answers to common questions about Everdantia, our NFT 
 				</div>
 			</section>
 		</main>
-
-		<Analytics enableAnalytics={true} enableErrorTracking={true} />
-
 		<script>
 			// FAQ accordion functionality
 			document.addEventListener('DOMContentLoaded', () => {
@@ -756,16 +752,11 @@ const description = 'Find answers to common questions about Everdantia, our NFT 
 					});
 				});
 
-				// Analytics tracking for FAQ interactions
+				// FAQ interaction tracking - simplified
 				faqQuestions.forEach((question, index) => {
 					question.addEventListener('click', () => {
-						if (typeof window !== 'undefined' && window.gtag) {
-							window.gtag('event', 'faq_interaction', {
-								faq_question: question.textContent.trim(),
-								question_index: index,
-								custom_parameter: 'faq_click'
-							});
-						}
+						// Basic console logging for development
+						console.log('FAQ interaction:', question.textContent.trim());
 					});
 				});
 			});
