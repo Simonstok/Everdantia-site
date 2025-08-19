@@ -692,17 +692,6 @@ const structuredData = {
 				});
 			});
 
-			// Performance optimization: Preload critical images
-			function preloadImage(src) {
-				const img = new Image();
-				img.src = src;
-			}
-
-			// Preload hero image for faster display (WebP for better performance)
-			// Preload responsive hero images
-			preloadImage('/images/background/hilltop/hilltop0-medium.webp');
-			preloadImage('/images/background/hilltop/hilltop0-1920.webp');
-
 			// Whitelist form handling
 			const whitelistForm = document.getElementById('whitelistForm');
 			const formMessage = document.getElementById('formMessage');
