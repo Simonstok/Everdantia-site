@@ -1,4 +1,6 @@
 ---
+import GlobalTypography from '../components/GlobalTypography.astro';
+
 const { 
   title = "Everdantia – A Living Forest of Care", 
   description = "Everdantia is a storybook world where NFTs are living trees rooted in care, restoration, and ecological Magic.", 
@@ -39,6 +41,7 @@ const absoluteImage = image.startsWith('http') ? image : `https://everdantia.art
     <meta name="twitter:image" content={absoluteImage} />
   </head>
   <body>
+    <GlobalTypography />
     <slot />
   </body>
 </html>

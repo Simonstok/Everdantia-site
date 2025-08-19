@@ -335,12 +335,14 @@ const structuredData = {
   </picture>
 			<div style="position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2), rgba(0,0,0,0.4)); z-index: -1;"></div>
 			
-			<h1 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; margin-bottom: 1.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3); max-width: 1000px; line-height: 1.1;">
+			<h1 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; margin-bottom: 1.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3); max-width: 1000px; line-height: 1.1; letter-spacing: -0.02em;">
 				"A living world, rooted in imagination."
 			</h1>
-			<p style="font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 400; color: rgba(255,255,255,0.9); margin-bottom: 3rem; max-width: 600px; line-height: 1.6;">
-				Enter Everdantia — where digital brushstrokes bring nature's magic to life.
-			</p>
+			<div style="max-width: 60ch; margin: 0 auto;">
+				<p style="font-size: clamp(1.125rem, 2vw, 1.5rem); font-weight: 400; color: rgba(255,255,255,0.95); margin-bottom: 3rem; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">
+					Enter Everdantia — where digital brushstrokes bring nature's magic to life.
+				</p>
+			</div>
 			<button style="background: rgba(255,255,255,0.95); color: #6b4f2a; font-size: 1rem; font-weight: 500; padding: 1.2rem 3rem; border-radius: 999px; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 4px 24px rgba(0,0,0,0.15); transition: all 0.3s ease;">
 				Explore the forest
 			</button>
@@ -348,13 +350,18 @@ const structuredData = {
 
 		<section id="trees" style="padding: 8rem 2rem; background: linear-gradient(180deg, #f8f6f2 0%, #e8e4db 100%);">
 			<div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-				<h2 class="fade-in" style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; color: #6b4f2a; margin-bottom: 1.5rem;">
+				<h2 class="fade-in" style="font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; color: #6b4f2a; margin-bottom: 1.5rem; max-width: 800px; margin-left: auto; margin-right: auto;">
 					The Founding Trees — Early Visions
 				</h2>
-				<p class="fade-in" style="font-size: 1.1rem; line-height: 1.6; color: #4d6b3c; max-width: 800px; margin: 0 auto 4rem;">
-					Behold the ancient guardians of Everdantia, each with its own story and unique characteristics. 
-					These legendary trees form the foundation of our enchanted realm. <em style="color: #8b6914; font-style: italic;">The visions shown here are early glimpses — the true forms of each tree are still taking shape in the mystical mists of creation.</em>
-				</p>
+				<div class="fade-in prose" style="max-width: 65ch; margin: 0 auto 4rem; text-align: left;">
+					<p style="font-size: 1.125rem; line-height: 1.7; color: #2d4a22; margin-bottom: 1.5rem;">
+						Behold the ancient guardians of Everdantia, each with its own story and unique characteristics. 
+						These legendary trees form the foundation of our enchanted realm.
+					</p>
+					<p style="font-size: 1rem; line-height: 1.6; color: #6b7f5c; font-style: italic;">
+						The visions shown here are early glimpses — the true forms of each tree are still taking shape in the mystical mists of creation.
+					</p>
+				</div>
 				<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
 					<div class="tree-card" style="background: white; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); transition: all 0.3s ease;">
 						<div style="position: relative; height: 300px;">
@@ -374,12 +381,14 @@ const structuredData = {
 							</div>
 						</div>
 						<div style="padding: 2rem;">
-							<h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: #6b4f2a; margin-bottom: 1rem;">
+							<h3 class="card-title" style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: #6b4f2a; margin-bottom: 1rem; line-height: 1.3;">
 								Whisperroot of the Hollow
 							</h3>
-							<p style="color: #4d6b3c; line-height: 1.6;">
-								In the quietest part of the forest, where winds dare not wander, Whisperroot of the Hollow listens to the dreams of soil. This tree's roots stretch deep into forgotten aquifers, drawing stories from below. Birds nest in its hollow trunk, believing it to be a portal to ancient voices.
-							</p>
+							<div class="card-content">
+								<p style="color: #2d4a22; line-height: 1.6; font-size: 1rem; max-width: 45ch;">
+									In the quietest part of the forest, where winds dare not wander, Whisperroot of the Hollow listens to the dreams of soil. This tree's roots stretch deep into forgotten aquifers, drawing stories from below. Birds nest in its hollow trunk, believing it to be a portal to ancient voices.
+								</p>
+							</div>
 						</div>
 					</div>
 					<div class="tree-card" style="background: white; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); transition: all 0.3s ease;">
@@ -399,12 +408,14 @@ const structuredData = {
 							</div>
 						</div>
 						<div style="padding: 2rem;">
-							<h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: #6b4f2a; margin-bottom: 1rem;">
+							<h3 class="card-title" style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: #6b4f2a; margin-bottom: 1rem; line-height: 1.3;">
 								Gloomshade Elder
 							</h3>
-							<p style="color: #4d6b3c; line-height: 1.6;">
-								Veiled in perpetual twilight beneath the dense canopy, the Gloomshade Elder is said to bloom only during eclipses. Its leaves shimmer with an oily sheen, and its scent induces visions of the forest's first dawn. Many fear to approach it, but those who do often return changed — softer, but with eyes like mirrors.
-							</p>
+							<div class="card-content">
+								<p style="color: #2d4a22; line-height: 1.6; font-size: 1rem; max-width: 45ch;">
+									Veiled in perpetual twilight beneath the dense canopy, the Gloomshade Elder is said to bloom only during eclipses. Its leaves shimmer with an oily sheen, and its scent induces visions of the forest's first dawn. Many fear to approach it, but those who do often return changed — softer, but with eyes like mirrors.
+								</p>
+							</div>
 						</div>
 					</div>
 					<div class="tree-card" style="background: white; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); transition: all 0.3s ease;">
@@ -424,12 +435,14 @@ const structuredData = {
 							</div>
 						</div>
 						<div style="padding: 2rem;">
-							<h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: #6b4f2a; margin-bottom: 1rem;">
+							<h3 class="card-title" style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: #6b4f2a; margin-bottom: 1rem; line-height: 1.3;">
 								Crown of Return
 							</h3>
-							<p style="color: #4d6b3c; line-height: 1.6;">
-								The final tree in the Genesis circle, Crown of Return is both an ending and a beginning. It is planted in soil mixed with ash and flower petals, symbolizing rebirth. Birds gather at its crown each solstice, and its bark is etched with motifs only visible under starlight. It listens for the moment the world is ready to begin again.
-							</p>
+							<div class="card-content">
+								<p style="color: #2d4a22; line-height: 1.6; font-size: 1rem; max-width: 45ch;">
+									The final tree in the Genesis circle, Crown of Return is both an ending and a beginning. It is planted in soil mixed with ash and flower petals, symbolizing rebirth. Birds gather at its crown each solstice, and its bark is etched with motifs only visible under starlight. It listens for the moment the world is ready to begin again.
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
