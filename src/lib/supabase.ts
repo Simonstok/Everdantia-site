@@ -1,137 +1,116 @@
-// Supabase client configuration
+// Supabase client configuration for newsletters and forms only
 import { createClient } from '@supabase/supabase-js';
 
-// Environment variables - these should be loaded from .env (with ANALYTICS_ prefix to avoid conflicts)
-const supabaseUrl = process.env.ANALYTICS_SUPABASE_URL;
-const supabaseAnonKey = process.env.ANALYTICS_SUPABASE_ANON_KEY;
-const supabaseServiceKey = process.env.ANALYTICS_SUPABASE_SERVICE_KEY;
+// Email/Newsletter Supabase Environment Variables 
+const emailSupabaseUrl = process.env.SUPABASE_URL;
+const emailSupabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
-// Validate required environment variables
-if (!supabaseUrl || !supabaseAnonKey || !supabaseServiceKey) {
-  throw new Error('Missing required Supabase environment variables. Please check your .env file.');
+// Validate email Supabase environment variables
+if (!emailSupabaseUrl || !emailSupabaseAnonKey) {
+  console.warn('Missing email Supabase environment variables. Newsletter and form features may not work.');
 }
 
-// Client for public operations (client-side)
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Client for email/newsletter operations only
+export const supabase = emailSupabaseUrl && emailSupabaseAnonKey 
+  ? createClient(emailSupabaseUrl, emailSupabaseAnonKey)
+  : null;
 
-// Client for server-side operations (API routes)
-export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false
-  }
-});
-
-// Database schema types
-export interface AnalyticsEvent {
+// Newsletter subscription interface
+export interface NewsletterSubscription {
   id?: string;
-  type: string;
-  name?: string;
-  properties?: any;
-  url: string;
-  referrer?: string;
-  timestamp: number;
-  session_id: string;
-  visitor_id?: string;
-  is_first_visit?: boolean;
-  user_agent?: string;
-  viewport?: {
-    width: number;
-    height: number;
-  };
-  ip?: string;
-  server_timestamp?: number;
-  created_at?: string;
+  email: string;
+  subscribed_at?: string;
+  is_active?: boolean;
 }
 
-// Analytics service class
-export class AnalyticsService {
-  static async saveEvent(event: AnalyticsEvent) {
+// Contact form interface  
+export interface ContactForm {
+  id?: string;
+  name: string;
+  email: string;
+  message: string;
+  submitted_at?: string;
+}
+
+// Newsletter service (email Supabase only)
+export class NewsletterService {
+  static async subscribe(email: string) {
+    if (!supabase) {
+      console.error('Newsletter service not available - missing Supabase configuration');
+      return { success: false, error: 'Service not available' };
+    }
+
     try {
-      const { data, error } = await supabaseAdmin
-        .from('analytics_events')
+      const { data, error } = await supabase
+        .from('newsletter_subscriptions')
         .insert([{
-          type: event.type,
-          name: event.name,
-          properties: event.properties,
-          url: event.url,
-          referrer: event.referrer,
-          timestamp: event.timestamp,
-          session_id: event.session_id,
-          visitor_id: event.visitor_id,
-          is_first_visit: event.is_first_visit,
-          user_agent: event.user_agent,
-          viewport: event.viewport,
-          ip: event.ip,
-          server_timestamp: event.server_timestamp
+          email: email,
+          subscribed_at: new Date().toISOString(),
+          is_active: true
         }]);
 
       if (error) {
-        console.error('Supabase analytics error:', error);
+        console.error('Newsletter subscription error:', error);
         return { success: false, error };
       }
 
       return { success: true, data };
     } catch (error) {
-      console.error('Analytics service error:', error);
+      console.error('Newsletter service error:', error);
       return { success: false, error };
     }
   }
 
-  static async getEvents(limit = 100) {
+  static async unsubscribe(email: string) {
+    if (!supabase) {
+      return { success: false, error: 'Service not available' };
+    }
+
     try {
-      const { data, error } = await supabaseAdmin
-        .from('analytics_events')
-        .select('*')
-        .order('timestamp', { ascending: false })
-        .limit(limit);
+      const { data, error } = await supabase
+        .from('newsletter_subscriptions')
+        .update({ is_active: false })
+        .eq('email', email);
 
       if (error) {
-        console.error('Supabase query error:', error);
+        console.error('Newsletter unsubscribe error:', error);
         return { success: false, error };
       }
 
       return { success: true, data };
     } catch (error) {
-      console.error('Analytics query error:', error);
+      console.error('Newsletter unsubscribe error:', error);
       return { success: false, error };
     }
   }
+}
 
-  static async getStats(timeframe = '24h') {
+// Contact form service (email Supabase only)
+export class ContactService {
+  static async submitForm(form: ContactForm) {
+    if (!supabase) {
+      console.error('Contact service not available - missing Supabase configuration');
+      return { success: false, error: 'Service not available' };
+    }
+
     try {
-      const now = new Date();
-      const timeframeMs = timeframe === '24h' ? 24 * 60 * 60 * 1000 : 
-                         timeframe === '7d' ? 7 * 24 * 60 * 60 * 1000 :
-                         timeframe === '30d' ? 30 * 24 * 60 * 60 * 1000 :
-                         24 * 60 * 60 * 1000;
-      
-      const since = new Date(now.getTime() - timeframeMs);
-
-      const { data, error } = await supabaseAdmin
-        .from('analytics_events')
-        .select('type, name, session_id, visitor_id, is_first_visit')
-        .gte('timestamp', since.getTime());
+      const { data, error } = await supabase
+        .from('contact_forms')
+        .insert([{
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          submitted_at: new Date().toISOString()
+        }]);
 
       if (error) {
-        console.error('Supabase stats error:', error);
+        console.error('Contact form submission error:', error);
         return { success: false, error };
       }
 
-      // Calculate stats
-      const stats = {
-        totalEvents: data.length,
-        pageViews: data.filter(e => e.type === 'pageview').length,
-        clicks: data.filter(e => e.type === 'event' && e.name === 'click').length,
-        errors: data.filter(e => e.type === 'event' && e.name?.includes('error')).length,
-        uniqueSessions: Array.from(new Set(data.map(e => e.session_id))).length,
-        uniqueVisitors: Array.from(new Set(data.map(e => e.visitor_id).filter(Boolean))).length,
-        newVisitors: data.filter(e => e.is_first_visit).length
-      };
-
-      return { success: true, data: stats };
+      return { success: true, data };
     } catch (error) {
-      console.error('Analytics stats error:', error);
+      console.error('Contact form service error:', error);
       return { success: false, error };
     }
   }
