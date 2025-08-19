@@ -1,0 +1,203 @@
+---
+// Search component that can be embedded in navigation or other pages
+const { placeholder = "Search...", size = "medium" } = Astro.props;
+
+const sizeClasses = {
+  small: "search-small",
+  medium: "search-medium", 
+  large: "search-large"
+};
+---
+
+<div class={`search-component ${sizeClasses[size]}`}>
+  <form class="search-form" action="/search" method="GET">
+    <div class="search-input-group">
+      <input 
+        type="text" 
+        name="q"
+        class="search-input"
+        placeholder={placeholder}
+        autocomplete="off"
+        aria-label="Search Everdantia"
+      />
+      <button type="submit" class="search-button" aria-label="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+      </button>
+    </div>
+  </form>
+</div>
+
+<style>
+  .search-component {
+    position: relative;
+  }
+
+  .search-form {
+    width: 100%;
+  }
+
+  .search-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .search-input-group:focus-within {
+    border-color: #48bb78;
+    box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+    background: white;
+  }
+
+  .search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0.9rem;
+    color: #4d6b3c;
+    padding: 0.75rem 1rem;
+    border-radius: 50px;
+  }
+
+  .search-input::placeholder {
+    color: #9ca3af;
+  }
+
+  .search-button {
+    background: none;
+    border: none;
+    padding: 0.75rem;
+    cursor: pointer;
+    color: #6b7280;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.25rem;
+  }
+
+  .search-button:hover {
+    background: rgba(72, 187, 120, 0.1);
+    color: #48bb78;
+    transform: scale(1.05);
+  }
+
+  .search-button:active {
+    transform: scale(0.95);
+  }
+
+  /* Size variants */
+  .search-small .search-input {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .search-small .search-button {
+    padding: 0.5rem;
+  }
+
+  .search-small .search-button svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .search-medium .search-input {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .search-medium .search-button {
+    padding: 0.75rem;
+  }
+
+  .search-large .search-input {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  .search-large .search-button {
+    padding: 1rem;
+  }
+
+  .search-large .search-button svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .search-input {
+      font-size: 16px; /* Prevents zoom on iOS */
+    }
+  }
+
+  /* Dark theme variant (for dark backgrounds) */
+  .search-component.dark .search-input-group {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .search-component.dark .search-input {
+    color: white;
+  }
+
+  .search-component.dark .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .search-component.dark .search-button {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .search-component.dark .search-input-group:focus-within {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #48bb78;
+  }
+
+  .search-component.dark .search-button:hover {
+    background: rgba(72, 187, 120, 0.2);
+    color: #48bb78;
+  }
+</style>
+
+<script>
+  // Add keyboard shortcut for search (Ctrl/Cmd + K)
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInputs = document.querySelectorAll('.search-component .search-input');
+    
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = searchInputs[0]; // Focus first search input
+        if (searchInput) {
+          searchInput.focus();
+        }
+      }
+    });
+
+    // Add search analytics tracking
+    searchInputs.forEach(input => {
+      const form = input.closest('form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          const query = input.value.trim();
+          if (query && typeof window !== 'undefined' && window.gtag) {
+            window.gtag('event', 'search', {
+              search_term: query,
+              custom_parameter: 'header_search'
+            });
+          }
+        });
+      }
+    });
+  });
+</script>

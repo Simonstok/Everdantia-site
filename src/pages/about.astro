@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Analytics from '../components/Analytics.astro';
 import { socialLinks } from '../config/social.ts';
+import SearchComponent from '../components/SearchComponent.astro';
 ---
 <Layout>
 <html lang="en">
@@ -258,6 +259,11 @@ import { socialLinks } from '../config/social.ts';
 			<p style="font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 400; color: rgba(255,255,255,0.9); margin-bottom: 3rem; max-width: 800px; line-height: 1.6;">
 				In a world where forests fall silent and biodiversity fades into memory, a digital forest awakens.
 			</p>
+			
+			<!-- Search Component -->
+			<div style="margin-bottom: 2rem; max-width: 400px;">
+				<SearchComponent size="medium" />
+			</div>
 		</section>
 
 		<section style="padding: 8rem 2rem;">

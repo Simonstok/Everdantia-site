@@ -1,5 +1,6 @@
 ---
 import layout from '../layouts/layout.astro';
+import SearchComponent from '../components/SearchComponent.astro';
 
 const blogPosts = [
   {
@@ -445,6 +446,11 @@ const blogPosts = [
 			<div class="hero-content">
 				<h1>Tales from Everdantia</h1>
 				<p>Journey through stories of magic, nature, and digital conservation</p>
+				
+				<!-- Search Component -->
+				<div style="margin-top: 2rem; max-width: 400px; margin-left: auto; margin-right: auto;">
+					<SearchComponent size="medium" />
+				</div>
 			</div>
 		</section>
 

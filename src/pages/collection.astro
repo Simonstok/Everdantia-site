@@ -1,6 +1,7 @@
 ---
 import Analytics from '../components/Analytics.astro';
 import SEO from '../components/SEO.astro';
+import SearchComponent from '../components/SearchComponent.astro';
 
 const title = "Genesis Collection — Coming Soon | Everdantia";
 const description = "The Genesis Collection of Everdantia is still growing. Return soon to discover the first mystical trees.";
@@ -48,6 +49,11 @@ const structuredData = {
           Return soon to witness the first sprouts of the enchanted forest.
         </p>
         <div class="sprout-emoji">🌿</div>
+        
+        <!-- Search Component for content discovery -->
+        <div style="margin: 2rem 0; max-width: 400px; margin-left: auto; margin-right: auto;">
+          <SearchComponent size="medium" />
+        </div>
         
         <div class="back-link">
           <a href="/">← Return to the Grove</a>

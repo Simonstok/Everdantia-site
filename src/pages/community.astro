@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { socialLinks, socialLinksArray } from '../config/social.ts';
+import SearchComponent from '../components/SearchComponent.astro';
 ---
 
 <html lang="en">
@@ -284,6 +285,11 @@ import { socialLinks, socialLinksArray } from '../config/social.ts';
 			<div class="hero-content">
 				<h1>Join Our Community</h1>
 				<p>Connect with fellow forest guardians, share your journey, and help shape the future of Everdantia</p>
+				
+				<!-- Search Component -->
+				<div style="margin-top: 2rem; max-width: 400px; margin-left: auto; margin-right: auto;">
+					<SearchComponent size="medium" />
+				</div>
 			</div>
 		</section>
 

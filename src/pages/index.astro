@@ -1,6 +1,7 @@
 ---
 import Analytics from '../components/Analytics.astro';
 import SEO from '../components/SEO.astro';
+import SearchComponent from '../components/SearchComponent.astro';
 import { socialLinks, socialLinksArray } from '../config/social.ts';
 
 // Homepage structured data
@@ -282,6 +283,9 @@ const structuredData = {
 				<a href="#trees" style="color: white; text-decoration: none; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Trees</a>
 				<a href="#mint" style="color: white; text-decoration: none; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Mint</a>
 				<a href="/community" style="color: white; text-decoration: none; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Community</a>
+				<div style="width: 200px;">
+					<SearchComponent placeholder="Search forest..." size="small" />
+				</div>
 			</div>
 			
 			<div class="mobile-menu-toggle" id="mobileMenuToggle">
@@ -293,6 +297,7 @@ const structuredData = {
 
 		<div class="mobile-menu" id="mobileMenu">
 			<ul style="list-style: none; padding: 0; margin: 0; width: 100%;">
+				<li><a href="/search">🔍 Search</a></li>
 				<li><a href="#story">Story</a></li>
 				<li><a href="/about">About</a></li>
 				<li><a href="/blog">Blog</a></li>

@@ -1,0 +1,369 @@
+---
+import Analytics from '../components/Analytics.astro';
+import SEO from '../components/SEO.astro';
+import { socialLinks } from '../config/social.ts';
+
+const title = 'Lost in the Forest - Page Not Found | Everdantia';
+const description = 'The path you seek has grown over with time. Explore the living world of Everdantia and discover new destinations.';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		
+		<SEO 
+			title={title}
+			description={description}
+			noindex={true}
+		/>
+		
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+		
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: 'Inter', sans-serif;
+				background: linear-gradient(135deg, #1a2e1a 0%, #2d4a2d 50%, #1a2e1a 100%);
+				color: #e8f4e8;
+				min-height: 100vh;
+				overflow-x: hidden;
+				position: relative;
+			}
+
+			/* Animated forest background */
+			.forest-bg {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: 
+					radial-gradient(circle at 20% 80%, rgba(72, 187, 120, 0.1) 0%, transparent 50%),
+					radial-gradient(circle at 80% 20%, rgba(72, 187, 120, 0.1) 0%, transparent 50%),
+					radial-gradient(circle at 40% 40%, rgba(72, 187, 120, 0.05) 0%, transparent 50%);
+				z-index: -2;
+			}
+
+			/* Floating particles */
+			.particles {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: -1;
+				pointer-events: none;
+			}
+
+			.particle {
+				position: absolute;
+				width: 4px;
+				height: 4px;
+				background: rgba(72, 187, 120, 0.3);
+				border-radius: 50%;
+				animation: float 6s ease-in-out infinite;
+			}
+
+			.particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+			.particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+			.particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+			.particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+			.particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+			.particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+			.particle:nth-child(7) { left: 70%; animation-delay: 0.5s; }
+			.particle:nth-child(8) { left: 80%; animation-delay: 1.5s; }
+			.particle:nth-child(9) { left: 90%; animation-delay: 2.5s; }
+
+			@keyframes float {
+				0%, 100% { transform: translateY(100vh) scale(0); opacity: 0; }
+				10% { opacity: 1; }
+				50% { transform: translateY(50vh) scale(1); opacity: 0.7; }
+				90% { opacity: 1; }
+			}
+
+			/* Main content */
+			.container {
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				padding: 2rem;
+				position: relative;
+				z-index: 1;
+			}
+
+			.error-content {
+				backdrop-filter: blur(20px);
+				background: rgba(255, 255, 255, 0.05);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: 24px;
+				padding: 3rem;
+				max-width: 600px;
+				width: 100%;
+				box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+				animation: fadeInUp 1s ease-out;
+			}
+
+			@keyframes fadeInUp {
+				from {
+					opacity: 0;
+					transform: translateY(30px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			.error-emoji {
+				font-size: 4rem;
+				margin-bottom: 1.5rem;
+				display: block;
+				animation: sway 3s ease-in-out infinite;
+			}
+
+			@keyframes sway {
+				0%, 100% { transform: rotate(-5deg); }
+				50% { transform: rotate(5deg); }
+			}
+
+			.error-title {
+				font-family: 'Cormorant Garamond', serif;
+				font-size: 2.5rem;
+				font-weight: 700;
+				color: #e8f4e8;
+				margin-bottom: 1rem;
+				line-height: 1.2;
+			}
+
+			.error-subtitle {
+				font-size: 1.5rem;
+				color: #48bb78;
+				margin-bottom: 1.5rem;
+				font-weight: 500;
+			}
+
+			.error-description {
+				font-size: 1.1rem;
+				color: #a0c4a0;
+				line-height: 1.6;
+				margin-bottom: 2rem;
+			}
+
+			.actions {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+				align-items: center;
+			}
+
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 1rem 2rem;
+				background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+				color: white;
+				text-decoration: none;
+				border-radius: 50px;
+				font-weight: 500;
+				transition: all 0.3s ease;
+				border: none;
+				cursor: pointer;
+				font-size: 1rem;
+				min-width: 200px;
+				justify-content: center;
+			}
+
+			.btn:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 8px 24px rgba(72, 187, 120, 0.3);
+				background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+			}
+
+			.btn-secondary {
+				background: rgba(255, 255, 255, 0.1);
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				color: #e8f4e8;
+			}
+
+			.btn-secondary:hover {
+				background: rgba(255, 255, 255, 0.2);
+				border-color: rgba(255, 255, 255, 0.3);
+				box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+			}
+
+			.helpful-links {
+				margin-top: 2rem;
+				padding-top: 2rem;
+				border-top: 1px solid rgba(255, 255, 255, 0.1);
+			}
+
+			.helpful-links h3 {
+				font-family: 'Cormorant Garamond', serif;
+				font-size: 1.3rem;
+				color: #e8f4e8;
+				margin-bottom: 1rem;
+			}
+
+			.link-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+				gap: 1rem;
+			}
+
+			.quick-link {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				color: #a0c4a0;
+				text-decoration: none;
+				padding: 0.75rem;
+				border-radius: 12px;
+				transition: all 0.3s ease;
+				background: rgba(255, 255, 255, 0.05);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				font-size: 0.9rem;
+			}
+
+			.quick-link:hover {
+				color: #48bb78;
+				background: rgba(72, 187, 120, 0.1);
+				border-color: rgba(72, 187, 120, 0.3);
+				transform: translateY(-1px);
+			}
+
+			@media (max-width: 768px) {
+				.error-content {
+					padding: 2rem;
+					margin: 1rem;
+				}
+
+				.error-title {
+					font-size: 2rem;
+				}
+
+				.error-subtitle {
+					font-size: 1.2rem;
+				}
+
+				.error-description {
+					font-size: 1rem;
+				}
+
+				.actions {
+					gap: 0.75rem;
+				}
+
+				.btn {
+					padding: 0.875rem 1.5rem;
+					font-size: 0.9rem;
+					min-width: 180px;
+				}
+
+				.link-grid {
+					grid-template-columns: 1fr;
+					gap: 0.75rem;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="forest-bg"></div>
+		
+		<div class="particles">
+			<div class="particle"></div>
+			<div class="particle"></div>
+			<div class="particle"></div>
+			<div class="particle"></div>
+			<div class="particle"></div>
+			<div class="particle"></div>
+			<div class="particle"></div>
+			<div class="particle"></div>
+			<div class="particle"></div>
+		</div>
+
+		<div class="container">
+			<div class="error-content">
+				<span class="error-emoji">🌲</span>
+				<h1 class="error-title">Lost in the Forest</h1>
+				<p class="error-subtitle">404 - Path Not Found</p>
+				<p class="error-description">
+					The path you seek has grown over with time. Like the ancient trails of Everdantia, 
+					some routes fade back into the forest, waiting to be rediscovered. Let us guide you 
+					to a new destination.
+				</p>
+
+				<div class="actions">
+					<a href="/" class="btn">
+						🏠 Return to the Grove
+					</a>
+					<button onclick="history.back()" class="btn btn-secondary">
+						↩️ Retrace Your Steps
+					</button>
+				</div>
+
+				<div class="helpful-links">
+					<h3>Explore the Living World</h3>
+					<div class="link-grid">
+						<a href="/collection" class="quick-link">
+							🌳 Tree Collection
+						</a>
+						<a href="/blog" class="quick-link">
+							📖 Forest Chronicles
+						</a>
+						<a href="/community" class="quick-link">
+							👥 Community
+						</a>
+						<a href="/about" class="quick-link">
+							ℹ️ About Everdantia
+						</a>
+						<a href={socialLinks.discord} target="_blank" rel="noopener noreferrer" class="quick-link">
+							💬 Discord
+						</a>
+						<a href="mailto:everdantia@gmail.com" class="quick-link">
+							✉️ Contact
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<Analytics enableAnalytics={true} enableErrorTracking={true} />
+
+		<script>
+			// Track 404 errors for analytics
+			if (typeof window !== 'undefined' && window.gtag) {
+				window.gtag('event', 'page_view', {
+					page_title: 'Lost in the Forest - 404',
+					page_location: window.location.href,
+					custom_parameter: '404_error'
+				});
+			}
+
+			// Add some interactive sparkle effect on hover
+			document.querySelectorAll('.quick-link, .btn').forEach(link => {
+				link.addEventListener('mouseenter', function() {
+					this.style.transform = 'translateY(-2px)';
+				});
+				
+				link.addEventListener('mouseleave', function() {
+					this.style.transform = 'translateY(0)';
+				});
+			});
+		</script>
+	</body>
+</html>

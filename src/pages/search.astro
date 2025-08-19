@@ -1,0 +1,642 @@
+---
+import Analytics from '../components/Analytics.astro';
+import SEO from '../components/SEO.astro';
+import { socialLinks } from '../config/social.ts';
+
+const title = 'Search the Forest | Everdantia';
+const description = 'Discover content across Everdantia - from tree lore and conservation stories to community updates and collection details.';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		
+		<SEO 
+			title={title}
+			description={description}
+			keywords="search, everdantia, trees, blog, collection, conservation, lore"
+		/>
+		
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+		
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: 'Inter', sans-serif;
+				background: linear-gradient(135deg, #f8f6f2 0%, #e8f4e8 100%);
+				color: #4d6b3c;
+				min-height: 100vh;
+			}
+
+			/* Header */
+			.header {
+				background: linear-gradient(135deg, #2d4a2d 0%, #1a2e1a 100%);
+				color: white;
+				padding: 2rem 0;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.header::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: url('/images/background/hilltop/hilltop0.jpg') center/cover;
+				opacity: 0.1;
+				z-index: 1;
+			}
+
+			.header-content {
+				position: relative;
+				z-index: 2;
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 2rem;
+				text-align: center;
+			}
+
+			.header h1 {
+				font-family: 'Cormorant Garamond', serif;
+				font-size: 2.5rem;
+				font-weight: 700;
+				margin-bottom: 1rem;
+			}
+
+			.header p {
+				font-size: 1.2rem;
+				opacity: 0.9;
+				max-width: 600px;
+				margin: 0 auto;
+			}
+
+			/* Navigation */
+			.nav-bar {
+				background: rgba(255, 255, 255, 0.95);
+				backdrop-filter: blur(20px);
+				border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+				padding: 1rem 0;
+				position: sticky;
+				top: 0;
+				z-index: 100;
+			}
+
+			.nav-content {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 2rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.logo {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				text-decoration: none;
+				color: #2d4a2d;
+			}
+
+			.logo img {
+				width: 2rem;
+				height: 2rem;
+			}
+
+			.logo span {
+				font-family: 'Cormorant Garamond', serif;
+				font-size: 1.5rem;
+				font-weight: 700;
+			}
+
+			.nav-links {
+				display: flex;
+				gap: 2rem;
+				align-items: center;
+			}
+
+			.nav-links a {
+				color: #4d6b3c;
+				text-decoration: none;
+				font-weight: 500;
+				transition: color 0.3s ease;
+			}
+
+			.nav-links a:hover {
+				color: #48bb78;
+			}
+
+			/* Main content */
+			.container {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 2rem;
+			}
+
+			/* Search form */
+			.search-section {
+				background: white;
+				border-radius: 16px;
+				padding: 2rem;
+				margin-bottom: 2rem;
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+			}
+
+			.search-form {
+				display: flex;
+				gap: 1rem;
+				margin-bottom: 1.5rem;
+			}
+
+			.search-input {
+				flex: 1;
+				padding: 1rem 1.5rem;
+				border: 2px solid #e2e8f0;
+				border-radius: 50px;
+				font-size: 1rem;
+				transition: all 0.3s ease;
+				background: #f8f9fa;
+			}
+
+			.search-input:focus {
+				outline: none;
+				border-color: #48bb78;
+				box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+				background: white;
+			}
+
+			.search-btn {
+				padding: 1rem 2rem;
+				background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+				color: white;
+				border: none;
+				border-radius: 50px;
+				font-weight: 500;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			.search-btn:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 8px 24px rgba(72, 187, 120, 0.3);
+			}
+
+			.search-btn:disabled {
+				opacity: 0.6;
+				cursor: not-allowed;
+				transform: none;
+			}
+
+			/* Filters */
+			.filters {
+				display: flex;
+				gap: 1rem;
+				flex-wrap: wrap;
+			}
+
+			.filter-select {
+				padding: 0.5rem 1rem;
+				border: 1px solid #e2e8f0;
+				border-radius: 8px;
+				background: white;
+				color: #4d6b3c;
+				font-size: 0.9rem;
+			}
+
+			/* Results */
+			.results-section {
+				margin-top: 2rem;
+			}
+
+			.results-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 1.5rem;
+				padding-bottom: 1rem;
+				border-bottom: 1px solid #e2e8f0;
+			}
+
+			.results-count {
+				color: #6b7280;
+				font-size: 0.9rem;
+			}
+
+			.results-grid {
+				display: grid;
+				gap: 1.5rem;
+			}
+
+			.result-card {
+				background: white;
+				border-radius: 12px;
+				padding: 1.5rem;
+				box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+				transition: all 0.3s ease;
+				border: 1px solid #f1f5f9;
+			}
+
+			.result-card:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+				border-color: #48bb78;
+			}
+
+			.result-type {
+				display: inline-block;
+				padding: 0.25rem 0.75rem;
+				background: #f0fff4;
+				color: #38a169;
+				font-size: 0.75rem;
+				font-weight: 500;
+				border-radius: 16px;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				margin-bottom: 0.75rem;
+			}
+
+			.result-type.page { background: #eff6ff; color: #2563eb; }
+			.result-type.tree { background: #fef3c7; color: #d97706; }
+			.result-type.blog { background: #f3e8ff; color: #7c3aed; }
+
+			.result-title {
+				font-family: 'Cormorant Garamond', serif;
+				font-size: 1.25rem;
+				font-weight: 600;
+				color: #2d4a2d;
+				margin-bottom: 0.5rem;
+				line-height: 1.3;
+			}
+
+			.result-title a {
+				color: inherit;
+				text-decoration: none;
+				transition: color 0.3s ease;
+			}
+
+			.result-title a:hover {
+				color: #48bb78;
+			}
+
+			.result-description {
+				color: #6b7280;
+				line-height: 1.5;
+				margin-bottom: 0.75rem;
+			}
+
+			.result-url {
+				color: #48bb78;
+				font-size: 0.875rem;
+				text-decoration: none;
+			}
+
+			.result-url:hover {
+				text-decoration: underline;
+			}
+
+			/* Loading and empty states */
+			.loading {
+				text-align: center;
+				padding: 3rem;
+				color: #6b7280;
+			}
+
+			.loading-spinner {
+				width: 2rem;
+				height: 2rem;
+				border: 2px solid #e2e8f0;
+				border-top: 2px solid #48bb78;
+				border-radius: 50%;
+				animation: spin 1s linear infinite;
+				margin: 0 auto 1rem;
+			}
+
+			@keyframes spin {
+				to { transform: rotate(360deg); }
+			}
+
+			.empty-state {
+				text-align: center;
+				padding: 3rem;
+				color: #6b7280;
+			}
+
+			.empty-state h3 {
+				font-family: 'Cormorant Garamond', serif;
+				font-size: 1.5rem;
+				color: #4d6b3c;
+				margin-bottom: 1rem;
+			}
+
+			/* Responsive */
+			@media (max-width: 768px) {
+				.header h1 {
+					font-size: 2rem;
+				}
+
+				.container {
+					padding: 1rem;
+				}
+
+				.search-form {
+					flex-direction: column;
+				}
+
+				.search-btn {
+					justify-content: center;
+				}
+
+				.nav-links {
+					display: none;
+				}
+
+				.nav-content {
+					justify-content: center;
+				}
+
+				.results-header {
+					flex-direction: column;
+					gap: 1rem;
+					align-items: flex-start;
+				}
+
+				.filters {
+					gap: 0.5rem;
+				}
+
+				.filter-select {
+					flex: 1;
+					min-width: 120px;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Header -->
+		<header class="header">
+			<div class="header-content">
+				<h1>🔍 Search the Forest</h1>
+				<p>Discover content across Everdantia - from tree lore and conservation stories to community updates and collection details.</p>
+			</div>
+		</header>
+
+		<!-- Navigation -->
+		<nav class="nav-bar">
+			<div class="nav-content">
+				<a href="/" class="logo">
+					<img src="/favicon/favicon.svg" alt="Everdantia logo" />
+					<span>Everdantia</span>
+				</a>
+				<div class="nav-links">
+					<a href="/">Home</a>
+					<a href="/about">About</a>
+					<a href="/blog">Blog</a>
+					<a href="/collection">Collection</a>
+					<a href="/community">Community</a>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Main Content -->
+		<main class="container">
+			<!-- Search Form -->
+			<section class="search-section">
+				<form class="search-form" id="searchForm">
+					<input 
+						type="text" 
+						class="search-input" 
+						id="searchInput"
+						placeholder="Search for trees, blog posts, lore, or anything else..."
+						autocomplete="off"
+					/>
+					<button type="submit" class="search-btn" id="searchBtn">
+						<span>🔍</span>
+						<span>Search</span>
+					</button>
+				</form>
+
+				<div class="filters">
+					<select class="filter-select" id="typeFilter">
+						<option value="">All Types</option>
+						<option value="blog">Blog Posts</option>
+						<option value="page">Pages</option>
+						<option value="tree">Trees</option>
+					</select>
+					<select class="filter-select" id="categoryFilter">
+						<option value="">All Categories</option>
+						<option value="lore">Lore</option>
+						<option value="conservation">Conservation</option>
+						<option value="collection">Collection</option>
+						<option value="community">Community</option>
+						<option value="announcement">Announcements</option>
+					</select>
+				</div>
+			</section>
+
+			<!-- Results -->
+			<section class="results-section">
+				<div class="results-header" id="resultsHeader" style="display: none;">
+					<h2>Search Results</h2>
+					<div class="results-count" id="resultsCount"></div>
+				</div>
+
+				<div class="results-grid" id="resultsGrid"></div>
+
+				<!-- Loading state -->
+				<div class="loading" id="loadingState" style="display: none;">
+					<div class="loading-spinner"></div>
+					<p>Searching the forest...</p>
+				</div>
+
+				<!-- Empty state -->
+				<div class="empty-state" id="emptyState" style="display: none;">
+					<span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🌲</span>
+					<h3>No results found</h3>
+					<p>Try different keywords or explore our main sections:</p>
+					<div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+						<a href="/blog" class="result-url">Blog</a>
+						<a href="/collection" class="result-url">Collection</a>
+						<a href="/community" class="result-url">Community</a>
+						<a href="/about" class="result-url">About</a>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<Analytics enableAnalytics={true} enableErrorTracking={true} />
+
+		<script>
+			class ForestSearch {
+				constructor() {
+					this.searchForm = document.getElementById('searchForm');
+					this.searchInput = document.getElementById('searchInput');
+					this.searchBtn = document.getElementById('searchBtn');
+					this.typeFilter = document.getElementById('typeFilter');
+					this.categoryFilter = document.getElementById('categoryFilter');
+					this.resultsGrid = document.getElementById('resultsGrid');
+					this.resultsHeader = document.getElementById('resultsHeader');
+					this.resultsCount = document.getElementById('resultsCount');
+					this.loadingState = document.getElementById('loadingState');
+					this.emptyState = document.getElementById('emptyState');
+
+					this.init();
+				}
+
+				init() {
+					// Get query from URL
+					const urlParams = new URLSearchParams(window.location.search);
+					const query = urlParams.get('q');
+					
+					if (query) {
+						this.searchInput.value = query;
+						this.performSearch(query);
+					}
+
+					// Event listeners
+					this.searchForm.addEventListener('submit', (e) => {
+						e.preventDefault();
+						this.handleSearch();
+					});
+
+					this.typeFilter.addEventListener('change', () => {
+						if (this.searchInput.value.trim()) {
+							this.handleSearch();
+						}
+					});
+
+					this.categoryFilter.addEventListener('change', () => {
+						if (this.searchInput.value.trim()) {
+							this.handleSearch();
+						}
+					});
+
+					// Real-time search on input (debounced)
+					let searchTimeout;
+					this.searchInput.addEventListener('input', () => {
+						clearTimeout(searchTimeout);
+						const query = this.searchInput.value.trim();
+						
+						if (query.length >= 2) {
+							searchTimeout = setTimeout(() => {
+								this.performSearch(query);
+							}, 500);
+						} else if (query.length === 0) {
+							this.clearResults();
+						}
+					});
+				}
+
+				handleSearch() {
+					const query = this.searchInput.value.trim();
+					if (query.length >= 2) {
+						this.performSearch(query);
+						// Update URL
+						const url = new URL(window.location);
+						url.searchParams.set('q', query);
+						window.history.pushState({}, '', url);
+					}
+				}
+
+				async performSearch(query) {
+					this.showLoading();
+
+					try {
+						const params = new URLSearchParams({
+							q: query
+						});
+
+						if (this.typeFilter.value) {
+							params.append('type', this.typeFilter.value);
+						}
+
+						if (this.categoryFilter.value) {
+							params.append('category', this.categoryFilter.value);
+						}
+
+						const response = await fetch(`/api/search?${params}`);
+						const data = await response.json();
+
+						if (response.ok) {
+							this.displayResults(data);
+						} else {
+							this.showError(data.error || 'Search failed');
+						}
+					} catch (error) {
+						console.error('Search error:', error);
+						this.showError('Search temporarily unavailable');
+					}
+				}
+
+				showLoading() {
+					this.loadingState.style.display = 'block';
+					this.emptyState.style.display = 'none';
+					this.resultsHeader.style.display = 'none';
+					this.resultsGrid.innerHTML = '';
+				}
+
+				displayResults(data) {
+					this.loadingState.style.display = 'none';
+					
+					if (data.results.length === 0) {
+						this.emptyState.style.display = 'block';
+						this.resultsHeader.style.display = 'none';
+						return;
+					}
+
+					this.emptyState.style.display = 'none';
+					this.resultsHeader.style.display = 'flex';
+					this.resultsCount.textContent = `${data.total} result${data.total !== 1 ? 's' : ''} for "${data.query}"`;
+
+					this.resultsGrid.innerHTML = data.results.map(result => `
+						<div class="result-card">
+							<span class="result-type ${result.type}">${result.type}</span>
+							<h3 class="result-title">
+								<a href="${result.url}">${result.title}</a>
+							</h3>
+							<p class="result-description">${result.description}</p>
+							<a href="${result.url}" class="result-url">${window.location.origin}${result.url}</a>
+						</div>
+					`).join('');
+				}
+
+				showError(message) {
+					this.loadingState.style.display = 'none';
+					this.resultsGrid.innerHTML = `
+						<div class="result-card" style="text-align: center; color: #dc2626;">
+							<h3>Search Error</h3>
+							<p>${message}</p>
+						</div>
+					`;
+				}
+
+				clearResults() {
+					this.resultsHeader.style.display = 'none';
+					this.resultsGrid.innerHTML = '';
+					this.loadingState.style.display = 'none';
+					this.emptyState.style.display = 'none';
+				}
+			}
+
+			// Initialize search when page loads
+			document.addEventListener('DOMContentLoaded', () => {
+				new ForestSearch();
+			});
+		</script>
+	</body>
+</html>
