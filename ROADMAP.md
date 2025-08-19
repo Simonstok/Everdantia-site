@@ -86,12 +86,12 @@ Your website is **professionally complete** with:
 
 #### 8. **Advanced Features**
 - [ ] Add dark/light mode toggle
-- [ ] Implement search functionality  
+- ✅ **Implement search functionality**
 - [ ] Add language switching (EN/NL/other)
 - [ ] Create team/about us page with bios
 - ✅ **Custom 404 error page**
 - [ ] Terms of Service and Privacy Policy pages
-- [ ] FAQ page with common questions
+- ✅ **FAQ page with common questions**
 
 #### 9. **Community Features**
 - ✅ Discord integration and centralized link management

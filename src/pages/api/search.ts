@@ -86,6 +86,16 @@ const searchableContent = [
     keywords: ['collection', 'trees', 'gallery', 'unique', 'showcase', 'diversity']
   },
   {
+    id: 'faq',
+    type: 'page',
+    title: 'Frequently Asked Questions',
+    description: 'Find answers to common questions about Everdantia, NFTs, conservation, and our community.',
+    content: 'FAQ questions answers Everdantia NFT blockchain conservation mint community technical support help',
+    url: '/faq',
+    category: 'Main',
+    keywords: ['faq', 'questions', 'answers', 'help', 'support', 'guide', 'information']
+  },
+  {
     id: 'community',
     type: 'page',
     title: 'Community',

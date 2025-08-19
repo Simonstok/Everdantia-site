@@ -1,0 +1,774 @@
+---
+import Analytics from '../components/Analytics.astro';
+import SEO from '../components/SEO.astro';
+import SearchComponent from '../components/SearchComponent.astro';
+import { socialLinks } from '../config/social.ts';
+
+const title = 'Frequently Asked Questions | Everdantia';
+const description = 'Find answers to common questions about Everdantia, our NFT collection, conservation mission, and how digital trees support real forests.';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		
+		<SEO 
+			title={title}
+			description={description}
+			keywords="FAQ, Everdantia, NFT questions, forest conservation, blockchain, digital trees, mint date, community"
+		/>
+		
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+		
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: 'Inter', sans-serif;
+				background: linear-gradient(135deg, #f8f6f2 0%, #e8f4e8 100%);
+				color: #4d6b3c;
+				line-height: 1.6;
+				min-height: 100vh;
+			}
+
+			/* Hero Section */
+			.hero-section {
+				background: linear-gradient(135deg, #2d4a2d 0%, #1a2e1a 100%);
+				color: white;
+				padding: 6rem 2rem 4rem;
+				text-align: center;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.hero-section::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: url('/images/environment/forest-sanctuary/sanctuary1.jpg') center/cover;
+				opacity: 0.1;
+				z-index: 1;
+			}
+
+			.hero-content {
+				position: relative;
+				z-index: 2;
+				max-width: 800px;
+				margin: 0 auto;
+			}
+
+			.hero-section h1 {
+				font-family: 'Cormorant Garamond', serif;
+				font-size: clamp(2.5rem, 6vw, 4rem);
+				font-weight: 700;
+				margin-bottom: 1rem;
+				text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+			}
+
+			.hero-section p {
+				font-size: 1.2rem;
+				color: rgba(255,255,255,0.9);
+				margin-bottom: 2rem;
+				max-width: 600px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			/* Navigation */
+			.nav-back {
+				position: absolute;
+				top: 2rem;
+				left: 2rem;
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				color: white;
+				text-decoration: none;
+				font-weight: 500;
+				transition: all 0.3s ease;
+				z-index: 3;
+				background: rgba(255,255,255,0.1);
+				padding: 0.75rem 1.5rem;
+				border-radius: 2rem;
+				backdrop-filter: blur(10px);
+			}
+
+			.nav-back:hover {
+				background: rgba(255,255,255,0.2);
+				transform: translateX(-5px);
+			}
+
+			/* Main Content */
+			.container {
+				max-width: 1000px;
+				margin: 0 auto;
+				padding: 4rem 2rem;
+			}
+
+			/* FAQ Categories */
+			.faq-nav {
+				background: white;
+				border-radius: 16px;
+				padding: 1.5rem;
+				margin-bottom: 3rem;
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+				text-align: center;
+			}
+
+			.faq-nav h3 {
+				font-family: 'Cormorant Garamond', serif;
+				color: #2d4a2d;
+				margin-bottom: 1rem;
+				font-size: 1.3rem;
+			}
+
+			.category-links {
+				display: flex;
+				gap: 1rem;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+
+			.category-link {
+				padding: 0.5rem 1rem;
+				background: #f0fff4;
+				color: #38a169;
+				text-decoration: none;
+				border-radius: 20px;
+				font-size: 0.9rem;
+				font-weight: 500;
+				transition: all 0.3s ease;
+				border: 1px solid #c6f6d5;
+			}
+
+			.category-link:hover {
+				background: #38a169;
+				color: white;
+				transform: translateY(-2px);
+			}
+
+			/* FAQ Sections */
+			.faq-section {
+				margin-bottom: 3rem;
+			}
+
+			.section-title {
+				font-family: 'Cormorant Garamond', serif;
+				font-size: 2rem;
+				color: #2d4a2d;
+				margin-bottom: 2rem;
+				text-align: center;
+				position: relative;
+			}
+
+			.section-title::after {
+				content: '';
+				display: block;
+				width: 60px;
+				height: 3px;
+				background: #48bb78;
+				margin: 0.5rem auto;
+				border-radius: 2px;
+			}
+
+			/* FAQ Items */
+			.faq-grid {
+				display: grid;
+				gap: 1.5rem;
+			}
+
+			.faq-item {
+				background: white;
+				border-radius: 12px;
+				box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+				overflow: hidden;
+				transition: all 0.3s ease;
+				border: 1px solid #f1f5f9;
+			}
+
+			.faq-item:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+				border-color: #48bb78;
+			}
+
+			.faq-question {
+				background: none;
+				border: none;
+				width: 100%;
+				text-align: left;
+				padding: 1.5rem;
+				font-family: 'Cormorant Garamond', serif;
+				font-size: 1.25rem;
+				font-weight: 600;
+				color: #2d4a2d;
+				cursor: pointer;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				transition: all 0.3s ease;
+			}
+
+			.faq-question:hover {
+				background: #f8f9fa;
+				color: #48bb78;
+			}
+
+			.faq-question.active {
+				background: #f0fff4;
+				color: #38a169;
+			}
+
+			.faq-icon {
+				font-size: 1.5rem;
+				transition: transform 0.3s ease;
+				color: #48bb78;
+			}
+
+			.faq-question.active .faq-icon {
+				transform: rotate(180deg);
+			}
+
+			.faq-answer {
+				padding: 0 1.5rem;
+				max-height: 0;
+				overflow: hidden;
+				transition: all 0.3s ease;
+			}
+
+			.faq-answer.active {
+				padding: 0 1.5rem 1.5rem;
+				max-height: 500px;
+			}
+
+			.faq-answer p {
+				color: #6b7280;
+				line-height: 1.7;
+				margin-bottom: 1rem;
+			}
+
+			.faq-answer p:last-child {
+				margin-bottom: 0;
+			}
+
+			.faq-answer a {
+				color: #48bb78;
+				text-decoration: none;
+				font-weight: 500;
+			}
+
+			.faq-answer a:hover {
+				text-decoration: underline;
+			}
+
+			/* Special callout boxes */
+			.faq-callout {
+				background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+				border: 1px solid #c6f6d5;
+				border-radius: 12px;
+				padding: 1.5rem;
+				margin: 2rem 0;
+			}
+
+			.faq-callout h4 {
+				font-family: 'Cormorant Garamond', serif;
+				color: #2d4a2d;
+				margin-bottom: 0.75rem;
+				font-size: 1.2rem;
+			}
+
+			.faq-callout p {
+				color: #4d6b3c;
+				margin: 0;
+			}
+
+			/* Contact section */
+			.contact-section {
+				background: white;
+				border-radius: 16px;
+				padding: 3rem;
+				text-align: center;
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+				margin-top: 4rem;
+			}
+
+			.contact-section h3 {
+				font-family: 'Cormorant Garamond', serif;
+				font-size: 2rem;
+				color: #2d4a2d;
+				margin-bottom: 1rem;
+			}
+
+			.contact-section p {
+				color: #6b7280;
+				margin-bottom: 2rem;
+				font-size: 1.1rem;
+			}
+
+			.contact-links {
+				display: flex;
+				gap: 1rem;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+
+			.contact-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 0.75rem 1.5rem;
+				background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+				color: white;
+				text-decoration: none;
+				border-radius: 50px;
+				font-weight: 500;
+				transition: all 0.3s ease;
+			}
+
+			.contact-link:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 8px 24px rgba(72, 187, 120, 0.3);
+			}
+
+			.contact-link.secondary {
+				background: rgba(72, 187, 120, 0.1);
+				color: #38a169;
+				border: 1px solid rgba(72, 187, 120, 0.3);
+			}
+
+			.contact-link.secondary:hover {
+				background: rgba(72, 187, 120, 0.2);
+			}
+
+			/* Responsive */
+			@media (max-width: 768px) {
+				.hero-section {
+					padding: 4rem 1rem 3rem;
+				}
+
+				.hero-section h1 {
+					font-size: 2.5rem;
+				}
+
+				.container {
+					padding: 3rem 1rem;
+				}
+
+				.nav-back {
+					top: 1rem;
+					left: 1rem;
+					padding: 0.5rem 1rem;
+					font-size: 0.9rem;
+				}
+
+				.category-links {
+					gap: 0.5rem;
+				}
+
+				.category-link {
+					font-size: 0.8rem;
+					padding: 0.4rem 0.8rem;
+				}
+
+				.faq-question {
+					padding: 1.25rem;
+					font-size: 1.1rem;
+				}
+
+				.faq-answer.active {
+					padding: 0 1.25rem 1.25rem;
+				}
+
+				.contact-section {
+					padding: 2rem 1.5rem;
+				}
+
+				.contact-links {
+					flex-direction: column;
+					align-items: center;
+				}
+
+				.contact-link {
+					min-width: 200px;
+					justify-content: center;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Hero Section -->
+		<section class="hero-section">
+			<a href="/" class="nav-back">
+				← Back to Home
+			</a>
+			
+			<div class="hero-content">
+				<h1>🌳 Frequently Asked Questions</h1>
+				<p>Everything you need to know about Everdantia, our conservation mission, and the magic of digital forests</p>
+				
+				<!-- Search Component -->
+				<div style="margin-top: 2rem; max-width: 400px; margin-left: auto; margin-right: auto;">
+					<SearchComponent size="medium" />
+				</div>
+			</div>
+		</section>
+
+		<!-- Main Content -->
+		<main class="container">
+			<!-- FAQ Navigation -->
+			<nav class="faq-nav">
+				<h3>Quick Navigation</h3>
+				<div class="category-links">
+					<a href="#basics" class="category-link">🌱 The Basics</a>
+					<a href="#nft" class="category-link">🎨 NFTs & Blockchain</a>
+					<a href="#conservation" class="category-link">🌍 Conservation</a>
+					<a href="#community" class="category-link">👥 Community</a>
+					<a href="#technical" class="category-link">⚙️ Technical</a>
+				</div>
+			</nav>
+
+			<!-- The Basics -->
+			<section id="basics" class="faq-section">
+				<h2 class="section-title">🌱 The Basics</h2>
+				<div class="faq-grid">
+					<div class="faq-item">
+						<button class="faq-question">
+							What is Everdantia?
+							<span class="faq-icon">🌿</span>
+						</button>
+						<div class="faq-answer">
+							<p>Everdantia is a magical digital forest where NFT art meets real-world conservation. Each tree in our collection represents both a unique piece of digital art and a commitment to protecting and restoring actual forests.</p>
+							<p>We're building a living world where imagination and environmental action grow together. Every NFT purchase supports reforestation projects and conservation efforts worldwide.</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							When can I mint an Everdantia tree?
+							<span class="faq-icon">📅</span>
+						</button>
+						<div class="faq-answer">
+							<p>We're currently in our growth phase, preparing for the Genesis Collection launch. While we don't have an official mint date yet, we're working hard to ensure everything is perfect for our community.</p>
+							<p>Join our <a href={socialLinks.discord} target="_blank">Discord</a> and follow our <a href="/blog">blog</a> for the latest updates and early access opportunities!</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							How much will Everdantia NFTs cost?
+							<span class="faq-icon">💰</span>
+						</button>
+						<div class="faq-answer">
+							<p>Pricing details for the Genesis Collection will be announced closer to launch. We're committed to making our trees accessible while ensuring meaningful support for conservation efforts.</p>
+							<p>Stay tuned to our community channels for pricing announcements and potential early supporter benefits.</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							What makes Everdantia different from other NFT projects?
+							<span class="faq-icon">✨</span>
+						</button>
+						<div class="faq-answer">
+							<p>Everdantia bridges the digital and natural worlds. Unlike typical NFT projects, we commit a significant portion of proceeds directly to real-world reforestation and conservation efforts.</p>
+							<p>Our trees aren't just digital art—they're seeds of change that grow into actual forests. Plus, our rich lore and worldbuilding create an immersive experience that goes beyond simple collectibles.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- NFTs & Blockchain -->
+			<section id="nft" class="faq-section">
+				<h2 class="section-title">🎨 NFTs & Blockchain</h2>
+				<div class="faq-grid">
+					<div class="faq-item">
+						<button class="faq-question">
+							What blockchain will Everdantia use?
+							<span class="faq-icon">⛓️</span>
+						</button>
+						<div class="faq-answer">
+							<p>We're committed to using environmentally responsible blockchain technology that aligns with our conservation mission. Details about our chosen blockchain will be announced as we approach launch.</p>
+							<p>Our priority is minimizing environmental impact while maximizing conservation support.</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							How many trees will be in the Genesis Collection?
+							<span class="faq-icon">🌳</span>
+						</button>
+						<div class="faq-answer">
+							<p>The Genesis Collection will feature a carefully curated selection of unique trees, each with distinct characteristics, domains, and lore. Exact numbers will be revealed as we approach launch.</p>
+							<p>Quality over quantity is our approach—each tree is designed to be meaningful and special.</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							Will there be different rarity levels?
+							<span class="faq-icon">💎</span>
+						</button>
+						<div class="faq-answer">
+							<p>Yes! Our trees will have different rarity levels based on trunk types, leaf colors, domains, and special attributes. From common Oak to legendary Mystic Elder, each rarity tells a different story.</p>
+							<p>Rarity affects not just visual appearance but also the lore and significance within the Everdantia world.</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							Do I need a crypto wallet to participate?
+							<span class="faq-icon">👛</span>
+						</button>
+						<div class="faq-answer">
+							<p>Yes, you'll need a compatible crypto wallet to mint and hold your Everdantia trees. We'll provide detailed guides and support to help newcomers set up their wallets safely.</p>
+							<p>Don't worry if you're new to crypto—our community is here to help guide you through the process!</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Conservation Callout -->
+			<div class="faq-callout">
+				<h4>🌍 Our Conservation Commitment</h4>
+				<p>We donate a significant portion of all proceeds to verified reforestation and conservation organizations. Every tree you mint directly contributes to protecting and restoring real forests worldwide.</p>
+			</div>
+
+			<!-- Conservation -->
+			<section id="conservation" class="faq-section">
+				<h2 class="section-title">🌍 Conservation Impact</h2>
+				<div class="faq-grid">
+					<div class="faq-item">
+						<button class="faq-question">
+							How do NFT sales support real conservation?
+							<span class="faq-icon">🌱</span>
+						</button>
+						<div class="faq-answer">
+							<p>We commit a substantial percentage of net proceeds from every mint to verified conservation organizations. For our Genesis Collection, we're dedicating 50% of net proceeds to our first conservation partner.</p>
+							<p>All donations are tracked transparently in our public Forest Ledger, where you can see proof of donations, partner organizations, and even GPS coordinates of protected or restored areas.</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							Which conservation organizations do you support?
+							<span class="faq-icon">🤝</span>
+						</button>
+						<div class="faq-answer">
+							<p>We're currently in discussions with several local reforestation initiatives and international conservation NGOs. We carefully evaluate potential partners based on their transparency, track record, and measurable impact.</p>
+							<p>Partner announcements will be made on our blog and community channels as partnerships are finalized.</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							Can I track the impact of my purchase?
+							<span class="faq-icon">📊</span>
+						</button>
+						<div class="faq-answer">
+							<p>Absolutely! Our Forest Ledger provides complete transparency. You'll be able to see:</p>
+							<p>• Total funds donated<br>• Which organizations received support<br>• Proof of donation documents<br>• Photos and GPS coordinates of conservation projects<br>• Regular impact updates</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							How do you ensure donations reach conservation efforts?
+							<span class="faq-icon">🛡️</span>
+						</button>
+						<div class="faq-answer">
+							<p>We work only with verified, transparent organizations and require detailed reporting on fund usage. All transactions are documented publicly in our Forest Ledger.</p>
+							<p>We also conduct due diligence on potential partners, reviewing their financials, impact reports, and field presence before committing to partnerships.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Community -->
+			<section id="community" class="faq-section">
+				<h2 class="section-title">👥 Community</h2>
+				<div class="faq-grid">
+					<div class="faq-item">
+						<button class="faq-question">
+							How can I join the Everdantia community?
+							<span class="faq-icon">🌿</span>
+						</button>
+						<div class="faq-answer">
+							<p>Join our vibrant community on <a href={socialLinks.discord} target="_blank">Discord</a> where forest guardians share stories, discuss conservation, and get early updates.</p>
+							<p>Follow us on <a href={socialLinks.twitter} target="_blank">Twitter</a> and <a href={socialLinks.instagram} target="_blank">Instagram</a> for visual updates and announcements.</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							Will there be holder benefits or utilities?
+							<span class="faq-icon">🎁</span>
+						</button>
+						<div class="faq-answer">
+							<p>Tree holders will have special access to conservation updates, exclusive content, and input on future conservation partnerships. We're also exploring educational partnerships and real-world experiences.</p>
+							<p>More utility details will be revealed as we approach launch!</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							Can I suggest conservation partners or projects?
+							<span class="faq-icon">💡</span>
+						</button>
+						<div class="faq-answer">
+							<p>Yes! Our community plays a vital role in identifying potential conservation partners. Share suggestions in our Discord or reach out directly.</p>
+							<p>We especially value recommendations from community members with knowledge of local conservation efforts.</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							Will there be events or meetups?
+							<span class="faq-icon">🎉</span>
+						</button>
+						<div class="faq-answer">
+							<p>We're planning virtual and potentially real-world events for our community. These might include conservation education sessions, artist talks, and even forest restoration volunteer opportunities.</p>
+							<p>Event announcements will be made in our Discord and on social media.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Technical -->
+			<section id="technical" class="faq-section">
+				<h2 class="section-title">⚙️ Technical Questions</h2>
+				<div class="faq-grid">
+					<div class="faq-item">
+						<button class="faq-question">
+							What file formats will the NFTs use?
+							<span class="faq-icon">🖼️</span>
+						</button>
+						<div class="faq-answer">
+							<p>Our trees will be high-quality digital artworks, likely in formats optimized for both viewing and long-term preservation. Technical specifications will be announced closer to launch.</p>
+							<p>We prioritize both visual quality and compatibility across different platforms and wallets.</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							Will metadata be stored on-chain or off-chain?
+							<span class="faq-icon">📁</span>
+						</button>
+						<div class="faq-answer">
+							<p>We're committed to long-term accessibility and permanence for our trees. Details about metadata storage will be provided as we finalize our technical infrastructure.</p>
+							<p>Our priority is ensuring your trees remain accessible and beautiful for years to come.</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							Can I display my tree in virtual galleries or metaverses?
+							<span class="faq-icon">🏛️</span>
+						</button>
+						<div class="faq-answer">
+							<p>Yes! We want your Everdantia trees to flourish wherever you choose to display them. We'll ensure compatibility with popular virtual galleries and metaverse platforms.</p>
+							<p>Your digital forest can grow across multiple virtual worlds!</p>
+						</div>
+					</div>
+
+					<div class="faq-item">
+						<button class="faq-question">
+							Will there be a secondary marketplace?
+							<span class="faq-icon">🏪</span>
+						</button>
+						<div class="faq-answer">
+							<p>Everdantia trees will be tradeable on standard NFT marketplaces. We may also explore creating our own marketplace features in the future.</p>
+							<p>A portion of secondary sales will continue supporting conservation efforts, ensuring ongoing impact.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Contact Section -->
+			<section class="contact-section">
+				<h3>Still Have Questions?</h3>
+				<p>Our forest guardians are here to help! Reach out through any of these channels and we'll get back to you soon.</p>
+				<div class="contact-links">
+					<a href={socialLinks.discord} target="_blank" rel="noopener noreferrer" class="contact-link">
+						💬 Join Discord
+					</a>
+					<a href="mailto:everdantia@gmail.com" class="contact-link secondary">
+						✉️ Email Us
+					</a>
+					<a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" class="contact-link secondary">
+						🐦 Twitter DM
+					</a>
+				</div>
+			</section>
+		</main>
+
+		<Analytics enableAnalytics={true} enableErrorTracking={true} />
+
+		<script>
+			// FAQ accordion functionality
+			document.addEventListener('DOMContentLoaded', () => {
+				const faqQuestions = document.querySelectorAll('.faq-question');
+				
+				faqQuestions.forEach(question => {
+					question.addEventListener('click', () => {
+						const answer = question.nextElementSibling;
+						const isActive = question.classList.contains('active');
+						
+						// Close all other FAQ items
+						faqQuestions.forEach(q => {
+							q.classList.remove('active');
+							q.nextElementSibling.classList.remove('active');
+						});
+						
+						// Toggle current FAQ item
+						if (!isActive) {
+							question.classList.add('active');
+							answer.classList.add('active');
+						}
+					});
+				});
+
+				// Smooth scrolling for category links
+				const categoryLinks = document.querySelectorAll('.category-link');
+				categoryLinks.forEach(link => {
+					link.addEventListener('click', (e) => {
+						e.preventDefault();
+						const targetId = link.getAttribute('href');
+						const targetElement = document.querySelector(targetId);
+						if (targetElement) {
+							targetElement.scrollIntoView({
+								behavior: 'smooth',
+								block: 'start'
+							});
+						}
+					});
+				});
+
+				// Analytics tracking for FAQ interactions
+				faqQuestions.forEach((question, index) => {
+					question.addEventListener('click', () => {
+						if (typeof window !== 'undefined' && window.gtag) {
+							window.gtag('event', 'faq_interaction', {
+								faq_question: question.textContent.trim(),
+								question_index: index,
+								custom_parameter: 'faq_click'
+							});
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
