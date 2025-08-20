@@ -31,16 +31,19 @@ CREATE INDEX idx_analytics_events_type_timestamp ON analytics_events(type, times
 ALTER TABLE analytics_events ENABLE ROW LEVEL SECURITY;
 
 -- Create a policy that allows inserting from your website
--- You'll need to adjust this based on your security requirements
+-- Performance-optimized with subqueries to prevent per-row re-evaluation
 CREATE POLICY "Allow insert for analytics" ON analytics_events
-  FOR INSERT WITH CHECK (true);
+  FOR INSERT WITH CHECK ((SELECT auth.role()) = 'service_role');
 
 -- Create a policy for reading data (only for authenticated users or service role)
+-- Performance-optimized with subqueries to prevent per-row re-evaluation
 CREATE POLICY "Allow read for analytics dashboard" ON analytics_events
-  FOR SELECT USING (true);
+  FOR SELECT USING ((SELECT auth.role()) = 'service_role' OR (SELECT auth.jwt() ->> 'role') = 'admin');
 
--- Optional: Create a view for easier querying
-CREATE VIEW analytics_summary AS
+-- Optional: Create a view for easier querying with proper security context
+CREATE VIEW analytics_summary 
+WITH (security_invoker = true)
+AS
 SELECT 
   DATE_TRUNC('hour', to_timestamp(timestamp / 1000)) as hour,
   type,
@@ -50,7 +53,7 @@ FROM analytics_events
 GROUP BY hour, type
 ORDER BY hour DESC;
 
--- Optional: Create a function to get daily stats
+-- Optional: Create a function to get daily stats with secure search_path
 CREATE OR REPLACE FUNCTION get_daily_analytics_stats(days_back INTEGER DEFAULT 7)
 RETURNS TABLE (
   date DATE,
@@ -60,6 +63,8 @@ RETURNS TABLE (
   error_count BIGINT
 ) 
 LANGUAGE SQL
+SECURITY DEFINER
+SET search_path = public
 AS $$
   SELECT 
     DATE(to_timestamp(timestamp / 1000)) as date,
