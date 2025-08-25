@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { socialLinks } from '../config/social.ts';
 import SearchComponent from '../components/SearchComponent.astro';
+import SEO from '../components/SEO.astro';
 ---
 <Layout>
 <html lang="en">
@@ -9,6 +10,16 @@ import SearchComponent from '../components/SearchComponent.astro';
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
+		
+		<!-- Enhanced SEO Component -->
+		<SEO 
+			title="About Everdantia - Solo Founder's Mission for Digital Forest Conservation"
+			description="Meet JB, founder of Everdantia. Learn how our 100-tree genesis NFT collection supports real-world reforestation. From solo vision to environmental impact."
+			keywords="Everdantia founder, JB creator, solo NFT project, environmental blockchain, digital conservation mission, 100 trees collection, reforestation NFTs"
+			pageType="about"
+			ogImage="/og-image.png"
+			ogType="article"
+		/>
 		
 		<!-- SEO Meta Tags -->
 		<title>About Everdantia - The Story Behind Our Digital Forest Conservation</title>
