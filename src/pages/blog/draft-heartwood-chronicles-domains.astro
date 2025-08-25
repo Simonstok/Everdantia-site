@@ -6,8 +6,11 @@ const description = 'Explore the living Domains of Everdantia — Forest, Hillto
 const date = new Date('2025-08-18').toISOString();
 const author = 'Everdantia';
 const readTime = '6 min read';
-const category = 'Lore';
+const category = 'NFT Collection';
+const canonical = 'https://everdantia.art/blog/heartwood-chronicles-domains'; // Final URL when published
 const keywords = 'Everdantia, domains, forest, hilltop, clearing, night sky, ruins, aurora, lore, worldbuilding, digital forest';
+const featuredImage = '/images/blog/night-sky.jpg';
+const featuredImageAlt = 'Star-filled night sky over the mystical forest of Everdantia';
 ---
 
 <BlogLayout 
@@ -18,6 +21,9 @@ const keywords = 'Everdantia, domains, forest, hilltop, clearing, night sky, rui
 	readTime={readTime}
 	category={category}
 	keywords={keywords}
+	featuredImage={featuredImage}
+	featuredImageAlt={featuredImageAlt}
+	canonical={canonical}
 >
 	<article class="blog-post">
 		<header class="post-header">
