@@ -32,7 +32,7 @@ const keywords = 'Everdantia, domains, forest, hilltop, clearing, night sky, rui
 
 		<section class="domain-section">
 			<div class="domain-image">
-				<img src="/images/blog/oak.jpg" alt="Forest Domain - The Verdant Haven" loading="lazy" />
+				<img src="/images/blog/Forest.jpg" alt="Forest Domain - The Verdant Haven" loading="lazy" />
 			</div>
 			<h2>🌳 Forest — The Verdant Haven</h2>
 			<p>The forest is the oldest and most abundant Domain in Everdantia. Here, towering trunks rise shoulder to shoulder, their branches weaving into vast canopies that let only golden shafts of sunlight break through. The air is thick with the scent of moss and rich earth, alive with the rustle of hidden creatures. Beneath this endless green, time feels slower, measured not by hours but by seasons.</p>
@@ -41,7 +41,7 @@ const keywords = 'Everdantia, domains, forest, hilltop, clearing, night sky, rui
 
 		<section class="domain-section">
 			<div class="domain-image">
-				<img src="/images/blog/pine.jpg" alt="Hilltop Domain - The Windswept Peaks" loading="lazy" />
+				<img src="/images/blog/Hilltop.jpg" alt="Hilltop Domain - The Windswept Peaks" loading="lazy" />
 			</div>
 			<h2>⛰️ Hilltop — The Windswept Peaks</h2>
 			<p>High above the valleys, where the air grows thin and the wind never stops singing, lies the Hilltop Domain. Here, trees must be strong to survive. Their roots dig deep into rocky soil, their branches bend but do not break. The view from these heights stretches endlessly — a tapestry of all the other Domains spread below like a living map.</p>
@@ -50,7 +50,7 @@ const keywords = 'Everdantia, domains, forest, hilltop, clearing, night sky, rui
 
 		<section class="domain-section">
 			<div class="domain-image">
-				<img src="/images/blog/willow.jpg" alt="Clearing Domain - The Quiet Grove" loading="lazy" />
+				<img src="/images/blog/Clearing.jpg" alt="Clearing Domain - The Quiet Grove" loading="lazy" />
 			</div>
 			<h2>🌿 Clearing — The Quiet Grove</h2>
 			<p>Between the depth of forests and the openness of meadows lies the Clearing Domain — a place of harmony and stillness. Here, the sunlight falls unbroken, bathing grasses and wildflowers in warmth. Forest edges frame the space like watchful guardians, but within, peace reigns.</p>
@@ -59,7 +59,7 @@ const keywords = 'Everdantia, domains, forest, hilltop, clearing, night sky, rui
 
 		<section class="domain-section">
 			<div class="domain-image">
-				<img src="/images/blog/emberwood.jpg" alt="Night Sky Domain - The Celestial Veil" loading="lazy" />
+				<img src="/images/blog/night-sky.jpg" alt="Night Sky Domain - The Celestial Veil" loading="lazy" />
 			</div>
 			<h2>🌌 Night Sky — The Celestial Veil</h2>
 			<p>The Night Sky Domain is where the heavens unfold in their full majesty. Countless stars scatter like runes across the darkness, their constellations shifting with the passage of ages. Moonlight silvers the land below, and sometimes, faint nebulae ripple in the distance, painting the night in soft hues of violet and blue.</p>
@@ -69,7 +69,7 @@ const keywords = 'Everdantia, domains, forest, hilltop, clearing, night sky, rui
 		<section class="domain-section">
 			<div class="domain-image">
 				<div class="rarity-banner rarity-4">4% Rarity</div>
-				<img src="/images/blog/mystic-elder.jpg" alt="Ancient Ruins Domain - The Memory Keepers" loading="lazy" />
+				<img src="/images/blog/ancient-ruins.jpg" alt="Ancient Ruins Domain - The Memory Keepers" loading="lazy" />
 			</div>
 			<h2>🏛 Ancient Ruins — The Memory Keepers</h2>
 			<p>In Everdantia, not all places are untouched by time. The Ruins Domain lies where civilizations once thrived and have long since fallen, their remnants now entwined with moss, ivy, and silence. Crumbling arches and weathered columns rise like bones from the earth, their carvings eroded but not forgotten.</p>
@@ -78,8 +78,11 @@ const keywords = 'Everdantia, domains, forest, hilltop, clearing, night sky, rui
 
 		<section class="domain-section">
 			<div class="domain-image">
-				<div class="rarity-banner rarity-3">3% Rarity</div>
-				<img src="/images/blog/oak.jpg" alt="Aurora Canopy Domain - The Dreamlit Realm" loading="lazy" />
+				   <div class="rarity-banner rarity-aurora">
+					   <span style="font-size:1.2em; vertical-align:middle; margin-right:0.3em;">✨</span>
+					   <span>Aurora Rarity • 3%</span>
+				   </div>
+				<img src="/images/blog/Aurora-canopy.jpg" alt="Aurora Canopy Domain - The Dreamlit Realm" loading="lazy" />
 			</div>
 			<h2>✨ Aurora Canopy — The Dreamlit Realm</h2>
 			<p>The rarest of all Domains, the Aurora Canopy transforms the night sky into a living river of light. Curtains of emerald, violet, and gold ripple endlessly, drifting like celestial banners that fold and unfold as though the heavens themselves are breathing.</p>
@@ -177,10 +180,23 @@ const keywords = 'Everdantia, domains, forest, hilltop, clearing, night sky, rui
 			box-shadow: 0 2px 8px rgba(159, 122, 234, 0.4);
 		}
 
-		.rarity-3 {
-			background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
-			box-shadow: 0 2px 8px rgba(237, 137, 54, 0.4);
-		}
+
+		   .rarity-3 {
+			   background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+			   box-shadow: 0 2px 8px rgba(237, 137, 54, 0.4);
+		   }
+
+		   .rarity-aurora {
+			   background: linear-gradient(90deg, #7f9cf5 0%, #b794f4 40%, #f6e05e 70%, #68d391 100%);
+			   box-shadow: 0 0 16px 4px rgba(127,156,245,0.25), 0 0 32px 8px rgba(246,224,94,0.15);
+			   border: 2px solid #f6e05e;
+			   animation: aurora-glow 2.5s linear infinite alternate;
+		   }
+
+		   @keyframes aurora-glow {
+			   0% { box-shadow: 0 0 16px 4px #7f9cf5, 0 0 32px 8px #f6e05e; }
+			   100% { box-shadow: 0 0 32px 8px #68d391, 0 0 48px 12px #b794f4; }
+		   }
 
 		.domain-section h2 {
 			font-family: 'Cormorant Garamond', serif;
