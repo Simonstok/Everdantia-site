@@ -166,13 +166,7 @@ const structuredData = {
           <div class="content">
             <slot />
           </div>
-          <div class="sharing-section">
-            <h3>Share this story</h3>
-            <div class="share-buttons">
-              <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent('Just read "' + title + '" - ' + description + ' 🌿✨')}&url=${encodeURIComponent(canonical)}`} target="_blank" rel="noopener noreferrer" class="share-btn">🐦 Share on Twitter</a>
-              <a href={socialLinks.discord} target="_blank" rel="noopener noreferrer" class="share-btn">💬 Join Discord</a>
-            </div>
-          </div>
+          <slot name="afterContent" />
         </div>
       </article>
     </div>
